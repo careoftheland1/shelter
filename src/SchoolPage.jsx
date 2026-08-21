@@ -45,7 +45,7 @@ function SchoolPage() {
 
     <section className="school-resources" id="resources"><header><p className="kicker">Free resources</p><h2>The quiet tools<br/>behind a build.</h2><p>Planning documents made for a small, owner-led project. Download them, change them and make them part of your own way of working.</p></header><div className="resource-list">{resources.map(([n,title,copy,type]) => <a href="mailto:build@onthe.land?subject=School resource" key={n}><span>{n}</span><h3>{title}</h3><p>{copy}</p><i>{type}</i><b>↓</b></a>)}</div></section>
 
-    <section className="school-tool"><p className="kicker">Free digital tool</p><h2>Try it before<br/>you build it.</h2><p>Build It is our free browser tool for testing a shelter before you commit to one. Repeat and arrange the Four Walls module, place doors and windows, and watch a live material takeoff update as you sketch.</p><a href="https://buildit.onthe.land/">Open Build It <span>↗</span></a></section>
+    <section className="school-tool"><p className="kicker">Free digital tool</p><h2>Make it<br/>your own.</h2><p>Build It is our free browser tool for shaping a shelter into your own. Repeat and arrange the Four Walls module, place doors and windows where they make sense for you, and watch a live material takeoff update as you go.</p><a href="https://buildit.onthe.land/">Open Build It <span>↗</span></a></section>
 
     <section className="school-plans"><p className="kicker">Learn with something real</p><h2>Choose a shelter.<br/>Follow the build.</h2><p>The lessons refer back to the free shelter plans, giving every demonstration a real dimension, assembly and sequence.</p><a href="/#shelters">Get the free plans <span>↗</span></a></section>
 
