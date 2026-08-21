@@ -75,7 +75,7 @@ function App() {
     <section className="manifesto" id="practice">
       <p className="kicker">Shelter on the Land / The practice</p>
       <div>
-        <h2>Good shelter can<br/>come from the ground.</h2>
+        <h2>You can build<br/>your own shelter.</h2>
         <p>We make small buildings that ordinary people can understand, adapt and build. The plans and lessons are free. Experienced help is there when the work calls for it.</p>
       </div>
     </section>
