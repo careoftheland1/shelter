@@ -111,7 +111,7 @@ function App() {
     <section className="contact" id="contact">
       <p className="kicker">Plans to build your own shelter / Free</p>
       <h2>Start with<br/>a shelter.</h2>
-      <div className="contact-actions"><a href="#shelters">See the free plans <span>↗</span></a><a href="mailto:build@onthe.land?subject=My land">Tell us about your land <span>↗</span></a></div>
+      <div className="contact-actions"><a href="#shelters">Select a plan set <span>↗</span></a><a href="mailto:build@onthe.land?subject=My land">Tell us about your land <span>↗</span></a></div>
     </section>
 
     <SiteFooter/>
