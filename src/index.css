@@ -61,6 +61,14 @@ footer{grid-template-columns:2fr 1fr 1fr}footer>a:not(.wordmark){font-size:9px;t
 
 .plan-image{display:block;width:calc(100% + 36px);height:330px;margin:auto -18px;object-fit:cover;filter:saturate(.88) contrast(1.04)}
 @media(max-width:760px){.plan-image{height:300px}}
+
+/* Shelter cards: full-bleed image with a single white identification strip. */
+.plan-card{position:relative;padding:0;min-height:510px;background:transparent;overflow:hidden}
+.plan-card:hover{background:transparent}
+.plan-card .plan-meta{position:absolute;z-index:2;top:0;left:0;right:0;padding:18px;color:#fff;text-shadow:0 1px 12px rgba(0,0,0,.55)}
+.plan-card .plan-image{width:100%;height:420px;margin:0;flex:1 1 auto}
+.plan-card .plan-name{min-height:92px;padding:17px 18px 18px;background:#fff;border-top:0}
+@media(max-width:760px){.plan-card .plan-image{height:370px}.plan-card .plan-name{min-height:90px}}
 .building-language figcaption{grid-template-columns:1fr 2fr 1.4fr}.building-language figcaption span:nth-child(3){text-align:right}
 
 /* About the practice */

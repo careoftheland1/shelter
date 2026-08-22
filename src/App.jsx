@@ -1,7 +1,8 @@
 import { lazy, Suspense } from "react";
 import heroUrl from "./assets/header-alternates/lightwell-corner-v3.png";
-import fourWallsUrl from "./assets/shelter-cards/four-walls-minidv.png";
+import fourWallsUrl from "./assets/shelter-cards/four-walls-source-minidv.png";
 import courtyardUrl from "./assets/shelter-cards/courtyard-minidv-v2.png";
+import longHouseUrl from "./assets/shelter-cards/long-house-minidv-v2.png";
 import SiteFooter from "./SiteFooter.jsx";
 
 const ShelterPage = lazy(() => import("./ShelterPage.jsx"));
@@ -17,7 +18,7 @@ const services = [
 const shelters = [
   { number: "S—01", name: "The Four Walls", area: "200 sq ft", rooms: "Studio / 1 bath", shape: "room", image: fourWallsUrl, imageAlt: "Canvas tool bag hanging in a sunlit earthen room", slug: "the-four-walls" },
   { number: "S—02", name: "The Courtyard", area: "600 sq ft", rooms: "3 volumes + courtyards", shape: "court", image: courtyardUrl, imageAlt: "Three rammed-earth volumes forming a shaded courtyard", slug: "the-courtyard" },
-  { number: "S—03", name: "The Long House", area: "1,000 sq ft", rooms: "4–6+ volumes", shape: "long", slug: "the-long-house" },
+  { number: "S—03", name: "The Long House", area: "1,000 sq ft", rooms: "4–6+ volumes", shape: "long", image: longHouseUrl, imageAlt: "View from a dark earthen room across a planted courtyard into a minimal kitchen", slug: "the-long-house" },
 ];
 
 function Plan({ shape }) {
