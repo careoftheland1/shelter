@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import heroUrl from "./assets/header-alternates/lightwell-corner-v3.png";
+import heroUrl from "./assets/header-alternates/opposing-courtyard-minidv.png";
 import fourWallsUrl from "./assets/shelter-cards/four-walls-angles/01-low-floor.png";
 import courtyardUrl from "./assets/shelter-cards/courtyard-minidv-v3.png";
 import longHouseUrl from "./assets/shelter-cards/long-house-minidv-v3.png";
@@ -76,7 +76,7 @@ function App() {
       <img src={heroUrl} alt="Warm afternoon light inside a naturally built earthen shelter"/>
       <div className="hero-wash"/>
       <p className="hero-note">Free plans, practical knowledge +<br/>experienced help for building on the land</p>
-      <h1>be a<br/>builder</h1>
+      <h1>be a builder</h1>
       <a className="down" href="#process">See how it works <span>↓</span></a>
     </section>
 
