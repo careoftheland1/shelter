@@ -1,5 +1,7 @@
 import { lazy, Suspense } from "react";
-import heroUrl from "./assets/re-corner.png";
+import heroUrl from "./assets/header-alternates/lightwell-corner-v3.png";
+import fourWallsUrl from "./assets/shelter-cards/four-walls-minidv.png";
+import courtyardUrl from "./assets/shelter-cards/courtyard-minidv-v2.png";
 import SiteFooter from "./SiteFooter.jsx";
 
 const ShelterPage = lazy(() => import("./ShelterPage.jsx"));
@@ -13,15 +15,20 @@ const services = [
 ];
 
 const shelters = [
-  { number: "S—01", name: "The Four Walls", area: "200 sq ft", rooms: "Studio / 1 bath", shape: "room", slug: "the-four-walls" },
-  { number: "S—02", name: "The Courtyard", area: "600 sq ft", rooms: "3 volumes + courtyards", shape: "court", slug: "the-courtyard" },
+  { number: "S—01", name: "The Four Walls", area: "200 sq ft", rooms: "Studio / 1 bath", shape: "room", image: fourWallsUrl, imageAlt: "Canvas tool bag hanging in a sunlit earthen room", slug: "the-four-walls" },
+  { number: "S—02", name: "The Courtyard", area: "600 sq ft", rooms: "3 volumes + courtyards", shape: "court", image: courtyardUrl, imageAlt: "Three rammed-earth volumes forming a shaded courtyard", slug: "the-courtyard" },
   { number: "S—03", name: "The Long House", area: "1,000 sq ft", rooms: "4–6+ volumes", shape: "long", slug: "the-long-house" },
 ];
 
 function Plan({ shape }) {
   return <svg className={`plan plan-${shape}`} viewBox="0 0 420 260" aria-hidden="true">
     {shape === "room" && <><rect x="105" y="34" width="210" height="192"/><path d="M105 164h80m45 62v-62h85M185 164v62M230 164h85"/><path className="door" d="M185 180a38 38 0 0 1 38-38"/></>}
-    {shape === "court" && <><path d="M58 45h304v170H58zM156 95h108v120H156z"/><path d="M58 95h98m108 0h98M110 95v120m200-120v120"/><path className="door" d="M156 130a35 35 0 0 0-35-35M264 130a35 35 0 0 1 35-35"/></>}
+    {shape === "court" && <>
+      <path d="M26 91h86v70H26zM306 83h88v91h-88zM105 184h184v65H105zM177 11l109 56-49 91-109-57z"/>
+      <path d="M112 126h-24m218 3h25M164 184v19m67-45-17-9"/>
+      <path className="door" d="M88 126a24 24 0 0 1 24-24M331 129a25 25 0 0 0-25-25M164 203a19 19 0 0 1 19-19M214 149a19 19 0 0 0 26-8"/>
+      <path className="plan-court-center" d="M137 126c28 22 51 35 77 41 25 6 50 3 78-13"/>
+    </>}
     {shape === "long" && <><rect x="28" y="70" width="364" height="120"/><path d="M128 70v120m98-120v120m78-120v120M28 130h100m98 0h78"/><path className="door" d="M128 150a30 30 0 0 1 30-30M226 150a30 30 0 0 0-30-30"/></>}
   </svg>;
 }
@@ -90,7 +97,7 @@ function App() {
       <div className="plan-grid">
         {shelters.map(s => <a className="plan-card" href={`/shelters/${s.slug}/`} key={s.number}>
           <div className="plan-meta"><span>{s.number}</span><span>{s.area}</span></div>
-          <Plan shape={s.shape}/>
+          {s.image ? <img className="plan-image" src={s.image} alt={s.imageAlt}/> : <Plan shape={s.shape}/>}
           <div className="plan-name"><h3>{s.name}</h3><p>{s.rooms}</p><b>↗</b></div>
         </a>)}
       </div>
