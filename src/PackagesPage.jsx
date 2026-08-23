@@ -56,7 +56,7 @@ function PackagesPage() {
 
     <section className="package-guide">
       <p className="kicker">A simple guide</p><h2>Not sure where<br/>you belong?</h2>
-      <div>{packages.map((item, i) => <p key={item.name}><span>{String(i + 1).padStart(2, "0")}</span>{i === 0 && <>You have land, practical experience and trusted local professionals. Begin <b>Solo</b>.</>}{i === 1 && <>You want an experienced eye on early decisions and someone reliable to call. Choose <b>Supported</b>.</>}{i === 2 && <>You will lead the build and want an ongoing design partner. Choose <b>Guided</b>.</>}{i === 3 && <>The project needs to be drawn from the land outward. Begin with <b>Custom</b>.</>}</p>)}</div>
+      <div>{packages.map((item, i) => <p key={item.name}><span className="guide-number">{String(i + 1).padStart(2, "0")}</span><span className="guide-copy">{i === 0 && <>You have land, practical experience and trusted local professionals. Begin <b>Solo</b>.</>}{i === 1 && <>You want an experienced eye on early decisions and someone reliable to call. Choose <b>Supported</b>.</>}{i === 2 && <>You will lead the build and want an ongoing design partner. Choose <b>Guided</b>.</>}{i === 3 && <>The project needs to be drawn from the land outward. Begin with <b>Custom</b>.</>}</span></p>)}</div>
     </section>
 
     <section className="packages-contact"><p className="kicker">Tell us what you are building</p><h2>Begin with<br/>the land.</h2><p>You do not need to know which package fits. Send a few words about the place, the shelter and what you hope to do yourself.</p><a href="mailto:build@onthe.land?subject=My shelter project">Start a conversation <span>↗</span></a></section>

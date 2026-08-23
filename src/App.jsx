@@ -75,16 +75,16 @@ function App() {
     <section className="hero" id="top">
       <img src={heroUrl} alt="Warm afternoon light inside a naturally built earthen shelter"/>
       <div className="hero-wash"/>
-      <p className="hero-note">Free plans, practical knowledge +<br/>experienced help for building on the land</p>
+      <p className="hero-note">FREE BUILDABLE PLANS AND GUIDES + EXPERIENCED HELP FOR BUILDING WITH RAMMED EARTH AND LAVACRETE</p>
       <h1>be a builder</h1>
       <a className="down" href="#process">See how it works <span>↓</span></a>
     </section>
 
     <section className="manifesto" id="practice">
-      <p className="kicker">Shelter on the Land / The practice</p>
+      <p className="kicker">START BUILDING TODAY</p>
       <div>
         <h2>You can build<br/>your own shelter.</h2>
-        <p>We make small buildings that ordinary people can understand, adapt and build. The plans and lessons are free. Experienced help is there when the work calls for it.</p>
+        <p>We make small buildings that ordinary people can understand, adapt and build. No experience necessary. The plans and lessons are free. Experienced help is there when the work calls for it.</p>
       </div>
     </section>
 
@@ -93,7 +93,7 @@ function App() {
     </section>
 
     <section className="plans" id="shelters">
-      <header><p className="kicker">The free shelter collection</p><h2>Plans made<br/>to be built.</h2><p>The Four Walls is the seed: a 200 sq ft room that teaches the whole system. Larger shelters grow through repetition, gathering enclosed rooms and useful open space between them.</p></header>
+      <header><p className="kicker">FREE PLANS TO GET STARTED</p><h2>Plans made<br/>to be built.</h2><p>The Four Walls is the seed: a 200 sq ft room that teaches the whole system. Larger shelters grow through repetition, gathering enclosed rooms and useful open space between them.</p></header>
       <BuildingLanguageDiagram/>
       <div className="plan-grid">
         {shelters.map(s => <a className="plan-card" href={`/shelters/${s.slug}/`} key={s.number}>
@@ -117,7 +117,7 @@ function App() {
     </section>
 
     <section className="contact" id="contact">
-      <p className="kicker">Plans to build your own shelter / Free</p>
+      <p className="kicker">YOUR LAND. YOUR HANDS. A PLACE TO BEGIN.</p>
       <h2>Start with<br/>a shelter.</h2>
       <div className="contact-actions"><a href="#shelters">Select a plan set <span>↗</span></a><a href="mailto:build@onthe.land?subject=My land">Tell us about your land <span>↗</span></a></div>
     </section>

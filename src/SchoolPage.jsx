@@ -1,4 +1,6 @@
+import { useState } from "react";
 import SiteFooter from "./SiteFooter.jsx";
+import schoolHeroUrl from "./assets/shelter-cards/courtyard-minidv.png";
 
 const chapters = [
   { number: "01", title: "Soils", summary: "Learn what is beneath your feet and whether it can become a wall.", lessons: ["Reading the land", "Simple field tests", "Soil composition", "Mix trials + test blocks"] },
@@ -17,39 +19,46 @@ const resources = [
 ];
 
 function SchoolPage() {
+  const [selectedLesson, setSelectedLesson] = useState({ chapter: chapters[0], chapterIndex: 0, lesson: chapters[0].lessons[0], lessonIndex: 0 });
+  const lessonNumber = `${selectedLesson.chapter.number}.${String(selectedLesson.lessonIndex + 1).padStart(2, "0")}`;
+  const selectLesson = (chapter, chapterIndex, lesson, lessonIndex) => {
+    setSelectedLesson({ chapter, chapterIndex, lesson, lessonIndex });
+    requestAnimationFrame(() => document.querySelector("#lesson-player")?.scrollIntoView({ behavior: "smooth" }));
+  };
   return <main className="school-page">
-    <header className="nav school-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="#curriculum">Curriculum</a><a href="#first-lesson">First lesson</a><a href="#resources">Resources</a><a href="#consultation">Consultation</a></nav><a className="nav-cta" href="#start">Begin with the soil ↘</a></header>
+    <header className="nav school-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="#curriculum">Curriculum</a><a href="#resources">Resources</a></nav><a className="nav-cta" href="https://buildit.onthe.land/">Open Build It ↗</a></header>
 
     <section className="school-hero" id="top">
-      <p className="kicker">Shelter School / Free and open</p>
-      <h1>Learn to<br/>build it.</h1>
-      <div><p>A complete video guide to building small shelter from the land—from the first soil test to the last finished surface.</p><a href="#curriculum">See the curriculum <span>↓</span></a></div>
+      <img src={schoolHeroUrl} alt="Rammed-earth shelter volumes arranged around a courtyard"/>
+      <p className="kicker">Shelter School / Free forever</p>
+      <h1>Learn how to build with the earth</h1>
+      <div><p>A comprehensive guide to building small shelters from the land using rammed earth and lavacrete. Everything from the first soil test to the last window, see it done before you try it on your own.</p><a href="#curriculum">See the curriculum <span>↓</span></a></div>
     </section>
 
-    <section className="school-statement" id="start"><p className="kicker">Knowledge belongs on site</p><h2>Plans tell you what.<br/>School shows you how.</h2><div><p>Good information makes independent building possible. Every lesson follows the actual order of the work, using direct language, visible demonstrations and tools you can carry into the field.</p><p>The school and the shelter plans are free. When a decision depends on your soil, climate, code or structure, you can bring us in for a focused consultation.</p></div></section>
+    <section className="school-statement" id="start"><p className="kicker">Knowledge made practical</p><h2>Plans tell you what.<br/>School shows you how.</h2><div><p>Our goal with the Shelter School is to make independent building possible. Every lesson follows the actual order of the build, using simple language, clear demonstrations and insights into tools you can carry into the field.</p></div></section>
 
     <section className="curriculum" id="curriculum">
-      <header><p className="kicker">The complete build / Six chapters</p><h2>From ground<br/>to shelter.</h2><p>Move in order or go directly to the work in front of you. Each chapter combines short lessons, demonstrations and downloadable field references.</p></header>
+      <header><p className="kicker">The complete build</p><h2>From land<br/>to shelter.</h2><p>Move in order or go directly to the work in front of you. Each chapter combines short lessons, demonstrations and downloadable field references.</p></header>
       <div className="chapter-list">{chapters.map((chapter, index) => <article className="chapter" key={chapter.number}>
         <div className="chapter-title"><span className="chapter-number">{chapter.number}</span><h3>{chapter.title}</h3><p>{chapter.summary}</p><span>{chapter.lessons.length} lessons</span></div>
-        <ol>{chapter.lessons.map((lesson, i) => <li key={lesson}><span>{chapter.number}.{String(i + 1).padStart(2,"0")}</span><b>{lesson}</b><i>{index === 0 && i === 0 ? "Watch first lesson" : "Video lesson"}</i><em>↗</em></li>)}</ol>
+        <ol>{chapter.lessons.map((lesson, i) => <li key={lesson}><button className="lesson-row" onClick={() => selectLesson(chapter, index, lesson, i)}><span>{chapter.number}.{String(i + 1).padStart(2,"0")}</span><b>{lesson}</b><i>{index === 0 && i === 0 ? "Watch first lesson" : "Video lesson"}</i><em>↘</em></button></li>)}</ol>
       </article>)}</div>
     </section>
 
-    <section className="featured-lesson" id="first-lesson">
-      <div className="lesson-screen"><div className="soil-lines"/><button aria-label="Play lesson"><span>▶</span></button><p>01.01 / Reading the land</p><i>12:48</i></div>
-      <div className="lesson-copy"><p className="kicker">First lesson</p><h2>Before you draw,<br/>look down.</h2><p>Begin by observing water, slope, plants and exposed earth. These clues tell you how the site behaves—and where more careful testing should begin.</p><a href="#curriculum">Watch the lesson <span>↗</span></a></div>
+    <section className="featured-lesson" id="lesson-player">
+      <div className="lesson-screen"><div className="soil-lines"/><button aria-label={`Play ${selectedLesson.lesson}`}><span>▶</span></button><p>{lessonNumber} / {selectedLesson.lesson}</p><i>Video lesson</i></div>
+      <div className="lesson-copy"><p className="kicker">{lessonNumber} / {selectedLesson.chapter.title}</p><h2>{selectedLesson.lesson}</h2><p>{selectedLesson.chapter.summary} This lesson follows the work in sequence, with a clear demonstration to watch before you begin.</p><a href="#curriculum">Choose another lesson <span>↑</span></a></div>
     </section>
 
-    <section className="field-notes"><p className="kicker">How to use the school</p><div><article><span>01</span><h3>Watch before the work</h3><p>See the whole operation before materials, tools and people are moving.</p></article><article><span>02</span><h3>Carry it into the field</h3><p>Use chapter notes, checklists and calculations alongside the drawings.</p></article><article><span>03</span><h3>Stop when it gets specific</h3><p>Local soil, structure and code need local judgment. Know when to ask.</p></article></div></section>
+    <section className="field-notes"><p className="kicker">How to use the school</p><div><article><span>01</span><h3>Watch before you build</h3><p>See the whole operation before materials, tools and people are moving.</p></article><article><span>02</span><h3>Carry it into the field</h3><p>Take your notes, and our checklists and calculations, to make the drawings even more buildable.</p></article><article><span>03</span><h3>Know what to ask</h3><p>Learn enough to recognize the decisions that need local expertise, ask sharper questions and make every consultation more productive.</p></article></div></section>
 
     <section className="school-resources" id="resources"><header><p className="kicker">Free resources</p><h2>The quiet tools<br/>behind a build.</h2><p>Planning documents made for a small, owner-led project. Download them, change them and make them part of your own way of working.</p></header><div className="resource-list">{resources.map(([n,title,copy,type]) => <a href="mailto:build@onthe.land?subject=School resource" key={n}><span>{n}</span><h3>{title}</h3><p>{copy}</p><i>{type}</i><b>↓</b></a>)}</div></section>
 
-    <section className="school-tool"><p className="kicker">Free digital tool</p><h2>Make it<br/>your own.</h2><p>Build It is our free browser tool for shaping a shelter into your own. Repeat and arrange the Four Walls module, place doors and windows where they make sense for you, and watch a live material takeoff update as you go.</p><a href="https://buildit.onthe.land/">Open Build It <span>↗</span></a></section>
+    <section className="school-tool"><p className="kicker">Free digital tool</p><h2>Turn ideas<br/>into plans.</h2><p>Build It is our free browser tool for shaping a shelter into your own. Repeat and arrange the Four Walls module, place doors and windows where they make sense for you, and watch a live material takeoff update as you go.</p><a href="https://buildit.onthe.land/">Open Build It <span>↗</span></a></section>
 
-    <section className="school-plans"><p className="kicker">Learn with something real</p><h2>Choose a shelter.<br/>Follow the build.</h2><p>The lessons refer back to the free shelter plans, giving every demonstration a real dimension, assembly and sequence.</p><a href="/#shelters">Get the free plans <span>↗</span></a></section>
+    <section className="school-plans"><p className="kicker">LEARN BY BUILDING</p><h2>Choose a shelter.<br/>Follow the build.</h2><p>The lessons refer back to the free shelter plans, giving every demonstration a real dimension, assembly and sequence.</p><a href="/#shelters">Get the free plans <span>↗</span></a></section>
 
-    <section className="school-help" id="consultation"><p className="kicker">When general knowledge meets your land</p><h2>One good question<br/>can move a build.</h2><p>Book a focused consultation when you need another set of eyes on soil tests, siting, plans, materials or an approaching construction decision.</p><a href="mailto:build@onthe.land?subject=School consultation">Ask for a consultation <span>↗</span></a><small>Or compare <a href="/packages/">all ways of working →</a></small></section>
+    <section className="school-help" id="consultation"><p className="kicker">Help when you need it</p><h2>Start on your own.<br/>{' '}Know who to call.</h2><p>Book a focused consultation when you need another set of eyes on soil tests, siting, plans, materials or an approaching construction decision, or if problems arise.</p><a href="mailto:build@onthe.land?subject=School consultation">Ask for a consultation <span>↗</span></a><small>Or compare <a href="/packages/">all ways of working →</a></small></section>
 
     <SiteFooter/>
   </main>;

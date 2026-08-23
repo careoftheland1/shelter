@@ -3,10 +3,18 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import modelUrl from "./assets/lavacrete-200.glb?url";
-import exteriorUrl from "./assets/lavacrete-312.png";
-import nightUrl from "./assets/lavacrete-atmosphere-night.png";
-import atmosphereUrl from "./assets/lavacrete-atmosphere.png";
-import interiorUrl from "./assets/re-corner.png";
+import fourWallsLowUrl from "./assets/shelter-cards/four-walls-angles/01-low-floor.png";
+import fourWallsCornerUrl from "./assets/shelter-cards/four-walls-angles/02-wall-corner.png";
+import fourWallsOpeningUrl from "./assets/shelter-cards/four-walls-angles/03-opposing-opening.png";
+import fourWallsThresholdUrl from "./assets/shelter-cards/four-walls-angles/04-threshold-reveal.png";
+import courtyardOneUrl from "./assets/shelter-cards/courtyard-minidv.png";
+import courtyardTwoUrl from "./assets/shelter-cards/courtyard-minidv-v2.png";
+import courtyardThreeUrl from "./assets/shelter-cards/courtyard-minidv-v3.png";
+import courtyardApproachUrl from "./assets/header-alternates/opposing-courtyard-minidv.png";
+import longHouseOneUrl from "./assets/shelter-cards/long-house-minidv.png";
+import longHouseTwoUrl from "./assets/shelter-cards/long-house-minidv-v2.png";
+import longHouseThreeUrl from "./assets/shelter-cards/long-house-minidv-v3.png";
+import deepOpeningUrl from "./assets/header-alternates/deep-opening.png";
 import SiteFooter from "./SiteFooter.jsx";
 
 const builds = {
@@ -15,10 +23,33 @@ const builds = {
   "the-long-house": { number: "S—03", name: "The Long House", area: "1,000 sq ft", rooms: "4–6+ volumes", footprint: "Site-adapted linear arrangement", occupancy: "2–4 people", wall: "18–24 in", duration: "10–15 months", cost: "$140–210k", description: "Four Walls volumes repeat along a narrow site, opening and closing as they go. The Long House moves between enclosed rooms and the courts, passages and pauses created in the voids between them." },
 };
 
+const galleries = {
+  "the-four-walls": [
+    [fourWallsLowUrl, "Low view across the timber floor toward two tall openings", "Room, floor + light"],
+    [fourWallsCornerUrl, "Close view of a thick earthen wall corner and opening", "Wall depth"],
+    [fourWallsOpeningUrl, "Sunlight moving across a rammed-earth wall between openings", "Opposing openings"],
+    [fourWallsThresholdUrl, "Deep threshold looking into the Four Walls room", "Threshold reveal"],
+  ],
+  "the-courtyard": [
+    [courtyardThreeUrl, "Earthen volumes enclosing a tree-filled courtyard", "The sheltered court"],
+    [courtyardOneUrl, "Courtyard shelter viewed between rammed-earth walls", "Rooms around open space"],
+    [courtyardTwoUrl, "Layered openings joining the courtyard volumes", "Passage + enclosure"],
+    [courtyardApproachUrl, "An approach through opposing walls toward the courtyard", "Approach to the court"],
+  ],
+  "the-long-house": [
+    [longHouseThreeUrl, "A long framed view from an earthen room across a planted court", "Room to courtyard"],
+    [longHouseOneUrl, "Repeated earthen rooms extending along the site", "A sequence of rooms"],
+    [longHouseTwoUrl, "Long House openings aligned through interior and exterior space", "Long view"],
+    [deepOpeningUrl, "A deep opening cut through a thick earthen wall", "Depth + threshold"],
+  ],
+};
+
 function ModelViewer() {
   const mount = useRef(null);
   const controlsRef = useRef(null);
+  const isTouch = useRef(window.matchMedia("(hover: none), (pointer: coarse)").matches);
   const [loaded, setLoaded] = useState(false);
+  const [interactive, setInteractive] = useState(!isTouch.current);
   useEffect(() => {
     const el = mount.current;
     const scene = new THREE.Scene();
@@ -35,6 +66,7 @@ function ModelViewer() {
     el.appendChild(renderer.domElement);
     const controls = new OrbitControls(camera, renderer.domElement);
     controlsRef.current = controls;
+    controls.enabled = !isTouch.current;
     controls.enableDamping = true; controls.dampingFactor = .055;
     controls.target.set(0, 1.7, 0); controls.minDistance = 10; controls.maxDistance = 32;
     controls.minPolarAngle = .55; controls.maxPolarAngle = 1.48;
@@ -57,8 +89,15 @@ function ModelViewer() {
     const draw = () => { controls.update(); renderer.render(scene,camera); raf=requestAnimationFrame(draw); }; draw();
     return () => { cancelAnimationFrame(raf); ro.disconnect(); controls.dispose(); renderer.dispose(); el.removeChild(renderer.domElement); };
   }, []);
+  useEffect(() => {
+    if (controlsRef.current) controlsRef.current.enabled = interactive;
+  }, [interactive]);
   const reset = () => { const c=controlsRef.current; if (!c) return; c.object.position.set(17,10,20); c.target.set(0,1.7,0); c.update(); };
-  return <div className="model-wrap" ref={mount}><span className={`model-status ${loaded ? "ready" : ""}`}>{loaded ? "Drag to explore · Scroll to zoom" : "Loading model…"}</span><button onClick={reset}>Reset view</button></div>;
+  return <div className={`model-wrap ${interactive ? "interactive" : ""}`} ref={mount}>
+    <span className={`model-status ${loaded ? "ready" : ""}`}>{loaded ? (isTouch.current ? (interactive ? "Drag or pinch to explore" : "Scroll to continue") : "Drag to explore · Scroll to zoom") : "Loading model…"}</span>
+    {isTouch.current && <button className="model-interact" onClick={() => setInteractive(value => !value)}>{interactive ? "Done" : "Explore 3D"}</button>}
+    <button className="model-reset" onClick={reset}>Reset view</button>
+  </div>;
 }
 
 const specsFor = b => [["Interior area",b.area],["Footprint",b.footprint],["Program",b.rooms],["Occupancy",b.occupancy],["Wall system","Rammed earth / lavacrete"],["Wall thickness",b.wall],["Foundation","Site-adapted slab"],["Roof","Low-slope shed roof"],["Typical build",b.duration],["Indicative cost",b.cost+"*"],["Plan version","1.0 / August 2026"],["Skill level","Ambitious owner-builder"]];
@@ -67,6 +106,7 @@ function ShelterPage() {
   const requestedSlug = location.pathname.split("/").filter(Boolean).pop();
   const slug = requestedSlug === "the-room" ? "the-four-walls" : requestedSlug;
   const build = builds[slug] || builds["the-four-walls"];
+  const gallery = galleries[slug] || galleries["the-four-walls"];
   const related = Object.entries(builds).filter(([key]) => key !== slug).slice(0,2);
   return <main className="shelter-page">
     <header className="nav detail-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="/#practice">Practice</a><a href="/#shelters">Shelters</a><a href="/#process">Process</a><a href="/#about">About</a></nav><a className="nav-cta" href="#downloads">Get the plans ↘</a></header>
@@ -76,7 +116,7 @@ function ShelterPage() {
 
     <section className="specs"><header><p className="kicker">Building specifications</p><h2>Small by design.<br/>Complete by nature.</h2><p>*Conceptual construction range in 2026 USD, excluding land, utilities, professional fees and unusually difficult site work.</p></header><dl>{specsFor(build).map(([term,value]) => <div key={term}><dt>{term}</dt><dd>{value}</dd></div>)}</dl></section>
 
-    <section className="building-gallery"><figure className="gallery-wide"><img src={exteriorUrl} alt={`${build.name} exterior under a starry sky`}/><figcaption>01 / Exterior approach</figcaption></figure><div className="gallery-pair"><figure><img src={interiorUrl} alt="Earthen interior illuminated by afternoon sun"/><figcaption>02 / Light and thermal mass</figcaption></figure><figure><img src={nightUrl} alt={`${build.name} at night`}/><figcaption>03 / Shelter in the landscape</figcaption></figure></div><figure className="gallery-wide"><img src={atmosphereUrl} alt="Lavacrete shelter in desert fog"/><figcaption>04 / Monolithic material expression</figcaption></figure></section>
+    <section className="building-gallery"><figure className="gallery-wide"><img src={gallery[0][0]} alt={gallery[0][1]}/><figcaption>01 / {gallery[0][2]}</figcaption></figure><div className="gallery-pair"><figure><img src={gallery[1][0]} alt={gallery[1][1]}/><figcaption>02 / {gallery[1][2]}</figcaption></figure><figure><img src={gallery[2][0]} alt={gallery[2][1]}/><figcaption>03 / {gallery[2][2]}</figcaption></figure></div><figure className="gallery-wide"><img src={gallery[3][0]} alt={gallery[3][1]}/><figcaption>04 / {gallery[3][2]}</figcaption></figure></section>
 
     <section className="plan-contents"><header><p className="kicker">The plan set</p><h2>Everything you need<br/>to find a place to start.</h2></header><div className="sheet-preview"><div className="sheet-plan"><span>A—101</span><svg viewBox="0 0 600 380"><rect x="105" y="50" width="390" height="280"/><path d="M105 225h150m86 105V225h154M255 225v105M341 225h154"/><circle cx="300" cy="190" r="110"/><path d="M60 350h480M80 360v-20m440 20v-20"/></svg><b>Dimensioned floor plan / Scale varies</b></div></div><ul>{["Dimensioned plans","Exterior elevations","Building sections","Foundation details","Wall and opening details","Roof assembly","Door + window schedule","Outline material quantities","Suggested build sequence","Digital reference model"].map((x,i)=><li key={x}><span>{String(i+1).padStart(2,"0")}</span>{x}</li>)}</ul></section>
 
