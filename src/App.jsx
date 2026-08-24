@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import heroUrl from "./assets/shelter-updates/courtyard-golden.png";
+import heroUrl from "./assets/shelter-updates/four-walls-hero.png";
 import fourWallsUrl from "./assets/shelter-cards/four-walls-angles/01-low-floor.png";
 import courtyardUrl from "./assets/shelter-cards/courtyard-minidv-v3.png";
 import longHouseUrl from "./assets/shelter-cards/long-house-minidv-v3.png";
@@ -73,7 +73,7 @@ function App() {
     </header>
 
     <section className="hero" id="top">
-      <img src={heroUrl} alt="Golden evening light across an earthen courtyard"/>
+      <img src={heroUrl} alt="Rammed-earth shelter volumes in a wooded desert courtyard"/>
       <div className="hero-wash"/>
       <p className="hero-note">FREE BUILDABLE PLANS AND GUIDES + EXPERIENCED HELP FOR BUILDING WITH RAMMED EARTH AND LAVACRETE</p>
       <h1>be a builder</h1>
