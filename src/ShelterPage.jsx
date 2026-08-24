@@ -3,18 +3,18 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import modelUrl from "./assets/lavacrete-200.glb?url";
-import fourWallsLowUrl from "./assets/shelter-cards/four-walls-angles/01-low-floor.png";
-import fourWallsCornerUrl from "./assets/shelter-cards/four-walls-angles/02-wall-corner.png";
-import fourWallsOpeningUrl from "./assets/shelter-cards/four-walls-angles/03-opposing-opening.png";
-import fourWallsThresholdUrl from "./assets/shelter-cards/four-walls-angles/04-threshold-reveal.png";
-import courtyardOneUrl from "./assets/shelter-cards/courtyard-minidv.png";
-import courtyardTwoUrl from "./assets/shelter-cards/courtyard-minidv-v2.png";
-import courtyardThreeUrl from "./assets/shelter-cards/courtyard-minidv-v3.png";
 import courtyardApproachUrl from "./assets/header-alternates/opposing-courtyard-minidv.png";
 import longHouseOneUrl from "./assets/shelter-cards/long-house-minidv.png";
 import longHouseTwoUrl from "./assets/shelter-cards/long-house-minidv-v2.png";
 import longHouseThreeUrl from "./assets/shelter-cards/long-house-minidv-v3.png";
 import deepOpeningUrl from "./assets/header-alternates/deep-opening.png";
+import fourWallsHeroUrl from "./assets/shelter-updates/four-walls-hero.png";
+import fourWallsLightSlotUrl from "./assets/shelter-updates/four-walls-light-slot.png";
+import fourWallsDiagonalLightUrl from "./assets/shelter-updates/four-walls-diagonal-light.png";
+import fourWallsMountainCourtUrl from "./assets/shelter-updates/four-walls-mountain-court.png";
+import courtyardDuskUrl from "./assets/shelter-updates/courtyard-dusk.png";
+import courtyardGoldenUrl from "./assets/shelter-updates/courtyard-golden.png";
+import courtyardQuietUrl from "./assets/shelter-updates/courtyard-quiet.png";
 import SiteFooter from "./SiteFooter.jsx";
 
 const builds = {
@@ -25,15 +25,15 @@ const builds = {
 
 const galleries = {
   "the-four-walls": [
-    [fourWallsLowUrl, "Low view across the timber floor toward two tall openings", "Room, floor + light"],
-    [fourWallsCornerUrl, "Close view of a thick earthen wall corner and opening", "Wall depth"],
-    [fourWallsOpeningUrl, "Sunlight moving across a rammed-earth wall between openings", "Opposing openings"],
-    [fourWallsThresholdUrl, "Deep threshold looking into the Four Walls room", "Threshold reveal"],
+    [fourWallsHeroUrl, "Rammed-earth shelter volumes in a wooded desert courtyard", "The Four Walls volume"],
+    [fourWallsLightSlotUrl, "Low horizontal opening casting warm light into an earthen room", "Low opening + light"],
+    [fourWallsDiagonalLightUrl, "Diagonal sunlight moving across a rammed-earth interior", "Light across the wall"],
+    [fourWallsMountainCourtUrl, "Rammed-earth volumes framing desert mountains", "Volume + landscape"],
   ],
   "the-courtyard": [
-    [courtyardThreeUrl, "Earthen volumes enclosing a tree-filled courtyard", "The sheltered court"],
-    [courtyardOneUrl, "Courtyard shelter viewed between rammed-earth walls", "Rooms around open space"],
-    [courtyardTwoUrl, "Layered openings joining the courtyard volumes", "Passage + enclosure"],
+    [courtyardDuskUrl, "Rammed-earth volumes gathered around a quiet courtyard at dusk", "The courtyard at dusk"],
+    [courtyardGoldenUrl, "Golden evening light across an earthen courtyard", "Rooms around open space"],
+    [courtyardQuietUrl, "A quiet rammed-earth courtyard in warm desert light", "Quiet courtyard"],
     [courtyardApproachUrl, "An approach through opposing walls toward the courtyard", "Approach to the court"],
   ],
   "the-long-house": [
