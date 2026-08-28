@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import modelUrl from "./assets/lavacrete-200.glb?url";
+import fourWallsModelUrl from "./assets/lavacrete-200.glb?url";
+import courtyardModelUrl from "./assets/courtyard-cluster.glb?url";
 import courtyardApproachUrl from "./assets/header-alternates/opposing-courtyard-minidv.png";
 import longHouseOneUrl from "./assets/shelter-cards/long-house-minidv.png";
 import longHouseTwoUrl from "./assets/shelter-cards/long-house-minidv-v2.png";
@@ -13,8 +14,8 @@ import fourWallsLightSlotUrl from "./assets/shelter-updates/four-walls-light-slo
 import fourWallsDiagonalLightUrl from "./assets/shelter-updates/four-walls-diagonal-light.png";
 import fourWallsMountainCourtUrl from "./assets/shelter-updates/four-walls-mountain-court.png";
 import courtyardDuskUrl from "./assets/shelter-updates/courtyard-dusk.png";
-import courtyardGoldenUrl from "./assets/shelter-updates/courtyard-golden.png";
 import courtyardQuietUrl from "./assets/shelter-updates/courtyard-quiet.png";
+import courtyardPassageEveningUrl from "./assets/shelter-updates/courtyard-passage-evening.png";
 import SiteFooter from "./SiteFooter.jsx";
 
 const builds = {
@@ -32,7 +33,7 @@ const galleries = {
   ],
   "the-courtyard": [
     [courtyardDuskUrl, "Rammed-earth volumes gathered around a quiet courtyard at dusk", "The courtyard at dusk"],
-    [courtyardGoldenUrl, "Golden evening light across an earthen courtyard", "Rooms around open space"],
+    [courtyardPassageEveningUrl, "Sunlit passage framed by thick rammed-earth courtyard walls", "Passage between rooms"],
     [courtyardQuietUrl, "A quiet rammed-earth courtyard in warm desert light", "Quiet courtyard"],
     [courtyardApproachUrl, "An approach through opposing walls toward the courtyard", "Approach to the court"],
   ],
@@ -44,7 +45,13 @@ const galleries = {
   ],
 };
 
-function ModelViewer() {
+const models = {
+  "the-four-walls": fourWallsModelUrl,
+  "the-courtyard": courtyardModelUrl,
+  "the-long-house": fourWallsModelUrl,
+};
+
+function ModelViewer({ modelUrl }) {
   const mount = useRef(null);
   const controlsRef = useRef(null);
   const isTouch = useRef(window.matchMedia("(hover: none), (pointer: coarse)").matches);
@@ -88,7 +95,7 @@ function ModelViewer() {
     const ro = new ResizeObserver(resize); ro.observe(el); resize(); let raf;
     const draw = () => { controls.update(); renderer.render(scene,camera); raf=requestAnimationFrame(draw); }; draw();
     return () => { cancelAnimationFrame(raf); ro.disconnect(); controls.dispose(); renderer.dispose(); el.removeChild(renderer.domElement); };
-  }, []);
+  }, [modelUrl]);
   useEffect(() => {
     if (controlsRef.current) controlsRef.current.enabled = interactive;
   }, [interactive]);
@@ -107,10 +114,11 @@ function ShelterPage() {
   const slug = requestedSlug === "the-room" ? "the-four-walls" : requestedSlug;
   const build = builds[slug] || builds["the-four-walls"];
   const gallery = galleries[slug] || galleries["the-four-walls"];
+  const model = models[slug] || fourWallsModelUrl;
   const related = Object.entries(builds).filter(([key]) => key !== slug).slice(0,2);
   return <main className="shelter-page">
     <header className="nav detail-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="/#practice">Practice</a><a href="/#shelters">Shelters</a><a href="/#process">Process</a><a href="/#about">About</a></nav><a className="nav-cta" href="#downloads">Get the plans ↘</a></header>
-    <section className="model-hero" id="top"><ModelViewer/><div className="model-title"><p>{build.number} / Buildable shelter</p><h1>{build.name}</h1><span>{build.area}<br/>{build.rooms}</span></div><a className="model-down" href="#overview">Explore the shelter ↓</a></section>
+    <section className="model-hero" id="top"><ModelViewer modelUrl={model}/><div className="model-title"><p>{build.number} / Buildable shelter</p><h1>{build.name}</h1><span>{build.area}<br/>{build.rooms}</span></div><a className="model-down" href="#overview">Explore the shelter ↓</a></section>
 
     <section className="shelter-intro" id="overview"><p className="kicker">The idea</p><h2>{build.description}</h2><p>Designed as a legible set of spaces and assemblies, this shelter can be built with local mineral materials and adapted to the realities of a particular site.</p></section>
 

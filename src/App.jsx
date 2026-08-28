@@ -9,6 +9,7 @@ const ShelterPage = lazy(() => import("./ShelterPage.jsx"));
 const PackagesPage = lazy(() => import("./PackagesPage.jsx"));
 const SchoolPage = lazy(() => import("./SchoolPage.jsx"));
 const ToolsPage = lazy(() => import("./ToolsPage.jsx"));
+const OffgridPage = lazy(() => import("./OffgridPage.jsx"));
 
 const services = [
   { number: "01", kind: "plans", title: "Start small", copy: "Begin with four walls. A small first project can become the beginning of a larger place.", action: "See the shelters", href: "#shelters" },
@@ -66,6 +67,9 @@ function App() {
   if (window.location.pathname.startsWith("/tools")) {
     return <Suspense fallback={<div className="page-loading">Opening the tools…</div>}><ToolsPage /></Suspense>;
   }
+  if (window.location.pathname.startsWith("/plans")) {
+    return <Suspense fallback={<div className="page-loading">Opening the building language…</div>}><OffgridPage /></Suspense>;
+  }
   if (window.location.pathname.startsWith("/shelters/")) {
     return <Suspense fallback={<div className="page-loading">Loading shelter…</div>}><ShelterPage /></Suspense>;
   }
@@ -106,7 +110,7 @@ function App() {
           <div className="plan-name"><h3>{s.name}</h3><p>{s.rooms}</p><b>↗</b></div>
         </a>)}
       </div>
-      <a className="text-link" href="/school/">Learn how to build <span>→</span></a>
+      <a className="text-link" href="/plans/">Explore the building language <span>→</span></a>
     </section>
 
     <section className="process" id="process">
