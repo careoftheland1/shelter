@@ -26,7 +26,7 @@ function SchoolPage() {
     requestAnimationFrame(() => document.querySelector("#lesson-player")?.scrollIntoView({ behavior: "smooth" }));
   };
   return <main className="school-page">
-    <header className="nav school-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="#curriculum">Curriculum</a><a href="#resources">Resources</a></nav><a className="nav-cta" href="https://buildit.onthe.land/">Open Build It ↗</a></header>
+    <header className="nav school-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="#curriculum">Curriculum</a><a href="#resources">Resources</a></nav><a className="nav-cta" href="/tools/">Design tools ↗</a></header>
 
     <section className="school-hero" id="top">
       <img src={schoolHeroUrl} alt="Rammed-earth shelter volumes arranged around a courtyard"/>
@@ -54,7 +54,7 @@ function SchoolPage() {
 
     <section className="school-resources" id="resources"><header><p className="kicker">Free resources</p><h2>The quiet tools<br/>behind a build.</h2><p>Planning documents made for a small, owner-led project. Download them, change them and make them part of your own way of working.</p></header><div className="resource-list">{resources.map(([n,title,copy,type]) => <a href="mailto:build@onthe.land?subject=School resource" key={n}><span>{n}</span><h3>{title}</h3><p>{copy}</p><i>{type}</i><b>↓</b></a>)}</div></section>
 
-    <section className="school-tool"><p className="kicker">Free digital tool</p><h2>Turn ideas<br/>into plans.</h2><p>Build It is our free browser tool for shaping a shelter into your own. Repeat and arrange the Four Walls module, place doors and windows where they make sense for you, and watch a live material takeoff update as you go.</p><a href="https://buildit.onthe.land/">Open Build It <span>↗</span></a></section>
+    <section className="school-tool"><p className="kicker">Free digital tools</p><h2>Turn ideas<br/>into plans.</h2><p>Space It and Shape It help you find an arrangement, shape the shelter into your own, place doors and windows, and understand preliminary material quantities as you work.</p><a href="/tools/">Explore the design workflow <span>↗</span></a></section>
 
     <section className="school-plans"><p className="kicker">LEARN BY BUILDING</p><h2>Choose a shelter.<br/>Follow the build.</h2><p>The lessons refer back to the free shelter plans, giving every demonstration a real dimension, assembly and sequence.</p><a href="/#shelters">Get the free plans <span>↗</span></a></section>
 
