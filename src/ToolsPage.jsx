@@ -1,29 +1,37 @@
 import SiteFooter from "./SiteFooter.jsx";
+import seeItLinework from "./assets/see-it-linework.png";
+import shapeItLinework from "./assets/shape-it-linework.png";
 
 function SpaceDiagram() {
   return <svg viewBox="0 0 640 420" aria-hidden="true">
-    <g className="tool-built"><rect x="54" y="68" width="150" height="104"/><rect x="242" y="42" width="142" height="112"/><rect x="420" y="92" width="158" height="106"/><rect x="88" y="246" width="164" height="110"/><rect x="382" y="254" width="150" height="102"/></g>
-    <path className="tool-void" d="M224 179 389 163 419 231 353 288 257 267z"/>
-    <path className="tool-thread" d="M204 120h38m142-20 36 42M171 172l-20 74m101 55 130 4m75-107-10 56"/>
+    <path className="tool-field" d="M93 97 293 44l237 70 35 169-185 97-230-47-75-143z"/>
+    <g className="tool-built">
+      <rect x="239" y="35" width="124" height="112" transform="rotate(14 301 91)"/>
+      <rect x="407" y="91" width="142" height="68" transform="rotate(-20 478 125)"/>
+      <rect x="301" y="188" width="150" height="103"/>
+      <rect x="178" y="145" width="75" height="79" transform="rotate(32 215.5 184.5)"/>
+      <rect x="147" y="259" width="82" height="59" transform="rotate(-17 188 288.5)"/>
+      <rect x="72" y="112" width="76" height="54" transform="rotate(-15 110 139)"/>
+    </g>
+    <g className="tool-held">
+      <rect x="70" y="226" width="72" height="58" transform="rotate(24 106 255)"/>
+      <rect x="306" y="321" width="70" height="58" transform="rotate(31 341 350)"/>
+      <rect x="421" y="304" width="143" height="68" transform="rotate(-15 492.5 338)"/>
+      <rect x="493" y="190" width="79" height="70" transform="rotate(24 532.5 225)"/>
+    </g>
+    <path className="tool-void" d="M243 140 294 128 321 176 294 219 241 201 224 163z"/>
+    <circle className="tool-influence" cx="264" cy="160" r="43"/>
+    <circle className="tool-influence" cx="303" cy="189" r="55"/>
+    <path className="tool-thread" d="m258 205 20-78m-3 91 47-74m-65 61 74-23"/>
   </svg>;
 }
 
 function ShapeDiagram() {
-  return <svg viewBox="0 0 640 420" aria-hidden="true">
-    <path className="tool-volume" d="m86 117 166-70 153 61-169 77zM86 117v169l150 78V185m169-77v170l-169 86"/>
-    <path className="tool-opening" d="m127 201 54 27v81l-54-28zM291 192l65-28v55l-65 29z"/>
-    <path className="tool-measure" d="M455 87v205m-15-190 15-15 15 15m-30 175 15 15 15-15M91 337l145 75 170-74"/>
-  </svg>;
+  return <img className="tool-linework tool-linework-shape" src={shapeItLinework} alt=""/>;
 }
 
 function SeeDiagram() {
-  return <svg viewBox="0 0 640 420" aria-hidden="true">
-    <rect className="tool-frame" x="52" y="42" width="536" height="336"/>
-    <path className="tool-land" d="M52 291c81-36 137-42 205-14 76 31 123-47 199-40 48 4 84 26 132 48v93H52z"/>
-    <path className="tool-shelter" d="m183 241 108-48 133 38-112 54zM183 241v70l129 40v-66m112-54v65l-112 55"/>
-    <circle className="tool-sun" cx="487" cy="116" r="35"/>
-    <path className="tool-rays" d="m455 151-80 83m106-70-43 65m91-74-29 64"/>
-  </svg>;
+  return <img className="tool-linework tool-linework-see" src={seeItLinework} alt=""/>;
 }
 
 function ToolsPage() {

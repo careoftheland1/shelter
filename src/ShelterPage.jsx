@@ -4,6 +4,8 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import fourWallsModelUrl from "./assets/lavacrete-200.glb?url";
 import courtyardModelUrl from "./assets/courtyard-cluster.glb?url";
+import lavacreteTextureUrl from "./assets/lavacrete-texture.jpg";
+import csreTextureUrl from "./assets/csre-texture.jpg";
 import courtyardApproachUrl from "./assets/header-alternates/opposing-courtyard-minidv.png";
 import longHouseOneUrl from "./assets/shelter-cards/long-house-minidv.png";
 import longHouseTwoUrl from "./assets/shelter-cards/long-house-minidv-v2.png";
@@ -46,12 +48,12 @@ const galleries = {
 };
 
 const models = {
-  "the-four-walls": fourWallsModelUrl,
-  "the-courtyard": courtyardModelUrl,
-  "the-long-house": fourWallsModelUrl,
+  "the-four-walls": { url: fourWallsModelUrl },
+  "the-courtyard": { url: courtyardModelUrl },
+  "the-long-house": { url: fourWallsModelUrl },
 };
 
-function ModelViewer({ modelUrl }) {
+function ModelViewer({ modelUrl, textureUrl }) {
   const mount = useRef(null);
   const controlsRef = useRef(null);
   const isTouch = useRef(window.matchMedia("(hover: none), (pointer: coarse)").matches);
@@ -83,9 +85,25 @@ function ModelViewer({ modelUrl }) {
     const ground = new THREE.Mesh(new THREE.CircleGeometry(36, 64), new THREE.MeshStandardMaterial({ color: 0x8e897e, roughness: 1 }));
     ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
     let loadedModel;
+    const overrideTexture = textureUrl ? new THREE.TextureLoader().load(textureUrl) : null;
+    if (overrideTexture) {
+      overrideTexture.colorSpace = THREE.SRGBColorSpace;
+      overrideTexture.wrapS = overrideTexture.wrapT = THREE.RepeatWrapping;
+      overrideTexture.flipY = false;
+      overrideTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    }
     new GLTFLoader().load(modelUrl, (gltf) => {
       loadedModel = gltf.scene;
-      loadedModel.traverse(child => { if (child.isMesh) { child.castShadow = true; child.receiveShadow = true; } });
+      loadedModel.traverse(child => { if (child.isMesh) {
+        child.castShadow = true; child.receiveShadow = true;
+        if (overrideTexture) {
+          child.material = child.material.clone();
+          child.material.map = overrideTexture;
+          child.material.color.set(0xffffff);
+          child.material.roughness = .92;
+          child.material.needsUpdate = true;
+        }
+      } });
       const box = new THREE.Box3().setFromObject(loadedModel), size = box.getSize(new THREE.Vector3());
       loadedModel.scale.setScalar(8.3 / Math.max(size.x, size.z)); loadedModel.updateMatrixWorld(true);
       const fitted = new THREE.Box3().setFromObject(loadedModel), center = fitted.getCenter(new THREE.Vector3());
@@ -94,8 +112,8 @@ function ModelViewer({ modelUrl }) {
     const resize = () => { const w=el.clientWidth,h=el.clientHeight; renderer.setSize(w,h); camera.aspect=w/h; camera.updateProjectionMatrix(); };
     const ro = new ResizeObserver(resize); ro.observe(el); resize(); let raf;
     const draw = () => { controls.update(); renderer.render(scene,camera); raf=requestAnimationFrame(draw); }; draw();
-    return () => { cancelAnimationFrame(raf); ro.disconnect(); controls.dispose(); renderer.dispose(); el.removeChild(renderer.domElement); };
-  }, [modelUrl]);
+    return () => { cancelAnimationFrame(raf); ro.disconnect(); controls.dispose(); overrideTexture?.dispose(); renderer.dispose(); el.removeChild(renderer.domElement); };
+  }, [modelUrl, textureUrl]);
   useEffect(() => {
     if (controlsRef.current) controlsRef.current.enabled = interactive;
   }, [interactive]);
@@ -110,15 +128,16 @@ function ModelViewer({ modelUrl }) {
 const specsFor = b => [["Interior area",b.area],["Footprint",b.footprint],["Program",b.rooms],["Occupancy",b.occupancy],["Wall system","Rammed earth / lavacrete"],["Wall thickness",b.wall],["Foundation","Site-adapted slab"],["Roof","Low-slope shed roof"],["Typical build",b.duration],["Indicative cost",b.cost+"*"],["Plan version","1.0 / August 2026"],["Skill level","Ambitious owner-builder"]];
 
 function ShelterPage() {
+  const [wallMaterial, setWallMaterial] = useState("lavacrete");
   const requestedSlug = location.pathname.split("/").filter(Boolean).pop();
   const slug = requestedSlug === "the-room" ? "the-four-walls" : requestedSlug;
   const build = builds[slug] || builds["the-four-walls"];
   const gallery = galleries[slug] || galleries["the-four-walls"];
-  const model = models[slug] || fourWallsModelUrl;
+  const model = models[slug] || models["the-four-walls"];
   const related = Object.entries(builds).filter(([key]) => key !== slug).slice(0,2);
   return <main className="shelter-page">
     <header className="nav detail-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="/#practice">Practice</a><a href="/#shelters">Shelters</a><a href="/#process">Process</a><a href="/#about">About</a></nav><a className="nav-cta" href="#downloads">Get the plans ↘</a></header>
-    <section className="model-hero" id="top"><ModelViewer modelUrl={model}/><div className="model-title"><p>{build.number} / Buildable shelter</p><h1>{build.name}</h1><span>{build.area}<br/>{build.rooms}</span></div><a className="model-down" href="#overview">Explore the shelter ↓</a></section>
+    <section className="model-hero" id="top"><ModelViewer modelUrl={model.url} textureUrl={wallMaterial === "earth" ? csreTextureUrl : lavacreteTextureUrl}/><div className="model-material-toggle" role="group" aria-label="Wall material preview"><span>Wall material</span><button className={wallMaterial === "earth" ? "active" : ""} onClick={() => setWallMaterial("earth")}>CSRE</button><button className={wallMaterial === "lavacrete" ? "active" : ""} onClick={() => setWallMaterial("lavacrete")}>Lavacrete</button></div><div className="model-title"><p>{build.number} / Buildable shelter</p><h1>{build.name}</h1><span>{build.area}<br/>{build.rooms}</span></div><a className="model-down" href="#overview">Explore the shelter ↓</a></section>
 
     <section className="shelter-intro" id="overview"><p className="kicker">The idea</p><h2>{build.description}</h2><p>Designed as a legible set of spaces and assemblies, this shelter can be built with local mineral materials and adapted to the realities of a particular site.</p></section>
 

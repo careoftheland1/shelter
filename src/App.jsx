@@ -37,23 +37,36 @@ function Plan({ shape }) {
 }
 
 function EntryVisual({ kind }) {
-  if (kind === "plans") return <svg className="entry-visual" viewBox="0 0 240 88" aria-hidden="true"><rect x="44" y="12" width="150" height="64"/><path d="M44 50h55m35 26V50h60M99 50v26m35-26h60"/></svg>;
+  if (kind === "plans") return <svg className="entry-visual" viewBox="0 0 240 88" aria-hidden="true">
+    <path d="M80 80V8h80v26m0 16v30h-30m-20 0H80M86 74V14h68v20m0 16v24h-24m-20 0H86"/>
+    <path d="M110 74v6m20-6v6m24-40h6m-6 4h6"/>
+  </svg>;
   if (kind === "school") return <div className="entry-visual school-sequence" aria-hidden="true">{["SOIL","FOUND","ENG","PLAN","BUILD","FINISH"].map((x,i)=><i key={x}><span>{String(i+1).padStart(2,"0")}</span>{x}</i>)}</div>;
-  return <svg className="entry-visual" viewBox="0 0 240 88" aria-hidden="true"><path d="M35 67 91 36l54 27 59-34v38l-59 10-54-14-56 8z"/><path d="M91 36v27m54 0v14m59-48-59-13-54 20-56-9v40"/><circle cx="185" cy="24" r="4"/></svg>;
+  return <svg className="entry-visual" viewBox="0 0 240 88" aria-hidden="true">
+    <path d="M24 28 83 11l65 17v41L83 82 24 66zM83 11v71"/>
+    <path d="M103 78V47h26v27"/>
+    <path d="m157 39 22-7 43 10v32l-43 8-22-7zM179 32v50"/>
+    <path d="M188 80V52h16v25"/>
+  </svg>;
 }
 
 function BuildingLanguageDiagram() {
   return <figure className="building-language">
     <svg viewBox="0 0 1040 250" role="img" aria-labelledby="language-title language-desc">
-      <title id="language-title">One shelter volume arranged into courtyard and long house configurations</title>
-      <desc id="language-desc">A single square becomes a cluster around open courtyards, then stretches into a linear sequence.</desc>
-      <path className="language-thread" d="M104 111H236M424 111h91M708 111h75"/>
-      <g className="language-seed"><rect x="42" y="49" width="124" height="124"/><circle cx="104" cy="111" r="4"/></g>
-      <g className="language-court-one"><rect x="256" y="27" width="78" height="78"/><rect x="346" y="27" width="78" height="78"/><rect x="256" y="117" width="78" height="78"/><path className="language-void" d="M346 117h78v78h-78z"/></g>
-      <g className="language-court-two"><rect x="535" y="27" width="72" height="72"/><rect x="619" y="27" width="72" height="72"/><rect x="535" y="111" width="72" height="72"/><rect x="619" y="111" width="72" height="72"/><path className="language-void" d="M596 88h34v34h-34z"/></g>
-      <g className="language-long"><rect x="803" y="70" width="62" height="82"/><rect x="877" y="44" width="62" height="82"/><rect x="951" y="82" width="62" height="82"/><path className="language-void" d="M865 126h86v38h-86z"/></g>
+      <title id="language-title">The Four Walls seed growing into courtyard and long house arrangements</title>
+      <desc id="language-desc">One thick-walled room gathers with independent rooms around a courtyard, or repeats in a line with room-width open courts.</desc>
+      <path className="language-thread" d="M183 125H275M528 125h86"/>
+      <g className="language-seed" transform="translate(34.5 37.5) scale(.7)"><rect x="48" y="58" width="134" height="134"/><circle cx="115" cy="125" r="4"/></g>
+      <g className="language-courtyard" transform="translate(110.6 35) scale(.72)">
+        <rect x="288" y="39" width="88" height="88"/><rect x="411" y="28" width="88" height="88" transform="rotate(7 455 72)"/><rect x="303" y="151" width="88" height="76" transform="rotate(-5 347 189)"/>
+        <path className="language-void" d="M390 119 431 109 450 146 409 185 384 161z"/>
+      </g>
+      <g className="language-long" transform="translate(324.4 50.4) scale(.6)">
+        <rect x="626" y="79" width="74" height="94"/><rect x="774" y="79" width="74" height="94"/><rect x="922" y="79" width="74" height="94"/>
+        <path className="language-void" d="M700 88h74v76h-74zm148 0h74v76h-74z"/>
+      </g>
     </svg>
-    <figcaption><span>01 / The seed</span><span>02 / Courtyard studies</span><span>03 / Linear studies</span></figcaption>
+    <figcaption><span>01 / Four Walls</span><span>02 / Courtyard</span><span>03 / Long House</span></figcaption>
   </figure>;
 }
 
