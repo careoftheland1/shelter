@@ -15,6 +15,7 @@ const PackagesPage = lazy(() => import("./PackagesPage.jsx"));
 const ToolsPage = lazy(() => import("./ToolsPage.jsx"));
 const OffgridPage = lazy(() => import("./OffgridPage.jsx"));
 const OffgridSystemsPage = lazy(() => import("./OffgridSystemsPage.jsx"));
+const PrivacyPage = lazy(() => import("./PrivacyPage.jsx"));
 
 const services = [
   { number: "01", kind: "plans", title: "Start small", copy: "Begin with four walls. A small first project can become the beginning of a larger place.", action: "See the shelters", href: "#shelters" },
@@ -74,6 +75,9 @@ function BuildingLanguageDiagram() {
 }
 
 function App() {
+  if (window.location.pathname.startsWith("/privacy")) {
+    return <Suspense fallback={<div className="page-loading">Opening privacy notice…</div>}><PrivacyPage /></Suspense>;
+  }
   if (window.location.pathname.startsWith("/offgrid")) {
     return <Suspense fallback={<div className="page-loading">Opening off grid…</div>}><OffgridSystemsPage /></Suspense>;
   }

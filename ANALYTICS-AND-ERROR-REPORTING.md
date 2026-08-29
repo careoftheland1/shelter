@@ -59,7 +59,7 @@ The ePrivacy rules concern cookies and similar access to information on a visito
 
 ### Privacy notice
 
-Even without a banner, publish a short privacy notice before broad promotion. It should identify:
+The public notice is available at `/privacy/`. It identifies:
 
 - The site operator and contact email
 - Cloudflare as hosting, security and analytics provider
@@ -137,7 +137,7 @@ Do not send:
 ## Recommended sequence
 
 1. Deploy the installed Cloudflare Web Analytics beacon and confirm reporting.
-2. Publish a short privacy notice before broad promotion.
+2. Keep the published privacy notice aligned with the services in use.
 3. Observe traffic and performance without adding custom tracking.
 4. Add minimal Sentry error capture once the account and privacy settings are ready.
 5. Reassess analytics and legal requirements when Stripe, scheduling or user uploads are introduced.

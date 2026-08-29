@@ -8,7 +8,7 @@ function SiteFooter() {
       <a href="/packages/"><span>Support</span><b>↗</b></a>
     </nav>
     <a className="footer-email" href="mailto:build@onthe.land">build@onthe.land</a>
-    <p className="footer-copy">© 2026 Shelter on the Land</p>
+    <p className="footer-copy"><a href="/privacy/">Privacy</a><span>© 2026 Shelter on the Land</span></p>
   </footer>;
 }
 

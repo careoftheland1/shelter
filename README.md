@@ -12,6 +12,7 @@ The public website for [shelter.onthe.land](https://shelter.onthe.land): free pl
 - `/tools/` — Space It, Shape It and See It workflow
 - `/packages/` — free plans and paid ways of working
 - `/offgrid/` — small off-grid and off-pipe systems
+- `/privacy/` — website privacy notice
 
 Shelter School is preserved in `src/SchoolPage.jsx` for a later phase but is not part of the public site. Requests to `/school` are redirected home by `public/_redirects`.
 
@@ -56,6 +57,7 @@ Key files:
 - `src/ToolsPage.jsx` — design-tools workflow
 - `src/PackagesPage.jsx` — support and commission paths
 - `src/OffgridSystemsPage.jsx` — off-grid systems page
+- `src/PrivacyPage.jsx` — website privacy notice
 - `src/SiteFooter.jsx` — shared footer
 - `src/PageMeta.jsx` — route-specific titles, descriptions and canonical URLs
 - `src/index.css` — sitewide and page-specific styles
