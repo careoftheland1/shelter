@@ -10,6 +10,7 @@ const PackagesPage = lazy(() => import("./PackagesPage.jsx"));
 const SchoolPage = lazy(() => import("./SchoolPage.jsx"));
 const ToolsPage = lazy(() => import("./ToolsPage.jsx"));
 const OffgridPage = lazy(() => import("./OffgridPage.jsx"));
+const OffgridSystemsPage = lazy(() => import("./OffgridSystemsPage.jsx"));
 
 const services = [
   { number: "01", kind: "plans", title: "Start small", copy: "Begin with four walls. A small first project can become the beginning of a larger place.", action: "See the shelters", href: "#shelters" },
@@ -71,6 +72,9 @@ function BuildingLanguageDiagram() {
 }
 
 function App() {
+  if (window.location.pathname.startsWith("/offgrid")) {
+    return <Suspense fallback={<div className="page-loading">Opening off grid…</div>}><OffgridSystemsPage /></Suspense>;
+  }
   if (window.location.pathname.startsWith("/school")) {
     return <Suspense fallback={<div className="page-loading">Opening the school…</div>}><SchoolPage /></Suspense>;
   }
