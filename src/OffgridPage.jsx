@@ -52,7 +52,7 @@ function OffgridPage() {
   }, []);
 
   return <main className="offgrid-page">
-    <header className="offgrid-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="#language">The system</a><a href="#plans">Plans</a><a href="/school/">School</a></nav><a href="#plans">Start with four walls ↓</a></header>
+    <header className="offgrid-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="#language">The system</a><a href="#plans">Plans</a><a href="/tools/">Tools</a></nav><a href="#plans">Start with four walls ↓</a></header>
 
     <section className="offgrid-seed-intro">
       <p className="kicker">A building language for starting small</p>

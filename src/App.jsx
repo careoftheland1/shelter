@@ -7,15 +7,13 @@ import SiteFooter from "./SiteFooter.jsx";
 
 const ShelterPage = lazy(() => import("./ShelterPage.jsx"));
 const PackagesPage = lazy(() => import("./PackagesPage.jsx"));
-const SchoolPage = lazy(() => import("./SchoolPage.jsx"));
 const ToolsPage = lazy(() => import("./ToolsPage.jsx"));
 const OffgridPage = lazy(() => import("./OffgridPage.jsx"));
 const OffgridSystemsPage = lazy(() => import("./OffgridSystemsPage.jsx"));
 
 const services = [
   { number: "01", kind: "plans", title: "Start small", copy: "Begin with four walls. A small first project can become the beginning of a larger place.", action: "See the shelters", href: "#shelters" },
-  { number: "02", kind: "school", title: "Learn how to build one", copy: "Follow the work from soil and foundations through walls, roofs and finishing. Shelter School is free and open.", action: "Enter Shelter School", href: "/school/" },
-  { number: "03", kind: "tool", title: "Develop your own idea", copy: "Use Space It, Shape It and See It to generate an arrangement, develop a measured shelter and visualize it on the land.", action: "Explore the tools", href: "/tools/" },
+  { number: "02", kind: "tool", title: "Develop your own idea", copy: "Use Space It, Shape It and See It to generate an arrangement, develop a measured shelter and visualize it on the land.", action: "Explore the tools", href: "/tools/" },
 ];
 
 const shelters = [
@@ -42,7 +40,6 @@ function EntryVisual({ kind }) {
     <path d="M80 80V8h80v26m0 16v30h-30m-20 0H80M86 74V14h68v20m0 16v24h-24m-20 0H86"/>
     <path d="M110 74v6m20-6v6m24-40h6m-6 4h6"/>
   </svg>;
-  if (kind === "school") return <div className="entry-visual school-sequence" aria-hidden="true">{["SOIL","FOUND","ENG","PLAN","BUILD","FINISH"].map((x,i)=><i key={x}><span>{String(i+1).padStart(2,"0")}</span>{x}</i>)}</div>;
   return <svg className="entry-visual" viewBox="0 0 240 88" aria-hidden="true">
     <path d="M24 28 83 11l65 17v41L83 82 24 66zM83 11v71"/>
     <path d="M103 78V47h26v27"/>
@@ -76,7 +73,7 @@ function App() {
     return <Suspense fallback={<div className="page-loading">Opening off grid…</div>}><OffgridSystemsPage /></Suspense>;
   }
   if (window.location.pathname.startsWith("/school")) {
-    return <Suspense fallback={<div className="page-loading">Opening the school…</div>}><SchoolPage /></Suspense>;
+    window.history.replaceState(null, "", "/");
   }
   if (window.location.pathname.startsWith("/packages")) {
     return <Suspense fallback={<div className="page-loading">Loading support…</div>}><PackagesPage /></Suspense>;
@@ -109,7 +106,7 @@ function App() {
       <p className="kicker">START BUILDING TODAY</p>
       <div>
         <h2>You can build<br/>your own shelter.</h2>
-        <p>We make small buildings that ordinary people can understand, adapt and build. No experience necessary. The plans and lessons are free. Experienced help is there when the work calls for it.</p>
+        <p>We make small buildings that ordinary people can understand, adapt and build. No experience necessary. The plans and design tools are free. Experienced help is there when the work calls for it.</p>
       </div>
     </section>
 
@@ -135,7 +132,7 @@ function App() {
       <h2>From a free plan<br/>to a built shelter.</h2>
       <ol>
         <li><span>01</span><div><small>Plans · Details · Material schedule</small><h3>Start with a complete shelter</h3><p>Choose a free plan with dimensioned drawings, assemblies and preliminary quantities—or use our free tools to test a form of your own.</p><div className="step-links"><a href="#shelters">Choose a shelter ↗</a><a href="/tools/">Customize a shelter ↗</a></div></div></li>
-        <li><span>02</span><div><small>Budget · Inventory · Build sequence</small><h3>Understand the work ahead</h3><p>Turn the drawings into a working budget, material inventory and realistic sequence. Shelter School demonstrates each stage before you reach it on site.</p><a href="/school/">Enter Shelter School ↗</a></div></li>
+        <li><span>02</span><div><small>Budget · Inventory · Schedule</small><h3>Plan the work ahead</h3><p>Use our free tools to carry preliminary quantities into a working budget, material inventory and realistic build schedule.</p><a href="/tools/">Explore the planning tools ↗</a></div></li>
         <li><span>03</span><div><small>Site · Code · Engineering</small><h3>Make the plan belong to the land</h3><p>Confirm access, utilities, soil, climate and local requirements. Adapt siting, foundations and structural details with the professionals required in your jurisdiction.</p></div></li>
         <li><span>04</span><div><small>Review · Tailoring · Build support</small><h3>Build independently—or with us</h3><p>Carry the plan into construction yourself. When a decision needs experience, bring us in for a focused review, plan tailoring or guidance through the build.</p><a href="/packages/">See ways of working ↗</a></div></li>
       </ol>
