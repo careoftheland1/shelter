@@ -145,6 +145,33 @@ footer{grid-template-columns:2fr 1fr 1fr}footer>a:not(.wordmark){font-size:9px;t
 /* School is offline for this phase; the landing entry set is plans + tools. */
 .services{grid-template-columns:repeat(2,1fr)}
 
+/* Editable documents that carry Shape It quantities into planning. */
+.working-documents{padding:16vh 6vw;background:#d4cec2}
+.working-documents>header{display:grid;grid-template-columns:1fr 2fr 1fr;gap:5vw;align-items:end;margin-bottom:11vh}
+.working-documents h2{font:700 clamp(58px,7vw,104px)/.86 'Alte Haas',sans-serif;letter-spacing:-.06em;margin:0}
+.working-documents>header>p:last-child{font-size:10px;line-height:1.75;margin:0}
+.working-document-list{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #979185}
+.working-document-list article{min-height:340px;padding:22px 2.5vw 28px 0;border-right:1px solid #979185;display:flex;flex-direction:column}
+.working-document-list article+article{padding-left:2.5vw}
+.working-document-list article:last-child{border-right:0}
+.working-document-list span{font-size:8px;opacity:.55}
+.working-document-list h3{font:700 25px 'Alte Haas',sans-serif;letter-spacing:-.035em;margin:70px 0 18px}
+.working-document-list p{font-size:10px;line-height:1.7;margin:0}
+.working-document-list b{font-size:8px;font-weight:400;text-transform:uppercase;letter-spacing:.08em;border-top:1px solid #979185;margin-top:auto;padding-top:12px}
+@media(max-width:760px){.working-documents{padding:12vh 22px}.working-documents>header{display:block;margin-bottom:9vh}.working-documents h2{font-size:16vw;margin:52px 0}.working-document-list{display:block}.working-document-list article,.working-document-list article+article{min-height:280px;padding:22px 0 28px;border-right:0;border-bottom:1px solid #979185}.working-document-list article:last-child{border-bottom:0}.working-document-list h3{margin-top:55px}}
+
+/* Five ways of working: free plans through full commission. */
+.package-2{background:#c9c2b5;color:#242219}
+.package-2 .package-details>a{background:#24261f;color:#eee8de}
+.package-3{background:#b9b2a5;color:#242219}
+.package-3 .package-details>a{background:#24261f;color:#eee8de}
+.package-3 .package-includes,.package-3 .package-includes li{border-color:#aaa398}
+.package-4{background:#8e6a4f;color:#f0e9df}
+.package-4 .package-includes,.package-4 .package-includes li{border-color:rgba(255,255,255,.25)}
+.package-5{background:#25271f;color:#ded9cf}
+.package-5 .package-details>a{background:#e8e1d5;color:#26271f}
+.package-5 .package-includes,.package-5 .package-includes li{border-color:#595a51}
+
 /* Offgrid fork — seed to system */
 .offgrid-page{background:#eeeae0;color:#201f18}.offgrid-nav{position:absolute;z-index:10;top:0;left:0;right:0;display:grid;grid-template-columns:1fr auto 1fr;align-items:start;padding:25px 30px;font-size:9px;text-transform:uppercase;letter-spacing:.09em}.offgrid-nav nav{display:flex;gap:38px}.offgrid-nav>a:last-child{justify-self:end;border-bottom:1px solid;padding-bottom:7px}.offgrid-seed-intro{min-height:155vh;padding:16vh 6vw 15vh;display:grid;grid-template-columns:1fr 1.5fr 1fr;grid-template-rows:auto 1fr auto;gap:5vw}.offgrid-seed-intro>.kicker{grid-column:1/-1}.offgrid-seed-intro h1{grid-column:1/4;align-self:center;font:700 clamp(90px,14vw,205px)/.78 'Alte Haas',sans-serif;letter-spacing:-.075em;margin:12vh 0}.offgrid-seed-symbol{grid-column:2;position:relative;width:min(430px,100%);justify-self:center}.offgrid-seed-symbol span{position:absolute;left:0;top:-30px;font-size:8px;text-transform:uppercase;letter-spacing:.1em}.offgrid-seed-symbol svg{display:block;width:100%;fill:#201f18}.offgrid-seed-copy{grid-column:3;align-self:end;border-top:1px solid #9e9a90;padding-top:18px}.offgrid-seed-copy p{font-size:11px;line-height:1.75;margin:0}.offgrid-seed-copy p+p{margin-top:22px}.offgrid-seed-copy b{font-weight:500}
 .offgrid-growth{background:#f5f2e9;display:grid;grid-template-columns:minmax(0,1.8fr) minmax(330px,.8fr);align-items:start}.offgrid-growth-canvas{position:sticky;top:0;height:100vh;display:grid;place-items:center;border-right:1px solid #b7b2a7;overflow:hidden}.offgrid-plan{width:min(90%,900px);height:auto;fill:none;stroke:#222119;stroke-width:1.5}.offgrid-plan .offgrid-poche{fill:#222119;stroke:none}.offgrid-plan text{font:8px 'Source Code Pro',monospace;letter-spacing:.12em;fill:#77746c;stroke:none;text-anchor:middle}.offgrid-plan .offgrid-ground{stroke:#aaa69c}.offgrid-plan .offgrid-void,.offgrid-plan .offgrid-court{fill:rgba(156,80,46,.09);stroke:#9c502e;stroke-dasharray:5 5}.offgrid-around,.offgrid-out{opacity:0;transition:opacity .7s ease,transform .7s ease;transform:translateY(18px)}.offgrid-plan-around .offgrid-around,.offgrid-plan-out .offgrid-out{opacity:1;transform:none}.offgrid-plan-out .offgrid-seed{transform:translateX(-4px)}.offgrid-seed{transition:transform .7s ease}.offgrid-growth-index{position:absolute;left:4vw;right:4vw;bottom:28px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;font-size:8px}.offgrid-growth-index i{height:1px;background:#aaa69c}.offgrid-growth-copy article{min-height:100vh;padding:16vh 5vw 12vh;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid #b7b2a7}.offgrid-growth-copy article>span{font-size:8px;opacity:.5}.offgrid-growth-copy .kicker{margin:15px 0 7vh}.offgrid-growth-copy h2{font:700 clamp(46px,5vw,76px)/.9 'Alte Haas',sans-serif;letter-spacing:-.05em;margin:0 0 45px}.offgrid-growth-copy article>p:not(.kicker){font-size:11px;line-height:1.75;margin:0}.offgrid-growth-copy b{margin-top:55px;text-transform:uppercase;font:500 10px 'Source Code Pro',monospace;letter-spacing:.1em}

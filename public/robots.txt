@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /school/
+
+Sitemap: https://shelter.onthe.land/sitemap.xml

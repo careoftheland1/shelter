@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import fourWallsUrl from "./assets/shelter-cards/four-walls-angles/01-low-floor.png";
-import courtyardUrl from "./assets/shelter-cards/courtyard-minidv-v3.png";
-import longHouseUrl from "./assets/shelter-cards/long-house-minidv-v3.png";
+import fourWallsUrl from "./assets/shelter-cards/four-walls-angles/01-low-floor.webp";
+import fourWallsSmallUrl from "./assets/shelter-cards/four-walls-angles/01-low-floor-800.webp";
+import courtyardUrl from "./assets/shelter-cards/courtyard-minidv-v3.webp";
+import courtyardSmallUrl from "./assets/shelter-cards/courtyard-minidv-v3-800.webp";
+import longHouseUrl from "./assets/shelter-cards/long-house-minidv-v3.webp";
+import longHouseSmallUrl from "./assets/shelter-cards/long-house-minidv-v3-800.webp";
 import SiteFooter from "./SiteFooter.jsx";
+import PageMeta from "./PageMeta.jsx";
 
 const growthSteps = [
   { state: "one", number: "01", kicker: "One room", title: "Start with the seed.", copy: "Four walls. One roof. One useful room. A bedroom, studio, kitchen, workshop or place to stay. For a small site—or a small beginning—that can be enough.", action: "Build one." },
@@ -11,9 +15,9 @@ const growthSteps = [
 ];
 
 const plans = [
-  { code: "SEED 01", name: "The Four Walls", footprint: "16 × 12 FT", area: "200 SQ FT", use: "STUDIO / SLEEPS 2", next: "CAN GROW → COURTYARD / LONG HOUSE", image: fourWallsUrl, href: "/shelters/the-four-walls/" },
-  { code: "COURTYARD 01", name: "The Courtyard", footprint: "3 VOLUMES", area: "600 SQ FT", use: "ROOMS + OPEN-AIR COURTS", next: "CAN GROW → ONE VOLUME AT A TIME", image: courtyardUrl, href: "/shelters/the-courtyard/" },
-  { code: "LONG HOUSE 01", name: "The Long House", footprint: "4–6+ VOLUMES", area: "1,000 SQ FT", use: "ROOM / COURT / ROOM", next: "CAN GROW → ALONG THE LAND", image: longHouseUrl, href: "/shelters/the-long-house/" },
+  { code: "SEED 01", name: "The Four Walls", footprint: "16 × 12 FT", area: "200 SQ FT", use: "STUDIO / SLEEPS 2", next: "CAN GROW → COURTYARD / LONG HOUSE", image: fourWallsUrl, imageSmall: fourWallsSmallUrl, href: "/shelters/the-four-walls/" },
+  { code: "COURTYARD 01", name: "The Courtyard", footprint: "3 VOLUMES", area: "600 SQ FT", use: "ROOMS + OPEN-AIR COURTS", next: "CAN GROW → ONE VOLUME AT A TIME", image: courtyardUrl, imageSmall: courtyardSmallUrl, href: "/shelters/the-courtyard/" },
+  { code: "LONG HOUSE 01", name: "The Long House", footprint: "4–6+ VOLUMES", area: "1,000 SQ FT", use: "ROOM / COURT / ROOM", next: "CAN GROW → ALONG THE LAND", image: longHouseUrl, imageSmall: longHouseSmallUrl, href: "/shelters/the-long-house/" },
 ];
 
 function GrowthPlan({ state }) {
@@ -52,6 +56,7 @@ function OffgridPage() {
   }, []);
 
   return <main className="offgrid-page">
+    <PageMeta title="A Building Language for Starting Small — Shelter on the Land" description="Begin with one useful room, then grow into courtyards or a long house with a simple building language and free shelter plans." path="/plans/"/>
     <header className="offgrid-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="#language">The system</a><a href="#plans">Plans</a><a href="/tools/">Tools</a></nav><a href="#plans">Start with four walls ↓</a></header>
 
     <section className="offgrid-seed-intro">
@@ -74,7 +79,7 @@ function OffgridPage() {
 
     <section className="offgrid-plans" id="plans">
       <header><p className="kicker">Free shelter plans</p><h2>Plans made<br/>to be built.</h2><p>Start small. Build now. Leave room for what comes next. Every plan belongs to the same system, and every small beginning contains the possibility of something larger.</p></header>
-      <div className="offgrid-plan-list">{plans.map((plan) => <a href={plan.href} key={plan.code}><div className="offgrid-plan-image"><img src={plan.image} alt=""/><span>{plan.code}</span></div><div className="offgrid-plan-info"><h3>{plan.name}</h3><dl><div><dt>Footprint</dt><dd>{plan.footprint}</dd></div><div><dt>Interior</dt><dd>{plan.area}</dd></div><div><dt>Use</dt><dd>{plan.use}</dd></div></dl><p>{plan.next}</p><b>View the plan ↗</b></div></a>)}</div>
+      <div className="offgrid-plan-list">{plans.map((plan) => <a href={plan.href} key={plan.code}><div className="offgrid-plan-image"><img src={plan.image} srcSet={`${plan.imageSmall} 800w, ${plan.image} ${plan.code === "COURTYARD 01" ? 1445 : plan.code === "LONG HOUSE 01" ? 1461 : 1452}w`} sizes="(max-width: 760px) 100vw, 55vw" alt="" loading="lazy" decoding="async"/><span>{plan.code}</span></div><div className="offgrid-plan-info"><h3>{plan.name}</h3><dl><div><dt>Footprint</dt><dd>{plan.footprint}</dd></div><div><dt>Interior</dt><dd>{plan.area}</dd></div><div><dt>Use</dt><dd>{plan.use}</dd></div></dl><p>{plan.next}</p><b>View the plan ↗</b></div></a>)}</div>
     </section>
 
     <section className="offgrid-close"><p className="kicker">Build only what you need</p><h2>One little room.<br/>More little rooms.<br/>A place to live.</h2><a href="#plans">Choose a place to begin <span>↑</span></a></section>

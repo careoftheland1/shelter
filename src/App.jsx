@@ -1,9 +1,14 @@
 import { lazy, Suspense } from "react";
-import heroUrl from "./assets/shelter-updates/four-walls-hero.png";
-import fourWallsUrl from "./assets/shelter-cards/four-walls-angles/01-low-floor.png";
-import courtyardUrl from "./assets/shelter-cards/courtyard-minidv-v3.png";
-import longHouseUrl from "./assets/shelter-cards/long-house-minidv-v3.png";
+import heroUrl from "./assets/shelter-updates/four-walls-hero.webp";
+import heroSmallUrl from "./assets/shelter-updates/four-walls-hero-800.webp";
+import fourWallsUrl from "./assets/shelter-cards/four-walls-angles/01-low-floor.webp";
+import fourWallsSmallUrl from "./assets/shelter-cards/four-walls-angles/01-low-floor-800.webp";
+import courtyardUrl from "./assets/shelter-cards/courtyard-minidv-v3.webp";
+import courtyardSmallUrl from "./assets/shelter-cards/courtyard-minidv-v3-800.webp";
+import longHouseUrl from "./assets/shelter-cards/long-house-minidv-v3.webp";
+import longHouseSmallUrl from "./assets/shelter-cards/long-house-minidv-v3-800.webp";
 import SiteFooter from "./SiteFooter.jsx";
+import PageMeta from "./PageMeta.jsx";
 
 const ShelterPage = lazy(() => import("./ShelterPage.jsx"));
 const PackagesPage = lazy(() => import("./PackagesPage.jsx"));
@@ -17,9 +22,9 @@ const services = [
 ];
 
 const shelters = [
-  { number: "S—01", name: "The Four Walls", area: "200 sq ft", rooms: "Studio / 1 bath", shape: "room", image: fourWallsUrl, imageAlt: "Empty earthen room framed by two bright openings", slug: "the-four-walls" },
-  { number: "S—02", name: "The Courtyard", area: "600 sq ft", rooms: "3 volumes + courtyards", shape: "court", image: courtyardUrl, imageAlt: "Three rammed-earth volumes forming a shaded courtyard", slug: "the-courtyard" },
-  { number: "S—03", name: "The Long House", area: "1,000 sq ft", rooms: "4–6+ volumes", shape: "long", image: longHouseUrl, imageAlt: "View from a dark earthen room across a planted courtyard into a minimal kitchen", slug: "the-long-house" },
+  { number: "S—01", name: "The Four Walls", area: "200 sq ft", rooms: "Studio / 1 bath", shape: "room", image: fourWallsUrl, imageSmall: fourWallsSmallUrl, imageAlt: "Empty earthen room framed by two bright openings", slug: "the-four-walls" },
+  { number: "S—02", name: "The Courtyard", area: "600 sq ft", rooms: "3 volumes + courtyards", shape: "court", image: courtyardUrl, imageSmall: courtyardSmallUrl, imageAlt: "Three rammed-earth volumes forming a shaded courtyard", slug: "the-courtyard" },
+  { number: "S—03", name: "The Long House", area: "1,000 sq ft", rooms: "4–6+ volumes", shape: "long", image: longHouseUrl, imageSmall: longHouseSmallUrl, imageAlt: "View from a dark earthen room across a planted courtyard into a minimal kitchen", slug: "the-long-house" },
 ];
 
 function Plan({ shape }) {
@@ -88,6 +93,7 @@ function App() {
     return <Suspense fallback={<div className="page-loading">Loading shelter…</div>}><ShelterPage /></Suspense>;
   }
   return <main>
+    <PageMeta title="Shelter on the Land — Free Plans for Earthen Shelters" description="Free buildable plans, design tools and experienced guidance for small rammed-earth and lavacrete shelters."/>
     <header className="nav">
       <a className="wordmark" href="#top">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a>
       <nav><a href="#practice">Practice</a><a href="#shelters">Shelters</a><a href="#process">Process</a><a href="#about">About</a></nav>
@@ -95,7 +101,7 @@ function App() {
     </header>
 
     <section className="hero" id="top">
-      <img src={heroUrl} alt="Rammed-earth shelter volumes in a wooded desert courtyard"/>
+      <img src={heroUrl} srcSet={`${heroSmallUrl} 800w, ${heroUrl} 1448w`} sizes="100vw" alt="Rammed-earth shelter volumes in a wooded desert courtyard" fetchPriority="high" decoding="async"/>
       <div className="hero-wash"/>
       <p className="hero-note">FREE BUILDABLE PLANS AND GUIDES + EXPERIENCED HELP FOR BUILDING WITH RAMMED EARTH AND LAVACRETE</p>
       <h1>be a builder</h1>
@@ -120,7 +126,7 @@ function App() {
       <div className="plan-grid">
         {shelters.map(s => <a className="plan-card" href={`/shelters/${s.slug}/`} key={s.number}>
           <div className="plan-meta"><span>{s.number}</span><span>{s.area}</span></div>
-          {s.image ? <img className="plan-image" src={s.image} alt={s.imageAlt}/> : <Plan shape={s.shape}/>}
+          {s.image ? <img className="plan-image" src={s.image} srcSet={`${s.imageSmall} 800w, ${s.image} ${s.slug === "the-courtyard" ? 1445 : s.slug === "the-long-house" ? 1461 : 1452}w`} sizes="(max-width: 760px) 100vw, 33vw" alt={s.imageAlt} loading="lazy" decoding="async"/> : <Plan shape={s.shape}/>}
           <div className="plan-name"><h3>{s.name}</h3><p>{s.rooms}</p><b>↗</b></div>
         </a>)}
       </div>
@@ -132,7 +138,7 @@ function App() {
       <h2>From a free plan<br/>to a built shelter.</h2>
       <ol>
         <li><span>01</span><div><small>Plans · Details · Material schedule</small><h3>Start with a complete shelter</h3><p>Choose a free plan with dimensioned drawings, assemblies and preliminary quantities—or use our free tools to test a form of your own.</p><div className="step-links"><a href="#shelters">Choose a shelter ↗</a><a href="/tools/">Customize a shelter ↗</a></div></div></li>
-        <li><span>02</span><div><small>Budget · Inventory · Schedule</small><h3>Plan the work ahead</h3><p>Use our free tools to carry preliminary quantities into a working budget, material inventory and realistic build schedule.</p><a href="/tools/">Explore the planning tools ↗</a></div></li>
+        <li><span>02</span><div><small>Quantities · Local prices · Build sequence</small><h3>Put numbers to the work</h3><p>Export preliminary material quantities from Shape It, add prices from the places you will actually buy, and begin with an editable sample build sequence.</p><a href="/tools/#working-documents">Explore the working documents ↗</a></div></li>
         <li><span>03</span><div><small>Site · Code · Engineering</small><h3>Make the plan belong to the land</h3><p>Confirm access, utilities, soil, climate and local requirements. Adapt siting, foundations and structural details with the professionals required in your jurisdiction.</p></div></li>
         <li><span>04</span><div><small>Review · Tailoring · Build support</small><h3>Build independently—or with us</h3><p>Carry the plan into construction yourself. When a decision needs experience, bring us in for a focused review, plan tailoring or guidance through the build.</p><a href="/packages/">See ways of working ↗</a></div></li>
       </ol>

@@ -1,0 +1,4 @@
+/school / 301
+/shelters/the-room /shelters/the-four-walls/ 301
+/shelters/the-room/ /shelters/the-four-walls/ 301
+/school/* / 301

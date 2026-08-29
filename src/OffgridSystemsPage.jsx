@@ -33,6 +33,7 @@ function SystemDrawing({id}){
 }
 
 export default function OffgridSystemsPage(){return <main className="og-page">
+  <PageMeta title="Off-Grid Systems for Small Shelters — Shelter on the Land" description="Free plans and guides for understandable water, heat, cooking, cooling and sanitation systems that work without the grid or pipe." path="/offgrid/"/>
   <header className="og-nav"><a href="/offgrid/">offgrid&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="#systems">Systems</a><a href="#guides">Guides</a><a href="#experiments">Experiments</a><a href="#about">About</a></nav></header>
   <section className="og-hero"><p className="kicker">Systems for a small shelter</p><h1>Opt out</h1><p className="og-hero-copy">Free plans and guides for the systems<br/>that make a shelter work without the grid<br/>or the pipe.</p><ol>{["Water","Heat","Cold","Cooking","Washing","Waste"].map(x=><li key={x}>{x}</li>)}</ol></section>
   <section className="og-thesis" id="about"><div><p className="kicker">The whole shelter</p><h2>everything<br/>a shelter<br/>needs.</h2><strong>Nothing it needs to connect to.</strong><div className="og-split"><p><b>Off grid</b>power<br/>heat<br/>cold<br/>cooking</p><p><b>Off pipe</b>water<br/>washing<br/>sanitation<br/>wastewater</p></div></div><figure><ShelterIndexDrawing/><figcaption>01 power · 02 water · 03 heat · 04 cold · 05 sanitation · 06 return</figcaption></figure></section>
@@ -41,3 +42,4 @@ export default function OffgridSystemsPage(){return <main className="og-page">
   <section className="og-free" id="guides"><p className="kicker">Plans, parts lists, diagrams + experiments</p><h2>Free to build.</h2><div><p>Plans, parts lists, diagrams, experiments and what we've learned.</p><p>Take them. Build them. Change them. Make them better.</p><a href="#systems">Explore the guides <span>→</span></a></div></section>
   <footer className="og-footer"><a href="/offgrid/">offgrid.onthe.land</a><nav><a href="#about">About</a><a href="#guides">License</a><a href="mailto:hello@onthe.land">Contact</a></nav><p>Small systems for small shelters.</p><span>© 2026 ON THE LAND</span></footer>
  </main>}
+import PageMeta from "./PageMeta.jsx";
