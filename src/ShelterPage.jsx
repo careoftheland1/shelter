@@ -48,7 +48,7 @@ const shelterMetadata = {
   "the-courtyard": {
     title: "The Courtyard — Free 600 sq ft Shelter Plan",
     description: "A free plan for three small earthen volumes gathered around protected outdoor rooms, with 600 sq ft of adaptable interior shelter.",
-    image: "/social/the-courtyard.jpg",
+    image: "/social/the-courtyard-v2.jpg",
   },
   "the-long-house": {
     title: "The Long House — Free 1,000 sq ft Shelter Plan",
