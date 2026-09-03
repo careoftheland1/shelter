@@ -43,14 +43,17 @@ const shelterMetadata = {
   "the-four-walls": {
     title: "The Four Walls — Free 200 sq ft Shelter Plan",
     description: "A free plan for a compact 200 sq ft rammed-earth or lavacrete room: a place to live, work, stay or begin building on the land.",
+    image: "/social/the-four-walls.jpg",
   },
   "the-courtyard": {
     title: "The Courtyard — Free 600 sq ft Shelter Plan",
     description: "A free plan for three small earthen volumes gathered around protected outdoor rooms, with 600 sq ft of adaptable interior shelter.",
+    image: "/social/the-courtyard.jpg",
   },
   "the-long-house": {
     title: "The Long House — Free 1,000 sq ft Shelter Plan",
     description: "A free plan for an adaptable long house of repeated earthen rooms, open-air courts and passages shaped to a narrow site.",
+    image: "/social/the-long-house.jpg",
   },
 };
 
@@ -165,7 +168,7 @@ function ShelterPage() {
   const model = models[slug] || models["the-four-walls"];
   const related = Object.entries(builds).filter(([key]) => key !== slug).slice(0,2);
   return <main className="shelter-page">
-    <PageMeta title={metadata.title} description={metadata.description} path={`/shelters/${slug}/`}/>
+    <PageMeta title={metadata.title} description={metadata.description} path={`/shelters/${slug}/`} image={metadata.image}/>
     <header className="nav detail-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="/#practice">Practice</a><a href="/#shelters">Shelters</a><a href="/#process">Process</a><a href="/#about">About</a></nav><a className="nav-cta" href="#downloads">Get the plans ↘</a></header>
     <section className="model-hero" id="top"><ModelViewer modelUrl={model.url} textureUrl={wallMaterial === "earth" ? csreTextureUrl : lavacreteTextureUrl}/><div className="model-material-toggle" role="group" aria-label="Wall material preview"><span>Wall material</span><button className={wallMaterial === "earth" ? "active" : ""} onClick={() => setWallMaterial("earth")}>CSRE</button><button className={wallMaterial === "lavacrete" ? "active" : ""} onClick={() => setWallMaterial("lavacrete")}>Lavacrete</button></div><div className="model-title"><p>{build.number} / Buildable shelter</p><h1>{build.name}</h1><span>{build.area}<br/>{build.rooms}</span></div><a className="model-down" href="#overview">Explore the shelter ↓</a></section>
 
