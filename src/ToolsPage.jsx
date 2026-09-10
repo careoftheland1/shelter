@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import SiteFooter from "./SiteFooter.jsx";
 import PageMeta from "./PageMeta.jsx";
 import seeItLinework from "./assets/see-it-linework.png";
@@ -36,11 +37,19 @@ function SeeDiagram() {
 }
 
 function ToolsPage() {
+  useEffect(() => {
+    if (!window.location.hash) return;
+    const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+    if (!target) return;
+    const frame = window.requestAnimationFrame(() => target.scrollIntoView());
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
   return <main className="tools-page">
     <PageMeta title="Free Shelter Design Tools — Shelter on the Land" description="Arrange rooms with Space It, shape a measured shelter with Shape It and visualize the place with See It." path="/tools/"/>
     <header className="nav tools-nav">
       <a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a>
-      <nav><a href="#workflow">Workflow</a><a href="#space-it">Space It</a><a href="#shape-it">Shape It</a><a href="#see-it">See It</a></nav>
+      <nav><a href="#workflow">Workflow</a><a href="#space-it">Space It</a><a href="#shape-it">Shape It</a><a href="#see-it">See It</a><a href="#working-documents">Documents</a></nav>
       <a className="nav-cta" href="#begin">Begin a shelter ↘</a>
     </header>
 
@@ -87,7 +96,7 @@ function ToolsPage() {
       </div>
     </section>
 
-    <section className="tools-begin" id="begin"><p className="kicker">Use one tool, or move through all three</p><h2>Begin with space.<br/>Leave with a vision.</h2><div><a href="https://spaceit.onthe.land/"><span>Start in Space It</span><b>Arrange the shelter ↗</b></a><a href="https://shapeit.onthe.land/"><span>Start in Shape It</span><b>Build the model ↗</b></a><a href="https://shapeit.onthe.land/see-it.html"><span>Start in See It</span><b>Visualize the place ↗</b></a></div></section>
+    <section className="tools-begin" id="begin"><p className="kicker">Use one tool, or move through all three</p><h2>See what you can build.</h2><div><a href="https://spaceit.onthe.land/"><span>Start in Space It</span><b>Arrange the spaces ↗</b></a><a href="https://shapeit.onthe.land/"><span>Start in Shape It</span><b>Build the model ↗</b></a><a href="https://shapeit.onthe.land/see-it.html"><span>Start in See It</span><b>Visualize the shelter ↗</b></a></div></section>
     <SiteFooter/>
   </main>;
 }

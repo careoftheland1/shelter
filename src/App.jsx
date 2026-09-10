@@ -19,7 +19,42 @@ const PrivacyPage = lazy(() => import("./PrivacyPage.jsx"));
 
 const services = [
   { number: "01", kind: "plans", title: "Start small", copy: "Begin with four walls. A small first project can become the beginning of a larger place.", action: "See the shelters", href: "#shelters" },
-  { number: "02", kind: "tool", title: "Develop your own idea", copy: "Use Space It, Shape It and See It to generate an arrangement, develop a measured shelter and visualize it on the land.", action: "Explore the tools", href: "/tools/" },
+  { number: "02", kind: "tool", title: "Develop your own idea", copy: "Use our free browser tools, Space It, Shape It and See It, to generate an arrangement, develop a measured shelter and visualize it on the land.", action: "Explore the tools", href: "/tools/" },
+];
+
+const processSteps = [
+  {
+    number: "01",
+    label: "Free plans",
+    title: "Choose a shelter",
+    copy: "Start with free, dimensioned plans for a complete earthen shelter.",
+    action: "Explore the shelters",
+    href: "#shelters",
+  },
+  {
+    number: "02",
+    label: "Design tools",
+    title: "Make it your own",
+    copy: "Arrange the rooms, set the dimensions and see the shelter on your land.",
+    action: "Use the design tools",
+    href: "/tools/#workflow",
+  },
+  {
+    number: "03",
+    label: "Working documents",
+    title: "Price it & plan it",
+    copy: "Turn material quantities and local prices into a practical build plan.",
+    action: "Open the documents",
+    href: "/tools/#working-documents",
+  },
+  {
+    number: "04",
+    label: "Experienced help",
+    title: "Build with support",
+    copy: "Build independently, or bring us in for review, tailoring and guidance.",
+    action: "See ways of working",
+    href: "/packages/",
+  },
 ];
 
 const shelters = [
@@ -49,8 +84,6 @@ function EntryVisual({ kind }) {
   return <svg className="entry-visual" viewBox="0 0 240 88" aria-hidden="true">
     <path d="M24 28 83 11l65 17v41L83 82 24 66zM83 11v71"/>
     <path d="M103 78V47h26v27"/>
-    <path d="m157 39 22-7 43 10v32l-43 8-22-7zM179 32v50"/>
-    <path d="M188 80V52h16v25"/>
   </svg>;
 }
 
@@ -116,7 +149,7 @@ function App() {
       <p className="kicker">START BUILDING TODAY</p>
       <div>
         <h2>You can build<br/>your own shelter.</h2>
-        <p>We make small buildings that ordinary people can understand, adapt and build. No experience necessary. The plans and design tools are free. Experienced help is there when the work calls for it.</p>
+        <p>We design small buildings that ordinary people can understand, adapt and build. No experience necessary. The plans and design tools are free. Experienced help is there when the work calls for it.</p>
       </div>
     </section>
 
@@ -138,14 +171,20 @@ function App() {
     </section>
 
     <section className="process" id="process">
-      <p className="kicker">How it works</p>
-      <h2>From a free plan<br/>to a built shelter.</h2>
-      <ol>
-        <li><span>01</span><div><small>Plans · Details · Material schedule</small><h3>Start with a complete shelter</h3><p>Choose a free plan with dimensioned drawings, assemblies and preliminary quantities—or use our free tools to test a form of your own.</p><div className="step-links"><a href="#shelters">Choose a shelter ↗</a><a href="/tools/">Customize a shelter ↗</a></div></div></li>
-        <li><span>02</span><div><small>Quantities · Local prices · Build sequence</small><h3>Put numbers to the work</h3><p>Export preliminary material quantities from Shape It, add prices from the places you will actually buy, and begin with an editable sample build sequence.</p><a href="/tools/#working-documents">Explore the working documents ↗</a></div></li>
-        <li><span>03</span><div><small>Site · Code · Engineering</small><h3>Make the plan belong to the land</h3><p>Confirm access, utilities, soil, climate and local requirements. Adapt siting, foundations and structural details with the professionals required in your jurisdiction.</p></div></li>
-        <li><span>04</span><div><small>Review · Tailoring · Build support</small><h3>Build independently—or with us</h3><p>Carry the plan into construction yourself. When a decision needs experience, bring us in for a focused review, plan tailoring or guidance through the build.</p><a href="/packages/">See ways of working ↗</a></div></li>
+      <header className="process-heading">
+        <p className="kicker">How it works</p>
+        <h2>From a free plan<br/>to a built shelter.</h2>
+      </header>
+      <ol className="process-rail" aria-label="Four ways to move a shelter forward">
+        {processSteps.map(step => <li className="process-card" key={step.number}>
+          <span className="process-number">{step.number}</span>
+          <small>{step.label}</small>
+          <h3>{step.title}</h3>
+          <p>{step.copy}</p>
+          <a href={step.href}><span>{step.action}</span><b aria-hidden="true">↗</b></a>
+        </li>)}
       </ol>
+      <p className="process-scroll-hint" aria-hidden="true">Scroll to explore <span>→</span></p>
     </section>
 
     <section className="contact" id="contact">
