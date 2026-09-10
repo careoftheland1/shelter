@@ -1,4 +1,10 @@
 /school / 301
-/shelters/the-room /shelters/the-four-walls/ 301
-/shelters/the-room/ /shelters/the-four-walls/ 301
+/shelters/the-room /shelters/four-walls/ 301
+/shelters/the-room/ /shelters/four-walls/ 301
+/shelters/the-four-walls /shelters/four-walls/ 301
+/shelters/the-four-walls/ /shelters/four-walls/ 301
+/shelters/the-courtyard /shelters/courtyard/ 301
+/shelters/the-courtyard/ /shelters/courtyard/ 301
+/shelters/the-long-house /shelters/long-house/ 301
+/shelters/the-long-house/ /shelters/long-house/ 301
 /school/* / 301

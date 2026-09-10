@@ -15,9 +15,9 @@ const growthSteps = [
 ];
 
 const plans = [
-  { code: "SEED 01", name: "The Four Walls", footprint: "16 × 12 FT", area: "200 SQ FT", use: "STUDIO / SLEEPS 2", next: "CAN GROW → COURTYARD / LONG HOUSE", image: fourWallsUrl, imageSmall: fourWallsSmallUrl, href: "/shelters/the-four-walls/" },
-  { code: "COURTYARD 01", name: "The Courtyard", footprint: "3 VOLUMES", area: "600 SQ FT", use: "ROOMS + OPEN-AIR COURTS", next: "CAN GROW → ONE VOLUME AT A TIME", image: courtyardUrl, imageSmall: courtyardSmallUrl, href: "/shelters/the-courtyard/" },
-  { code: "LONG HOUSE 01", name: "The Long House", footprint: "4–6+ VOLUMES", area: "1,000 SQ FT", use: "ROOM / COURT / ROOM", next: "CAN GROW → ALONG THE LAND", image: longHouseUrl, imageSmall: longHouseSmallUrl, href: "/shelters/the-long-house/" },
+  { code: "SEED 01", name: "Four Walls", footprint: "16 × 12 FT", area: "200 SQ FT", use: "STUDIO / SLEEPS 2", next: "CAN GROW → COURTYARD / LONG HOUSE", image: fourWallsUrl, imageSmall: fourWallsSmallUrl, href: "/shelters/four-walls/" },
+  { code: "COURTYARD 01", name: "Courtyard", footprint: "3 VOLUMES", area: "600 SQ FT", use: "ROOMS + OPEN-AIR COURTS", next: "CAN GROW → ONE VOLUME AT A TIME", image: courtyardUrl, imageSmall: courtyardSmallUrl, href: "/shelters/courtyard/" },
+  { code: "LONG HOUSE 01", name: "Long House", footprint: "4–6+ VOLUMES", area: "1,000 SQ FT", use: "ROOM / COURT / ROOM", next: "CAN GROW → ALONG THE LAND", image: longHouseUrl, imageSmall: longHouseSmallUrl, href: "/shelters/long-house/" },
 ];
 
 function GrowthPlan({ state }) {

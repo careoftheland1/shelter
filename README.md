@@ -5,9 +5,9 @@ The public website for [shelter.onthe.land](https://shelter.onthe.land): free pl
 ## Public pages
 
 - `/` — Shelter on the Land landing page
-- `/shelters/the-four-walls/` — The Four Walls
-- `/shelters/the-courtyard/` — The Courtyard
-- `/shelters/the-long-house/` — The Long House
+- `/shelters/four-walls/` — Four Walls
+- `/shelters/courtyard/` — Courtyard
+- `/shelters/long-house/` — Long House
 - `/plans/` — the Shelter building language
 - `/tools/` — Space It, Shape It and See It workflow
 - `/packages/` — free plans and paid ways of working
@@ -81,6 +81,7 @@ The site currently shares `public/thumbnail.jpg` as its social image. Page-speci
 
 ## Planning documents
 
+- `SHELTER-ECOSYSTEM-LAUNCH-PREP.md` — launch review sequence and pending-document index for Shelter, Space It, Shape It and See It
 - `STARTING-POINT-FLOW.md` — proposed Stripe and scheduling flow for the $200 Starting Point session
 - `SHAPE-IT-PROJECT-WORKBOOK.md` — designed XLSX export specification for Shape It
 - `ANALYTICS-AND-ERROR-REPORTING.md` — launch analytics, monitoring and privacy posture

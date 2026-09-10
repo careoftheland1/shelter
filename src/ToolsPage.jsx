@@ -52,8 +52,7 @@ function ToolsPage() {
 
     <section className="tools-intro" id="workflow">
       <p className="kicker">One continuous workflow</p>
-      <h2>Gather the rooms.<br/>Shape the shelter.<br/>See the place.</h2>
-      <p>Begin loosely. Let rooms gather around useful outdoor space, without deciding the whole building at once. Carry the arrangement into a measured model, then explore its light, material and atmosphere.</p>
+      <h2>Gather the rooms → Shape the volumes → See the shelter.</h2>
     </section>
 
     <section className="tool-stage tool-stage-space" id="space-it">
@@ -67,7 +66,7 @@ function ToolsPage() {
     <section className="tool-stage tool-stage-shape" id="shape-it">
       <header><span>02 / 03</span><p className="kicker">Define + understand the build</p><h2>Shape It</h2></header>
       <div className="tool-stage-visual"><ShapeDiagram/></div>
-      <div className="tool-stage-copy"><h3>Make the idea measurable.</h3><p>Open a Space It starting point—or begin with a single volume—and work at the scale of an actual shelter. Set dimensions, wall systems, roofs and openings while the model keeps the material implications visible.</p><ul><li>Move and refine individual or grouped volumes</li><li>Set wall thickness, material and roof form</li><li>Place and size doors and windows</li><li>Export a dimensioned plan and preliminary material quantities</li></ul><a href="https://shapeit.onthe.land/">Open Shape It <span>↗</span></a></div>
+      <div className="tool-stage-copy"><h3>Make the idea measurable.</h3><p>Open a Space It starting point or begin with a single volume, then work at the scale of an actual shelter. Set dimensions, wall systems, roofs and openings while the model keeps the material implications visible.</p><ul><li>Move and refine individual or grouped volumes</li><li>Set wall thickness, material and roof form</li><li>Place and size doors and windows</li><li>Export a dimensioned plan and preliminary material quantities</li></ul><a href="https://shapeit.onthe.land/">Open Shape It <span>↗</span></a></div>
     </section>
 
     <section className="tools-handoff"><span>SHAPE IT</span><i>02</i><b>Capture the chosen view</b><em>→</em><i>03</i><b>Bring it into the landscape</b><span>SEE IT</span></section>
@@ -79,16 +78,16 @@ function ToolsPage() {
     </section>
 
     <section className="working-documents" id="working-documents">
-      <header><p className="kicker">Working documents</p><h2>Carry the numbers<br/>into the work.</h2><p>Shape It can provide the quantities the geometry knows. Editable documents carry those numbers forward, leaving room for local prices, project-specific materials and the decisions only a builder can make.</p></header>
+      <header><p className="kicker">Working documents</p><h2>Plan it. Price it. Build it.</h2><p>Shape It can provide the quantities the geometry knows. Editable documents carry those numbers forward, leaving room for local prices, project-specific materials and the decisions only a builder can make.</p></header>
       <div className="working-document-list">
-        <article><span>01</span><h3>Material takeoff</h3><p>Begin with calculated wall volume and weight, soil or lavasand, cement, formed wall area and floor area—organized by volume and for the project as a whole.</p><b>Populated by Shape It</b></article>
+        <article><span>01</span><h3>Material takeoff</h3><p>Begin with calculated wall volume and weight, soil or lavasand, cement, formed wall area and floor area, organized by volume and for the project as a whole.</p><b>Populated by Shape It</b></article>
         <article><span>02</span><h3>Editable budget</h3><p>Carry the calculated quantities into a cost workbook. Add local unit prices, waste, labor, tax and the materials the model cannot determine.</p><b>Completed by the builder</b></article>
         <article><span>03</span><h3>Sample sequence</h3><p>Begin with an editable order of work, then adjust durations, dependencies, crews and dates to the site and the way the project will actually be built.</p><b>Adapted to the project</b></article>
         <article><span>04</span><h3>Make it complete</h3><p>Add reinforcement, foundations, roofing, openings, services, finishes and any other work specific to the plan, engineering and jurisdiction.</p><b>Verified locally</b></article>
       </div>
     </section>
 
-    <section className="tools-begin" id="begin"><p className="kicker">Use one tool—or move through all three</p><h2>Begin with space.<br/>Leave with a vision.</h2><div><a href="https://spaceit.onthe.land/"><span>Start in Space It</span><b>Arrange the shelter ↗</b></a><a href="https://shapeit.onthe.land/"><span>Start in Shape It</span><b>Build the model ↗</b></a><a href="https://shapeit.onthe.land/see-it.html"><span>Start in See It</span><b>Visualize the place ↗</b></a></div></section>
+    <section className="tools-begin" id="begin"><p className="kicker">Use one tool, or move through all three</p><h2>Begin with space.<br/>Leave with a vision.</h2><div><a href="https://spaceit.onthe.land/"><span>Start in Space It</span><b>Arrange the shelter ↗</b></a><a href="https://shapeit.onthe.land/"><span>Start in Shape It</span><b>Build the model ↗</b></a><a href="https://shapeit.onthe.land/see-it.html"><span>Start in See It</span><b>Visualize the place ↗</b></a></div></section>
     <SiteFooter/>
   </main>;
 }

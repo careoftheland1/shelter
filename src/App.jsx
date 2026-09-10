@@ -23,9 +23,9 @@ const services = [
 ];
 
 const shelters = [
-  { number: "S—01", name: "The Four Walls", area: "200 sq ft", rooms: "Studio / 1 bath", shape: "room", image: fourWallsUrl, imageSmall: fourWallsSmallUrl, imageAlt: "Empty earthen room framed by two bright openings", slug: "the-four-walls" },
-  { number: "S—02", name: "The Courtyard", area: "600 sq ft", rooms: "3 volumes + courtyards", shape: "court", image: courtyardUrl, imageSmall: courtyardSmallUrl, imageAlt: "Three rammed-earth volumes forming a shaded courtyard", slug: "the-courtyard" },
-  { number: "S—03", name: "The Long House", area: "1,000 sq ft", rooms: "4–6+ volumes", shape: "long", image: longHouseUrl, imageSmall: longHouseSmallUrl, imageAlt: "View from a dark earthen room across a planted courtyard into a minimal kitchen", slug: "the-long-house" },
+  { number: "S—01", name: "Four Walls", area: "200 sq ft", rooms: "Studio / 1 bath", shape: "room", image: fourWallsUrl, imageSmall: fourWallsSmallUrl, imageAlt: "Empty earthen room framed by two bright openings", slug: "four-walls" },
+  { number: "S—02", name: "Courtyard", area: "600 sq ft", rooms: "3 volumes + courtyards", shape: "court", image: courtyardUrl, imageSmall: courtyardSmallUrl, imageAlt: "Three rammed-earth volumes forming a shaded courtyard", slug: "courtyard" },
+  { number: "S—03", name: "Long House", area: "1,000 sq ft", rooms: "4–6+ volumes", shape: "long", image: longHouseUrl, imageSmall: longHouseSmallUrl, imageAlt: "View from a dark earthen room across a planted courtyard into a minimal kitchen", slug: "long-house" },
 ];
 
 function Plan({ shape }) {
@@ -57,7 +57,7 @@ function EntryVisual({ kind }) {
 function BuildingLanguageDiagram() {
   return <figure className="building-language">
     <svg viewBox="0 0 1040 250" role="img" aria-labelledby="language-title language-desc">
-      <title id="language-title">The Four Walls seed growing into courtyard and long house arrangements</title>
+      <title id="language-title">Four Walls seed growing into courtyard and long house arrangements</title>
       <desc id="language-desc">One thick-walled room gathers with independent rooms around a courtyard, or repeats in a line with room-width open courts.</desc>
       <path className="language-thread" d="M183 125H275M528 125h86"/>
       <g className="language-seed" transform="translate(34.5 37.5) scale(.7)"><rect x="48" y="58" width="134" height="134"/><circle cx="115" cy="125" r="4"/></g>
@@ -125,12 +125,12 @@ function App() {
     </section>
 
     <section className="plans" id="shelters">
-      <header><p className="kicker">FREE PLANS TO GET STARTED</p><h2>Plans made<br/>to be built.</h2><p>The Four Walls is the seed: a 200 sq ft room that teaches the whole system. Larger shelters grow through repetition, gathering enclosed rooms and useful open space between them.</p></header>
+      <header><p className="kicker">FREE PLANS TO GET STARTED</p><h2>Plans made<br/>to be built.</h2><p>Four Walls is the seed: a 200 sq ft room that teaches the whole system. Larger shelters grow through repetition, gathering enclosed rooms and useful open space between them.</p></header>
       <BuildingLanguageDiagram/>
       <div className="plan-grid">
         {shelters.map(s => <a className="plan-card" href={`/shelters/${s.slug}/`} key={s.number}>
           <div className="plan-meta"><span>{s.number}</span><span>{s.area}</span></div>
-          {s.image ? <img className="plan-image" src={s.image} srcSet={`${s.imageSmall} 800w, ${s.image} ${s.slug === "the-courtyard" ? 1445 : s.slug === "the-long-house" ? 1461 : 1452}w`} sizes="(max-width: 760px) 100vw, 33vw" alt={s.imageAlt} loading="lazy" decoding="async"/> : <Plan shape={s.shape}/>}
+          {s.image ? <img className="plan-image" src={s.image} srcSet={`${s.imageSmall} 800w, ${s.image} ${s.slug === "courtyard" ? 1445 : s.slug === "long-house" ? 1461 : 1452}w`} sizes="(max-width: 760px) 100vw, 33vw" alt={s.imageAlt} loading="lazy" decoding="async"/> : <Plan shape={s.shape}/>}
           <div className="plan-name"><h3>{s.name}</h3><p>{s.rooms}</p><b>↗</b></div>
         </a>)}
       </div>

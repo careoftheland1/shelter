@@ -15,7 +15,7 @@ export default function PackagesPortalSection() {
       <p>Supported, Guided and Custom projects will share a simple online workspace built around the realities of making a building.</p>
     </header>
     <div className="portal-window">
-      <div className="portal-top"><span>S—01 / The Four Walls</span><span>Build overview</span><i>24% complete</i></div>
+      <div className="portal-top"><span>S—01 / Four Walls</span><span>Build overview</span><i>24% complete</i></div>
       <div className="portal-body">
         <aside><b>Overview</b><span>Drawings</span><span>Decisions <i>3</i></span><span>Site log</span><span>Conversations</span></aside>
         <div className="portal-content">

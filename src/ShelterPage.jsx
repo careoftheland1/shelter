@@ -34,43 +34,43 @@ import SiteFooter from "./SiteFooter.jsx";
 import PageMeta from "./PageMeta.jsx";
 
 const builds = {
-  "the-four-walls": { number: "S—01", name: "The Four Walls", area: "200 sq ft", rooms: "Studio / 1 bath", footprint: "14′ × 18′", occupancy: "1–2 people", wall: "18–24 in", duration: "4–7 months", cost: "$45–75k", description: "Four walls, one quiet room, made from the ground beneath it. The Four Walls is the smallest complete shelter in the collection—a place to begin, retreat, work or stay." },
-  "the-courtyard": { number: "S—02", name: "The Courtyard", area: "600 sq ft", rooms: "3 volumes + courtyards", footprint: "Site-adapted cluster", occupancy: "1–3 people", wall: "18–24 in", duration: "7–11 months", cost: "$95–145k", description: "Three Four Walls volumes come together around protected outdoor rooms. The Courtyard makes 600 square feet of interior shelter—and a much larger place to live through the useful space held between its walls." },
-  "the-long-house": { number: "S—03", name: "The Long House", area: "1,000 sq ft", rooms: "4–6+ volumes", footprint: "Site-adapted linear arrangement", occupancy: "2–4 people", wall: "18–24 in", duration: "10–15 months", cost: "$140–210k", description: "Four Walls volumes repeat along a narrow site, opening and closing as they go. The Long House moves between enclosed rooms and the courts, passages and pauses created in the voids between them." },
+  "four-walls": { number: "S—01", name: "Four Walls", area: "200 sq ft", rooms: "Studio / 1 bath", footprint: "14′ × 18′", occupancy: "1–2 people", wall: "18–24 in", duration: "4–7 months", cost: "$45–75k", description: "Four walls, one quiet room, made from the ground beneath it. Four Walls is the smallest complete shelter in the collection—a place to begin, retreat, work or stay." },
+  "courtyard": { number: "S—02", name: "Courtyard", area: "600 sq ft", rooms: "3 volumes + courtyards", footprint: "Site-adapted cluster", occupancy: "1–3 people", wall: "18–24 in", duration: "7–11 months", cost: "$95–145k", description: "Three Four Walls volumes come together around protected outdoor rooms. Courtyard makes 600 square feet of interior shelter—and a much larger place to live through the useful space held between its walls." },
+  "long-house": { number: "S—03", name: "Long House", area: "1,000 sq ft", rooms: "4–6+ volumes", footprint: "Site-adapted linear arrangement", occupancy: "2–4 people", wall: "18–24 in", duration: "10–15 months", cost: "$140–210k", description: "Four Walls volumes repeat along a narrow site, opening and closing as they go. Long House moves between enclosed rooms and the courts, passages and pauses created in the voids between them." },
 };
 
 const shelterMetadata = {
-  "the-four-walls": {
-    title: "The Four Walls — Free 200 sq ft Shelter Plan",
+  "four-walls": {
+    title: "Four Walls — Free 200 sq ft Shelter Plan",
     description: "A free plan for a compact 200 sq ft rammed-earth or lavacrete room: a place to live, work, stay or begin building on the land.",
-    image: "/social/the-four-walls.jpg",
+    image: "/social/four-walls.jpg",
   },
-  "the-courtyard": {
-    title: "The Courtyard — Free 600 sq ft Shelter Plan",
+  "courtyard": {
+    title: "Courtyard — Free 600 sq ft Shelter Plan",
     description: "A free plan for three small earthen volumes gathered around protected outdoor rooms, with 600 sq ft of adaptable interior shelter.",
-    image: "/social/the-courtyard-v2.jpg",
+    image: "/social/courtyard-v2.jpg",
   },
-  "the-long-house": {
-    title: "The Long House — Free 1,000 sq ft Shelter Plan",
+  "long-house": {
+    title: "Long House — Free 1,000 sq ft Shelter Plan",
     description: "A free plan for an adaptable long house of repeated earthen rooms, open-air courts and passages shaped to a narrow site.",
-    image: "/social/the-long-house.jpg",
+    image: "/social/long-house.jpg",
   },
 };
 
 const galleries = {
-  "the-four-walls": [
-[fourWallsHeroUrl, fourWallsHeroSmallUrl, "Rammed-earth shelter volumes in a wooded desert courtyard", "The Four Walls volume", 1448],
+  "four-walls": [
+[fourWallsHeroUrl, fourWallsHeroSmallUrl, "Rammed-earth shelter volumes in a wooded desert courtyard", "Four Walls volume", 1448],
 [fourWallsLightSlotUrl, fourWallsLightSlotSmallUrl, "Low horizontal opening casting warm light into an earthen room", "Low opening + light", 1467],
 [fourWallsDiagonalLightUrl, fourWallsDiagonalLightSmallUrl, "Diagonal sunlight moving across a rammed-earth interior", "Light across the wall", 1319],
 [fourWallsMountainCourtUrl, fourWallsMountainCourtSmallUrl, "Rammed-earth volumes framing desert mountains", "Volume + landscape", 1086],
   ],
-  "the-courtyard": [
+  "courtyard": [
 [courtyardDuskUrl, courtyardDuskSmallUrl, "Rammed-earth volumes gathered around a quiet courtyard at dusk", "The courtyard at dusk", 1086],
 [courtyardPassageEveningUrl, courtyardPassageEveningSmallUrl, "Sunlit passage framed by thick rammed-earth courtyard walls", "Passage between rooms", 1448],
 [courtyardQuietUrl, courtyardQuietSmallUrl, "A quiet rammed-earth courtyard in warm desert light", "Quiet courtyard", 1067],
 [courtyardApproachUrl, courtyardApproachSmallUrl, "An approach through opposing walls toward the courtyard", "Approach to the court", 1451],
   ],
-  "the-long-house": [
+  "long-house": [
 [longHouseThreeUrl, longHouseThreeSmallUrl, "A long framed view from an earthen room across a planted court", "Room to courtyard", 1461],
 [longHouseOneUrl, longHouseOneSmallUrl, "Repeated earthen rooms extending along the site", "A sequence of rooms", 1586],
 [longHouseTwoUrl, longHouseTwoSmallUrl, "Long House openings aligned through interior and exterior space", "Long view", 1586],
@@ -79,9 +79,9 @@ const galleries = {
 };
 
 const models = {
-  "the-four-walls": { url: fourWallsModelUrl },
-  "the-courtyard": { url: courtyardModelUrl },
-  "the-long-house": { url: fourWallsModelUrl },
+  "four-walls": { url: fourWallsModelUrl },
+  "courtyard": { url: courtyardModelUrl },
+  "long-house": { url: fourWallsModelUrl },
 };
 
 function ModelViewer({ modelUrl, textureUrl }) {
@@ -161,11 +161,12 @@ const specsFor = b => [["Interior area",b.area],["Footprint",b.footprint],["Prog
 function ShelterPage() {
   const [wallMaterial, setWallMaterial] = useState("lavacrete");
   const requestedSlug = location.pathname.split("/").filter(Boolean).pop();
-  const slug = requestedSlug === "the-room" ? "the-four-walls" : requestedSlug;
-  const build = builds[slug] || builds["the-four-walls"];
-  const metadata = shelterMetadata[slug] || shelterMetadata["the-four-walls"];
-  const gallery = galleries[slug] || galleries["the-four-walls"];
-  const model = models[slug] || models["the-four-walls"];
+  const legacySlugs = { "the-room": "four-walls", "the-four-walls": "four-walls", "the-courtyard": "courtyard", "the-long-house": "long-house" };
+  const slug = legacySlugs[requestedSlug] || requestedSlug;
+  const build = builds[slug] || builds["four-walls"];
+  const metadata = shelterMetadata[slug] || shelterMetadata["four-walls"];
+  const gallery = galleries[slug] || galleries["four-walls"];
+  const model = models[slug] || models["four-walls"];
   const related = Object.entries(builds).filter(([key]) => key !== slug).slice(0,2);
   return <main className="shelter-page">
     <PageMeta title={metadata.title} description={metadata.description} path={`/shelters/${slug}/`} image={metadata.image}/>
