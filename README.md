@@ -77,7 +77,7 @@ Photographic assets used by the live site have full-size and 800-pixel WebP vari
 
 Every live route sets a unique title, description and canonical URL through `PageMeta`. Open Graph and Twitter titles, descriptions and URLs follow the same page metadata.
 
-The site currently shares `public/thumbnail.jpg` as its social image. Page-specific social images can be added later by extending `PageMeta` with an image property.
+The home page uses `public/thumbnail.jpg`. The plan overview, plan request and individual shelter pages use render images from `public/social/`. Keep their `PageMeta` image and matching `vite.config.js` route image aligned so social crawlers see the correct thumbnail in the generated HTML.
 
 ## Planning documents
 
@@ -85,6 +85,9 @@ The site currently shares `public/thumbnail.jpg` as its social image. Page-speci
 - `STARTING-POINT-FLOW.md` — proposed Stripe and scheduling flow for the $200 Starting Point session
 - `SHAPE-IT-PROJECT-WORKBOOK.md` — designed XLSX export specification for Shape It
 - `ANALYTICS-AND-ERROR-REPORTING.md` — launch analytics, monitoring and privacy posture
+- `PLANS-AND-CLIENT-FUNNEL-HANDOFF.md` — offer, plan access and inquiry decisions
+- `CLIENT-FUNNEL-DESIGN-DIRECTION.md` — project brief interaction and visual direction
+- `FUNNEL-INTEGRATION.md` — current form delivery behavior and endpoint contracts
 - `archive/` — preserved earlier sections and implementation notes
 
 ## Deployment

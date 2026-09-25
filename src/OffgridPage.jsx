@@ -56,7 +56,7 @@ function OffgridPage() {
   }, []);
 
   return <main className="offgrid-page">
-    <PageMeta title="A Building Language for Starting Small — Shelter on the Land" description="Begin with one useful room, then grow into courtyards or a long house with a simple building language and free shelter plans." path="/plans/"/>
+    <PageMeta title="A Building Language for Starting Small — Shelter on the Land" description="Begin with one useful room, then grow into courtyards or a long house with a simple building language and free shelter plans." path="/plans/" image="/social/four-walls.jpg"/>
     <header className="offgrid-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="#language">The system</a><a href="#plans">Plans</a><a href="/tools/">Tools</a></nav><a href="#plans">Start with four walls ↓</a></header>
 
     <section className="offgrid-seed-intro">

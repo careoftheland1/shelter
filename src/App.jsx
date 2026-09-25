@@ -16,6 +16,9 @@ const ToolsPage = lazy(() => import("./ToolsPage.jsx"));
 const OffgridPage = lazy(() => import("./OffgridPage.jsx"));
 const OffgridSystemsPage = lazy(() => import("./OffgridSystemsPage.jsx"));
 const PrivacyPage = lazy(() => import("./PrivacyPage.jsx"));
+const ProjectPage = lazy(() => import("./ProjectPage.jsx"));
+const PlanRequestPage = lazy(() => import("./PlanRequestPage.jsx"));
+const OfferingPage = lazy(() => import("./OfferingPage.jsx"));
 
 const services = [
   { number: "01", kind: "plans", title: "Start small", copy: "Begin with four walls. A small first project can become the beginning of a larger place.", action: "See the shelters", href: "#shelters" },
@@ -108,6 +111,18 @@ function BuildingLanguageDiagram() {
 }
 
 function App() {
+  if (window.location.pathname.startsWith("/project")) {
+    return <Suspense fallback={<div className="page-loading">Opening project brief…</div>}><ProjectPage /></Suspense>;
+  }
+  if (window.location.pathname.startsWith("/free-plans")) {
+    return <Suspense fallback={<div className="page-loading">Opening free plans…</div>}><PlanRequestPage /></Suspense>;
+  }
+  if (window.location.pathname.startsWith("/supported")) {
+    return <Suspense fallback={<div className="page-loading">Opening Supported…</div>}><OfferingPage kind="supported" /></Suspense>;
+  }
+  if (window.location.pathname.startsWith("/guided")) {
+    return <Suspense fallback={<div className="page-loading">Opening Guided…</div>}><OfferingPage kind="guided" /></Suspense>;
+  }
   if (window.location.pathname.startsWith("/privacy")) {
     return <Suspense fallback={<div className="page-loading">Opening privacy notice…</div>}><PrivacyPage /></Suspense>;
   }
@@ -190,7 +205,7 @@ function App() {
     <section className="contact" id="contact">
       <p className="kicker">YOUR LAND. YOUR HANDS. A PLACE TO BEGIN.</p>
       <h2>Start<br className="contact-break-mobile"/> with<br className="contact-break-desktop"/> a<br className="contact-break-mobile"/> shelter.</h2>
-      <div className="contact-actions"><a href="#shelters">Select a plan set <span>↗</span></a><a href="mailto:build@onthe.land?subject=My land">Tell us about your land <span>↗</span></a></div>
+      <div className="contact-actions"><a href="#shelters">Select a plan set <span>↗</span></a><a href="/project/?source=home">Tell us about your land <span>↗</span></a></div>
     </section>
 
     <SiteFooter/>

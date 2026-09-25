@@ -16,19 +16,18 @@ function PrivacyPage() {
 
     <article className="privacy-content">
       <header>
-        <p className="kicker">Privacy notice / Effective August 29, 2026</p>
-        <h1>A small site.<br/>A small data footprint.</h1>
+        <p className="kicker">Privacy notice / Effective September 25, 2026</p>
         <p>Shelter on the Land uses limited information to operate, secure and improve this website, and to respond when you choose to get in touch. We do not sell personal information or use advertising trackers.</p>
       </header>
 
       <section>
         <span>01</span>
-        <div><h2>What this site collects</h2><p>You can browse this site without creating an account or submitting a form. Cloudflare hosts and secures the site and may process technical request information needed to deliver it, protect it from abuse and diagnose problems.</p><p>Cloudflare Web Analytics measures aggregate visits, pages viewed, referring sites, approximate country, device and browser type, and page-performance information such as Core Web Vitals. It is configured without advertising pixels, cross-site identifiers, session replay or a tag manager.</p></div>
+        <div><h2>What this site collects</h2><p>You can browse this site without creating an account or sending a request. Cloudflare hosts and secures the site and may process technical request information needed to deliver it, protect it from abuse and diagnose problems.</p><p>Cloudflare Web Analytics measures aggregate visits, pages viewed, referring sites, approximate country, device and browser type, and page-performance information such as Core Web Vitals. It is configured without advertising pixels, cross-site identifiers, session replay or a tag manager.</p></div>
       </section>
 
       <section>
         <span>02</span>
-        <div><h2>Email and project conversations</h2><p>If you email us, we receive the address you use and anything you include in the message or attachments. We use that information to answer your question, discuss a plan or service, and maintain the resulting working correspondence.</p><p>Please do not send sensitive personal, financial or health information. Email is not a secure construction-document portal.</p></div>
+        <div><h2>Email and project conversations</h2><p>If you request plans or share a project brief, we receive the address and project information you provide when the request is sent. We use it to respond, discuss a plan or service, and maintain the resulting correspondence. The optional choice to receive building guidance is separate from a plan request.</p><p>When a request opens your email app, the information is sent only after you send that message. Please do not send sensitive personal, financial or health information. Email is not a secure construction-document portal.</p></div>
       </section>
 
       <section>
