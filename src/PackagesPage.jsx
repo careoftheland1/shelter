@@ -3,32 +3,36 @@ import PageMeta from "./PageMeta.jsx";
 
 const packages = [
   {
-    index: "01", name: "Solo", price: "Free", label: "Plan access",
-    intro: "Take the plans and make a start. You lead the work, assemble your local team and adapt the design to your land.",
-    includes: ["Complete digital plan set", "Material quantities + build sequence", "Editable project checklist", "Future plan updates"],
-    action: "Choose a shelter", href: "/#shelters"
+    index: "01", name: "The Open Set", price: "Free", label: "Open building system",
+    intro: "Start with the Shelter building system: one room, three around a court or six along a line. The plans are open so you can study them, adapt them to your land and make a start yourself.",
+    includes: ["Four Walls — one independent room, the seed", "Courtyard — three volumes around shared outdoor space", "Longhouse — six volumes arranged along a line", "Complete digital plan sets", "Material quantities + build sequence", "Editable project checklist + future updates"],
+    note: "Shelter plans are reference construction sets. Structure, soil, climate, code and permitting requirements must be verified for the project location.",
+    action: "Explore the open set", href: "/#shelters"
   },
   {
-    index: "02", name: "Starting Point", price: "$200", label: "Two-hour working session",
-    intro: "Bring your land, a plan or the questions taking shape. We’ll spend two focused hours understanding where you are, thinking through the choices in front of you and finding a useful way forward.",
-    includes: ["A little preparation before we meet", "One private two-hour video conversation", "Review of the plans, site or questions you bring", "A written outline of useful next steps"],
+    index: "02", name: "Starting Point", price: "$200", label: "One-hour working session",
+    intro: "Bring your land, a Shelter plan or the questions taking shape. We’ll spend one focused hour understanding where you are, testing the choices in front of you and finding the clearest way forward.",
+    includes: ["Preparation before we meet", "One private one-hour video conversation", "Review of the plans, site or questions you bring", "A written outline of useful next steps"],
+    note: "If you continue into Supported or Guided, the $200 is credited toward that service.",
     action: "Find your starting point", href: "mailto:build@onthe.land?subject=Starting Point session"
   },
   {
-    index: "03", name: "Supported", price: "$1,000", label: "Focused support",
-    intro: "Bring us into the decisions that shape the build. Start with a Shelter plan or plans of your own; we review your direction and stay available at key moments.",
-    includes: ["Use a Shelter plan or bring your own", "Plan siting and orienting", "Plan check preparation"],
-    action: "Talk through your build", href: "mailto:build@onthe.land?subject=Supported build"
+    index: "03", name: "Supported", price: "$1,000", label: "Get ready to build",
+    intro: "Bring us into the decisions that shape the project before construction begins. Start with a Shelter plan or plans of your own; we help site the project and get the plans ready for submitting to your local building department.",
+    includes: ["Use a Shelter plan or bring your own", "Site planning + orientation", "Plan adaptations within the agreed scope", "Plan-check and permit preparation"],
+    note: "Supported ends when the project is ready to move into construction.",
+    action: "Get your project ready", href: "mailto:build@onthe.land?subject=Supported build"
   },
   {
-    index: "04", name: "Guided", price: "$5,000", label: "Ongoing guidance",
-    intro: "A longer working relationship from site planning through construction. You remain the builder; we help keep the whole effort coherent.",
-    includes: ["Everything in Supported", "Full plan adaptations", "Building department interfacing", "Regular build consultations"],
+    index: "04", name: "Guided", price: "$5,000", label: "Build with Shelter beside you",
+    intro: "A longer working relationship from site planning through construction. You remain the builder; we stay with the project as decisions move from drawings into the field.",
+    includes: ["Everything in Supported", "Building-department interfacing", "Regular build consultations", "Review of site photos or video at key moments", "Construction-stage problem solving", "Support through completion within the agreed project duration"],
+    note: "Supported gets you to construction. Guided stays through construction.",
     action: "Tell us about your build", href: "mailto:build@onthe.land?subject=Guided build"
   },
   {
-    index: "05", name: "Custom", price: "", label: "Full commission",
-    intro: "A full architectural commission shaped around your land, climate, material, budget and way of living. From first idea to a buildable design.",
+    index: "05", name: "Custom", price: "", label: "Designed from the land outward",
+    intro: "Some projects should not begin with a plan. For unusual sites, programs or ambitions, we can begin with the land and develop a project from first principles—drawing from the Shelter material and building language where useful.",
     includes: ["Original site-specific design", "Architecture + consultant coordination", "Permit drawing set", "Soils testing & engineering", "Construction-phase support"],
     action: "Start a conversation", href: "mailto:build@onthe.land?subject=Custom shelter"
   }
@@ -36,7 +40,7 @@ const packages = [
 
 function PackagesPage() {
   return <main className="packages-page">
-    <PageMeta title="Plans + Ways of Working — Shelter on the Land" description="Use a free Shelter plan or bring your own, then choose focused advice, ongoing guidance or a full custom commission." path="/packages/"/>
+    <PageMeta title="Plans + Ways of Working — Shelter on the Land" description="Start with the open Shelter building system, then bring us in for focused advice, pre-construction support, guidance through the build or a project designed from the land outward." path="/packages/"/>
     <header className="nav packages-nav">
       <a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a>
       <nav><a href="/#practice">Practice</a><a href="/#shelters">Shelters</a><a href="/#process">Process</a><a href="/#about">About</a></nav>
@@ -64,7 +68,7 @@ function PackagesPage() {
       </div>
       <p className="kicker">Ways of working</p>
       <h1>Build it yourself.<br/>Not alone.</h1>
-      <div className="packages-hero-copy"><p>When the plans aren’t enough. Talk through the decisions before you build. Call when something unexpected comes up on site. We can be a call away.</p><a href="#packages">Compare the paths <span>↓</span></a></div>
+      <div className="packages-hero-copy"><p>When the plans aren’t enough, talk through the decisions before you build. And when something unexpected comes up on site, we’re a call away.</p><a href="#packages">Compare the paths <span>↓</span></a></div>
     </section>
 
     <section className="packages-intro" id="choose">
@@ -75,16 +79,16 @@ function PackagesPage() {
     <section className="package-list" id="packages">
       {packages.map((item, i) => <article className={`package-row package-${i + 1}`} key={item.name}>
         <header className="package-heading"><span>{item.index} / {String(packages.length).padStart(2, "0")}</span>{item.tag && <em>{item.tag}</em>}<h2>{item.name}</h2></header>
-        <div className="package-details"><div className="package-price"><span>{item.label}</span>{item.price && <strong>{item.price}</strong>}</div><p className="package-intro">{item.intro}</p><div className="package-includes"><span>Included in this path</span><ul>{item.includes.map(x => <li key={x}>{x}</li>)}</ul></div><a href={item.href}>{item.action}<span>↗</span></a></div>
+        <div className="package-details"><div className="package-price"><span>{item.label}</span>{item.price && <strong>{item.price}</strong>}</div><p className="package-intro">{item.intro}</p><div className="package-includes"><span>Included in this path</span><ul>{item.includes.map(x => <li key={x}>{x}</li>)}</ul></div>{item.note && <p className="package-note">{item.note}</p>}<a href={item.href}>{item.action}<span>↗</span></a></div>
       </article>)}
     </section>
 
     <section className="package-guide">
       <p className="kicker">A simple guide</p><h2>Not sure where to start?</h2>
-      <div>{packages.map((item, i) => <p key={item.name}><span className="guide-number">{String(i + 1).padStart(2, "0")}</span><span className="guide-copy">{i === 0 && <>You have land, practical experience and trusted local professionals. Begin <b>Solo</b>.</>}{i === 1 && <>You are curious, just beginning or need help finding the right first move. Start at the <b>Starting Point</b>.</>}{i === 2 && <>You want an experienced eye on early decisions and someone reliable to call. Choose <b>Supported</b>.</>}{i === 3 && <>You will lead the build and want an ongoing design partner. Choose <b>Guided</b>.</>}{i === 4 && <>The project needs to be drawn from the land outward. Begin with <b>Custom</b>.</>}</span></p>)}</div>
+      <div>{packages.map((item, i) => <p key={item.name}><span className="guide-number">{String(i + 1).padStart(2, "0")}</span><span className="guide-copy">{i === 0 && <>You have land, practical experience and trusted local professionals. Begin with <b>The Open Set</b>.</>}{i === 1 && <>You are curious, just beginning or need help identifying the right first move. Start at the <b>Starting Point</b>.</>}{i === 2 && <>You have a direction and want help getting it ready for construction. Choose <b>Supported</b>.</>}{i === 3 && <>You will lead the build and want Shelter alongside you through construction. Choose <b>Guided</b>.</>}{i === 4 && <>The project needs to be drawn from the land outward. Begin with <b>Custom</b>.</>}</span></p>)}</div>
     </section>
 
-    <section className="packages-contact"><p className="kicker">Tell us what you are building</p><h2>Begin with<br/>the land.</h2><p>You do not need to know which package fits. Send a few words about the place, the shelter and what you hope to do yourself.</p><a href="mailto:build@onthe.land?subject=My shelter project">Start a conversation <span>↗</span></a></section>
+    <section className="packages-contact"><p className="kicker">Tell us what you are building</p><h2>Begin with<br/>the land.</h2><p>You do not need to choose a path first. Tell us about the place, the shelter and the parts of the work you hope to take on yourself.</p><a href="mailto:build@onthe.land?subject=My shelter project">Start a conversation <span>↗</span></a></section>
     <SiteFooter/>
   </main>;
 }

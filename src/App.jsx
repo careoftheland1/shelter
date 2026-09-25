@@ -189,7 +189,7 @@ function App() {
 
     <section className="contact" id="contact">
       <p className="kicker">YOUR LAND. YOUR HANDS. A PLACE TO BEGIN.</p>
-      <h2>Start with<br/>a shelter.</h2>
+      <h2>Start<br className="contact-break-mobile"/> with<br className="contact-break-desktop"/> a<br className="contact-break-mobile"/> shelter.</h2>
       <div className="contact-actions"><a href="#shelters">Select a plan set <span>↗</span></a><a href="mailto:build@onthe.land?subject=My land">Tell us about your land <span>↗</span></a></div>
     </section>
 

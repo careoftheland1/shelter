@@ -96,7 +96,7 @@ function ToolsPage() {
       </div>
     </section>
 
-    <section className="tools-begin" id="begin"><p className="kicker">Use one tool, or move through all three</p><h2>See what you can build.</h2><div><a href="https://spaceit.onthe.land/"><span>Start in Space It</span><b>Arrange the spaces ↗</b></a><a href="https://shapeit.onthe.land/"><span>Start in Shape It</span><b>Build the model ↗</b></a><a href="https://shapeit.onthe.land/see-it.html"><span>Start in See It</span><b>Visualize the shelter ↗</b></a></div></section>
+    <section className="tools-begin" id="begin"><p className="kicker">Use one tool, or move through all three</p><h2>See what you can build.</h2><div><a href="https://spaceit.onthe.land/"><span>Start in Space It</span><b>Arrange the spaces <i className="text-arrow" aria-hidden="true"/></b></a><a href="https://shapeit.onthe.land/"><span>Start in Shape It</span><b>Build the model <i className="text-arrow" aria-hidden="true"/></b></a><a href="https://shapeit.onthe.land/see-it.html"><span>Start in See It</span><b>Visualize the shelter <i className="text-arrow" aria-hidden="true"/></b></a></div></section>
     <SiteFooter/>
   </main>;
 }
