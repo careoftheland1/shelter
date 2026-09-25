@@ -113,7 +113,7 @@
 .funnel-history{margin:0}
 .project-page .funnel-history-all{min-height:46px;margin:0;padding:0 6vw;grid-template-columns:1fr auto;border:0;border-bottom:1px solid rgba(36,34,25,.2);font-size:10px!important;letter-spacing:.07em;text-transform:uppercase}
 .project-page .funnel-history-all{background:#e7e0d2}
-.funnel-answer-drawer{max-height:min(40svh,320px);overflow:auto;padding:4px 6vw 12px;background:#e7e0d2}
+.funnel-answer-drawer{padding:4px 6vw 12px;background:#e7e0d2}
 .funnel-panel{min-height:calc(100svh - 66px);padding:34px 6vw 7vh;box-shadow:none;animation:project-reveal .25s ease-out both}
 .funnel-panel-meta{padding:0;border:0;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
 .funnel-panel form{grid-template-columns:minmax(0,1fr) minmax(350px,.9fr);gap:8vw;margin-top:9vh}
