@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import heroUrl from "./assets/shelter-updates/four-walls-hero.webp";
 import heroSmallUrl from "./assets/shelter-updates/four-walls-hero-800.webp";
 import fourWallsUrl from "./assets/shelter-cards/four-walls-angles/01-low-floor.webp";
@@ -7,6 +7,10 @@ import courtyardUrl from "./assets/shelter-cards/courtyard-minidv-v3.webp";
 import courtyardSmallUrl from "./assets/shelter-cards/courtyard-minidv-v3-800.webp";
 import longHouseUrl from "./assets/shelter-cards/long-house-minidv-v3.webp";
 import longHouseSmallUrl from "./assets/shelter-cards/long-house-minidv-v3-800.webp";
+import contactGroveUrl from "./assets/contact-carousel/shelter-grove.webp";
+import contactCourtUrl from "./assets/contact-carousel/shelter-court.webp";
+import contactLavacreteUrl from "./assets/contact-carousel/shelter-lavacrete.webp";
+import contactMixedUrl from "./assets/contact-carousel/shelter-lavacrete-csre.webp";
 import SiteFooter from "./SiteFooter.jsx";
 import PageMeta from "./PageMeta.jsx";
 
@@ -66,6 +70,35 @@ const shelters = [
   { number: "S—02", name: "Courtyard", area: "600 sq ft", rooms: "3 volumes + courtyards", shape: "court", image: courtyardUrl, imageSmall: courtyardSmallUrl, imageAlt: "Three rammed-earth volumes forming a shaded courtyard", slug: "courtyard" },
   { number: "S—03", name: "Long House", area: "1,000 sq ft", rooms: "4–6+ volumes", shape: "long", image: longHouseUrl, imageSmall: longHouseSmallUrl, imageAlt: "View from a dark earthen room across a planted courtyard into a minimal kitchen", slug: "long-house" },
 ];
+
+const contactSlides = [
+  { image: contactGroveUrl, alt: "Rammed-earth shelter among mesquite trees in a sandy desert clearing" },
+  { image: contactCourtUrl, alt: "Two earthen shelters around a shaded desert courtyard" },
+  { image: contactLavacreteUrl, alt: "Three dark lavacrete shelter volumes around a sandy desert court" },
+  { image: contactMixedUrl, alt: "Dark lavacrete and warm CSRE shelter volumes around a desert court" },
+];
+
+function ShelterCarousel() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const interval = window.setInterval(() => setActive(index => (index + 1) % contactSlides.length), 11000);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  return <div className="contact-carousel" aria-label="Shelter renders">
+    {contactSlides.map((slide, index) => <img
+      key={slide.image}
+      className={index === active ? "is-active" : ""}
+      src={slide.image}
+      alt={index === active ? slide.alt : ""}
+      aria-hidden={index !== active}
+      loading="lazy"
+      decoding="async"
+    />)}
+  </div>;
+}
 
 function Plan({ shape }) {
   return <svg className={`plan plan-${shape}`} viewBox="0 0 420 260" aria-hidden="true">
@@ -156,21 +189,23 @@ function App() {
       <a className="nav-cta" href="#contact">Start a build ↗</a>
     </header>
 
-    <section className="hero" id="top">
-      <img src={heroUrl} srcSet={`${heroSmallUrl} 800w, ${heroUrl} 1448w`} sizes="100vw" alt="Rammed-earth shelter volumes in a wooded desert courtyard" fetchPriority="high" decoding="async"/>
-      <div className="hero-wash"/>
-      <p className="hero-note">FREE BUILDABLE PLANS AND GUIDES + EXPERIENCED HELP FOR BUILDING WITH RAMMED EARTH AND LAVACRETE</p>
-      <h1>be a builder</h1>
-      <a className="down" href="#process">See how it works <span>↓</span></a>
-    </section>
+    <div className="landing-intro">
+      <section className="hero" id="top">
+        <img src={heroUrl} srcSet={`${heroSmallUrl} 800w, ${heroUrl} 1448w`} sizes="100vw" alt="Rammed-earth shelter volumes in a wooded desert courtyard" fetchPriority="high" decoding="async"/>
+        <div className="hero-wash"/>
+        <p className="hero-note">FREE BUILDABLE PLANS AND GUIDES + EXPERIENCED HELP FOR BUILDING WITH RAMMED EARTH AND LAVACRETE</p>
+        <h1>be a builder</h1>
+        <a className="down" href="#process">See how it works <span>↓</span></a>
+      </section>
 
-    <section className="manifesto" id="practice">
-      <p className="kicker">START BUILDING TODAY</p>
-      <div>
-        <h2>You can build<br/>your own shelter.</h2>
-        <p>We design small buildings that ordinary people can understand, adapt and build. No experience necessary. The plans and design tools are free. Experienced help is there when the work calls for it.</p>
-      </div>
-    </section>
+      <section className="manifesto" id="practice">
+        <p className="kicker">START BUILDING TODAY</p>
+        <div>
+          <h2>You can build<br/>your own shelter.</h2>
+          <p>We design small buildings that ordinary people can understand, adapt and build. No experience necessary. The plans and design tools are free. Experienced help is there when the work calls for it.</p>
+        </div>
+      </section>
+    </div>
 
     <section className="services">
       {services.map(item => <article key={item.number}><a href={item.href}><span>{item.number}</span><EntryVisual kind={item.kind}/><h3>{item.title}</h3><p>{item.copy}</p><b>{item.action} ↗</b></a></article>)}
@@ -207,6 +242,7 @@ function App() {
     </section>
 
     <section className="contact" id="contact">
+      <ShelterCarousel/>
       <p className="kicker">YOUR LAND. YOUR HANDS. A PLACE TO BEGIN.</p>
       <h2>Start<br className="contact-break-mobile"/> with<br className="contact-break-desktop"/> a<br className="contact-break-mobile"/> shelter.</h2>
       <div className="contact-actions"><a href="#shelters">Select a plan set <span>↗</span></a><a href="/project/?source=home">Tell us about your land <span>↗</span></a></div>
