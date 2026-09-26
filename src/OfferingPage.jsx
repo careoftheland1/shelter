@@ -35,12 +35,13 @@ const faqs = [
 function OfferingPage({ kind }) {
   const offer = offerings[kind];
   const briefHref = `/project/?offering=${kind}&source=${kind}`;
+  const [firstLine, secondLine] = offer.heading.split("<br/>");
   return <main className={`offering-page offering-${offer.tone}`}>
     <PageMeta title={`${offer.name} — Shelter on the Land`} description={offer.intro} path={`/${kind}/`}/>
     <header className="nav offering-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><a className="nav-cta" href="/packages/">Compare paths ↗</a></header>
     <section className="offering-hero">
       <div className="offering-hero-top"><span>{offer.number} / {offer.name.toUpperCase()}</span></div>
-      <h1>{offer.heading.split("<br/>").map((line, i) => <span key={line}>{i > 0 && <br/>}{line}</span>)}</h1>
+      <h1>{firstLine}<br/>{secondLine}</h1>
       <div className="offering-hero-bottom"><p>{offer.intro}</p><a href={briefHref}>Tell us about your project <span>↗</span></a></div>
     </section>
     <section className="offering-overview"><p className="funnel-eyebrow">{offer.name.toUpperCase()}</p><div><h2>Help where<br/>it matters.</h2><p>{offer.outcome}</p></div><div className="offering-price"><span>CURRENTLY ADVERTISED FEE</span><strong>{offer.price}</strong><p>The deliverables, schedule and any project-specific conditions are set out in a written scope before work begins.</p></div></section>
