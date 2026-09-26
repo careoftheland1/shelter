@@ -27,8 +27,12 @@
 .offering-hero-bottom p{font:12px/1.7 'Source Code Pro',monospace;max-width:none;margin:0 0 55px}
 .offering-hero-bottom>a{border-top:1px solid currentColor;padding-top:13px;display:flex;justify-content:space-between;gap:24px;font:9px/1.5 'Source Code Pro',monospace;text-transform:uppercase;letter-spacing:.09em}
 .offering-hero-bottom>a:hover{text-decoration:underline;text-underline-offset:4px}
+.offering-next-link{align-self:end;width:100%;border-top:1px solid rgba(240,233,223,.55);padding:14px 0 17px;display:flex;justify-content:space-between;align-items:center;gap:24px;color:inherit;font:10px/1.5 'Source Code Pro',monospace;text-transform:uppercase;letter-spacing:.09em}
+.offering-next-link span{font-size:15px;line-height:1}
+.offering-next-link:hover{text-decoration:underline;text-underline-offset:4px}
 .offering-includes h2{font:700 clamp(42px,5.2vw,74px)/.94 'Public Sans',sans-serif!important;letter-spacing:-.055em;max-width:650px}
 @media(max-width:760px){.offering-hero,.offering-guided .offering-hero{min-height:100svh;padding:9vh 22px 5vh;display:flex;flex-direction:column}.offering-hero h1{font-size:clamp(48px,12vw,75px);line-height:1;margin:auto 0 6vh}.offering-hero-bottom{width:100%}.offering-hero-bottom p{font-size:12px;margin-bottom:40px}}
+@media(max-width:760px){.offering-next-link{margin-top:35px}}
 
 /* The questions occupy one compact disclosure and open into a full-width list. */
 .offering-faq{display:block;padding:0 6vw;background:#241e17;color:#f0e9df}

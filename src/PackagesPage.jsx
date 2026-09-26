@@ -11,23 +11,23 @@ const packages = [
   },
   {
     index: "02", name: "Starting Point", price: "$200", label: "One-hour working session",
-    intro: "Bring your land, a Shelter plan or the questions taking shape. We’ll spend one focused hour understanding where you are, testing the choices in front of you and finding the clearest way forward.",
-    includes: ["Preparation before we meet", "One private one-hour video conversation", "Review of the plans, site or questions you bring", "A written outline of useful next steps"],
-    note: "If you continue into Supported or Guided, the $200 is credited toward that service.",
+    intro: "Starting Point is for people who need substantive help finding the right direction. Bring your land, a Shelter plan, plans of your own, or the questions taking shape. We’ll work through the decisions in front of you and identify the clearest next step.",
+    includes: ["Preparation before we meet", "One focused, one-hour working session", "Review of your site, plans, or questions", "Written next steps"],
+    note: "If you continue into Supported or Guided, the $200 is credited toward that service. You can also inquire about either service directly.",
     action: "Find your starting point", href: "mailto:build@onthe.land?subject=Starting Point session"
   },
   {
     index: "03", name: "Supported", price: "$1,000", label: "Get ready to build",
     intro: "Bring us into the decisions that shape the project before construction begins. Start with a Shelter plan or plans of your own; we help site the project and get the plans ready for submitting to your local building department.",
     includes: ["Use a Shelter plan or bring your own", "Site planning + orientation", "Plan adaptations within the agreed scope", "Plan-check and permit preparation"],
-    note: "Supported ends when the project is ready to move into construction.",
+    note: "Supported prepares the site-specific plan for local permit review and the next stage of construction.",
     action: "Explore Supported", href: "/supported/"
   },
   {
     index: "04", name: "Guided", price: "$5,000", label: "Build with Shelter beside you",
     intro: "A longer working relationship from site planning through construction. You remain the builder; we stay with the project as decisions move from drawings into the field.",
-    includes: ["Everything in Supported", "Building-department interfacing", "Regular build consultations", "Review of site photos or video at key moments", "Construction-stage problem solving", "Support through completion within the agreed project duration"],
-    note: "Supported gets you to construction. Guided stays through construction.",
+    includes: ["Everything in Supported", "Building-department questions within the agreed scope", "Regular build consultations", "Review of site photos or video at key moments", "Construction-stage problem solving", "Support through the agreed construction period"],
+    note: "Supported gets the project ready for construction. Guided stays with the project through construction.",
     action: "Explore Guided", href: "/guided/"
   },
   {
@@ -81,11 +81,10 @@ function PackagesPage() {
         <header className="package-heading"><span>{item.index} / {String(packages.length).padStart(2, "0")}</span>{item.tag && <em>{item.tag}</em>}<h2>{item.name}</h2></header>
         <div className="package-details"><div className="package-price"><span>{item.label}</span>{item.price && <strong>{item.price}</strong>}</div><p className="package-intro">{item.intro}</p><div className="package-includes"><span>Included in this path</span><ul>{item.includes.map(x => <li key={x}>{x}</li>)}</ul></div>{item.note && <p className="package-note">{item.note}</p>}<a href={item.href}>{item.action}<span>↗</span></a></div>
       </article>)}
-    </section>
-
-    <section className="package-guide">
-      <p className="kicker">A simple guide</p><h2>Not sure where to start?</h2>
-      <div>{packages.map((item, i) => <p key={item.name}><span className="guide-number">{String(i + 1).padStart(2, "0")}</span><span className="guide-copy">{i === 0 && <>You have land, practical experience and trusted local professionals. Begin with <b>The Open Set</b>.</>}{i === 1 && <>You are curious, just beginning or need help identifying the right first move. Start at the <b>Starting Point</b>.</>}{i === 2 && <>You have a direction and want help getting it ready for construction. Choose <b>Supported</b>.</>}{i === 3 && <>You will lead the build and want Shelter alongside you through construction. Choose <b>Guided</b>.</>}{i === 4 && <>The project needs to be drawn from the land outward. Begin with <b>Custom</b>.</>}</span></p>)}</div>
+      <section className="package-guide">
+        <p className="kicker">A simple guide</p><h2>Not sure where to start?</h2>
+        <div>{packages.map((item, i) => <p key={item.name}><span className="guide-number">{String(i + 1).padStart(2, "0")}</span><span className="guide-copy">{i === 0 && <>You have land, practical experience and trusted local professionals. Begin with <b>The Open Set</b>.</>}{i === 1 && <>You need help finding the right direction. Consider a paid <b>Starting Point</b> working session.</>}{i === 2 && <>You have a direction and want help getting it ready for construction. Choose <b>Supported</b>.</>}{i === 3 && <>You will lead the build and want Shelter alongside you through construction. Choose <b>Guided</b>.</>}{i === 4 && <>The project needs to be drawn from the land outward. Begin with <b>Custom</b>.</>}</span></p>)}</div>
+      </section>
     </section>
 
     <section className="packages-contact"><p className="kicker">Tell us what you are building</p><h2>Begin with<br/>the land.</h2><p>You do not need to choose a path first. Tell us about the place, the shelter and the parts of the work you hope to take on yourself.</p><a href="/project/?source=packages">Tell us about your project <span>↗</span></a></section>

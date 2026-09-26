@@ -20,7 +20,7 @@ Verified in the local repository; production parity has not been verified:
 - Starting Point is advertised as $200 for a one-hour session, credited toward Supported or Guided.
 - Supported is advertised at $1,000 for pre-construction support.
 - Guided is advertised at $5,000 for support through construction within an agreed project duration.
-- `STARTING-POINT-FLOW.md` describes a two-hour session, which conflicts with the current page's one-hour offer. Resolve this before implementing booking.
+- Starting Point duration is resolved as one hour across the page and `STARTING-POINT-FLOW.md`.
 - `SHELTER-ECOSYSTEM-LAUNCH-PREP.md` identifies privacy updates needed when introducing email, scheduling, payments, or stored project information.
 
 ## Proposed customer paths
@@ -112,7 +112,7 @@ Do not imply unlimited revisions, guaranteed permit approval, engineering servic
 - What happens if the project pauses or takes longer than expected?
 - How are additional work, cancellations, and refunds handled?
 
-A dedicated Starting Point page can follow once its session length and booking terms are settled. A Custom page is outside the first release.
+A dedicated Starting Point page can follow once its booking terms are settled. The session length is confirmed as one hour. A Custom page is outside the first release.
 
 ## 3. Shared project brief
 
@@ -186,7 +186,7 @@ Keep API credentials server-side. If download access is intended to be enforced,
 ### Phase 1 — clarify the offers and remove manual delivery
 
 1. Confirm complete plan files and versions available for delivery.
-2. Set Supported/Guided scope boundaries and resolve Starting Point duration.
+2. Set Supported/Guided scope boundaries. Starting Point duration is confirmed as one hour.
 3. Draft and build Supported and Guided pages.
 4. Add the shared project brief and internal notification.
 5. Add email capture, automatic plan delivery, and optional stage capture.
@@ -200,7 +200,7 @@ Review inquiries manually during this phase to learn which questions predict a u
 1. Add the optional email sequence and suppression rules.
 2. Connect reviewed inquiries to fit-call scheduling.
 3. Add the simple inquiry pipeline and proposal follow-up.
-4. Implement Starting Point booking once its terms are resolved, reconciling `STARTING-POINT-FLOW.md`.
+4. Implement Starting Point booking using the confirmed one-hour duration and `STARTING-POINT-FLOW.md`.
 5. Adjust questions and copy based on real inquiry quality.
 
 ## 8. Acceptance checks
@@ -229,9 +229,8 @@ Use these to improve inquiry quality and reduce repeated explanation. Email list
 2. What geographic/project limits apply, and which services remain with local professionals?
 3. What meeting cadence, response window, revision allowance, and duration are sustainable?
 4. What happens with pauses, upgrades, additional work, cancellations, and refunds?
-5. Is Starting Point one hour or two, and what are its credit terms?
-6. Which complete plan sets are ready for automated delivery?
-7. Which existing email, contact, and scheduling systems should be reused?
-8. Who reviews inquiries, and what response window can be published?
+5. Which complete plan sets are ready for automated delivery?
+6. Which existing email, contact, and scheduling systems should be reused?
+7. Who reviews inquiries, and what response window can be published?
 
-Start with decisions 1–5: they determine the promises on the offering pages and the clients the funnel should bring into meetings.
+Starting Point is a one-hour working session at $200, credited toward Supported or Guided if the client continues. This duration and credit are resolved. Start with decisions 1–4: they determine the remaining scope promises on the offering pages and the clients the funnel should bring into meetings.

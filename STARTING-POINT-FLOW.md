@@ -2,10 +2,10 @@
 
 ## Offer
 
-**Starting Point** is a fixed-price, conversation-first service for someone who is curious, beginning a project or trying to identify the right first move.
+**Starting Point** is paid project advice for someone who needs substantive help finding the right direction. It is optional; clients ready for Supported or Guided can inquire about those services directly.
 
 - Price: $200, paid once
-- Format: one private two-hour video working session
+- Format: one private one-hour video working session
 - Preparation: light review before the meeting
 - Client may bring: land information, a Shelter plan, plans of their own or early questions
 - Follow-up: a written outline of useful next steps
@@ -14,13 +14,13 @@ The plans remain free. The client is paying for focused time, judgment and guida
 
 ## Customer flow
 
-1. The visitor selects **Book your Starting Point** on the Support page.
+1. The visitor selects **Book your Starting Point** on the ways of working page.
 2. The button opens a Stripe Payment Link for the $200 Starting Point product.
 3. Stripe collects payment and sends a receipt.
 4. After payment, Stripe redirects the client to a scheduling page.
-5. The client chooses a two-hour meeting time and submits relevant plans, site information or questions.
+5. The client chooses a one-hour meeting time and submits relevant plans, site information or questions.
 6. Shelter reviews the submitted material before the meeting.
-7. The two-hour video session takes place.
+7. The one-hour video session takes place.
 8. Shelter sends a concise written outline of useful next steps.
 
 ## Stripe product
@@ -28,7 +28,7 @@ The plans remain free. The client is paying for focused time, judgment and guida
 - Product name: `Starting Point`
 - Price: `$200 USD`
 - Payment type: one-time
-- Description: `One private two-hour working session, light preparation and a written outline of useful next steps.`
+- Description: `One private one-hour working session, light preparation and a written outline of useful next steps.`
 - Quantity: fixed at one
 - Promotion codes: optional
 - Billing address: only if needed for tax or bookkeeping
@@ -45,7 +45,7 @@ Preferred destination:
 
 The scheduling page can be provided by Calendly, Cal.com or a simple Shelter page connected to an appointment system. It should:
 
-- Offer only eligible two-hour appointment windows
+- Offer only eligible one-hour appointment windows
 - Collect the client’s name, email and timezone
 - Ask what they are hoping to understand or decide
 - Accept links or uploads for plans, site photographs and supporting material
@@ -79,4 +79,4 @@ When the Stripe Payment Link is ready:
 4. Configure Stripe’s successful-payment redirect to the scheduling destination.
 5. Complete a real test payment, refund and rescheduling pass before publishing.
 
-The $1,000+ Supported, Guided and Custom paths should continue to begin by email at `build@onthe.land`; they are scoped through conversation rather than purchased directly.
+Supported and Guided remain available by direct inquiry without a Starting Point booking. A brief fit call after an inquiry establishes mutual fit and scope; Starting Point provides paid project advice, preparation and written next steps.
