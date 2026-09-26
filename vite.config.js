@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 const siteUrl = 'https://shelter.onthe.land'
 const routePages = [
   { path: 'plans', title: 'A Building Language for Starting Small — Shelter on the Land', description: 'Begin with one useful room, then grow into courtyards or a long house with a simple building language and free shelter plans.', image: '/social/four-walls.jpg' },
+  { path: 'shelters', title: 'Free Shelter Plans — Shelter on the Land', description: 'Explore Four Walls, Courtyard and Long House: free plans for small earthen shelters.', image: '/social/four-walls.jpg' },
   { path: 'tools', title: 'Free Shelter Design Tools — Shelter on the Land', description: 'Arrange rooms with Space It, shape a measured shelter with Shape It and visualize the place with See It.' },
   { path: 'packages', title: 'Plans + Ways of Working — Shelter on the Land', description: 'Use a free Shelter plan or bring your own, then choose focused advice, ongoing guidance or a full custom commission.' },
   { path: 'supported', title: 'Supported — Shelter on the Land', description: 'Pre-construction support for siting, adaptations and preparing a shelter project to build.' },
@@ -50,6 +51,7 @@ function staticRoutePages() {
 // https://vite.dev/config/
 export default defineConfig({
   assetsInclude: ['**/*.glb'],
+  build: { manifest: true },
   optimizeDeps: { exclude: ['three'] },
   plugins: [react(), staticRoutePages()],
 })

@@ -17,6 +17,7 @@ function PrivacyPage() {
     <article className="privacy-content">
       <header>
         <p className="kicker">Privacy notice / Effective September 25, 2026</p>
+        <h1>Privacy</h1>
         <p>Shelter on the Land uses limited information to operate, secure and improve this website, and to respond when you choose to get in touch. We do not sell personal information or use advertising trackers.</p>
       </header>
 

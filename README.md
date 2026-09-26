@@ -47,12 +47,13 @@ The production build is written to `dist/`.
 
 ## Architecture
 
-This is a Vite and React single-page application. `src/App.jsx` selects a page from `window.location.pathname`; larger pages are lazy-loaded into separate chunks.
+This is a Vite and React site with build-time prerendering for public routes. `vite.config.js` writes route-specific metadata, and `scripts/prerender.mjs` fills each page with readable HTML. `src/main.jsx` loads and hydrates the matching page component so interactive features still work. Add new public routes to the metadata list, prerender route list and client route selection together.
 
 Key files:
 
 - `src/App.jsx` — route selection and landing page
 - `src/ShelterPage.jsx` — the three shelter detail pages and 3D model viewer
+- `src/SheltersPage.jsx` — the shelter collection index
 - `src/OffgridPage.jsx` — building-language page
 - `src/ToolsPage.jsx` — design-tools workflow
 - `src/PackagesPage.jsx` — support and commission paths
@@ -69,6 +70,7 @@ Files in `public/` are copied directly into the production build.
 - `_redirects` defines Cloudflare Pages redirects and valid SPA rewrites.
 - `404.html` is the branded not-found page.
 - `robots.txt` and `sitemap.xml` provide crawler guidance.
+- `llms.txt` provides a supplemental index for machine readers.
 - `downloads/` contains public plan and specification downloads.
 
 Photographic assets used by the live site have full-size and 800-pixel WebP variants. Original PNG source images remain in `src/assets/`.

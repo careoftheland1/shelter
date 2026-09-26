@@ -87,9 +87,14 @@ const models = {
 function ModelViewer({ modelUrl, textureUrl }) {
   const mount = useRef(null);
   const controlsRef = useRef(null);
-  const isTouch = useRef(window.matchMedia("(hover: none), (pointer: coarse)").matches);
+  const [isTouch, setIsTouch] = useState(false);
+  useEffect(() => {
+    const touch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+    setIsTouch(touch);
+    if (touch) setInteractive(false);
+  }, []);
   const [loaded, setLoaded] = useState(false);
-  const [interactive, setInteractive] = useState(!isTouch.current);
+  const [interactive, setInteractive] = useState(true);
   useEffect(() => {
     const el = mount.current;
     const scene = new THREE.Scene();
@@ -106,7 +111,7 @@ function ModelViewer({ modelUrl, textureUrl }) {
     el.appendChild(renderer.domElement);
     const controls = new OrbitControls(camera, renderer.domElement);
     controlsRef.current = controls;
-    controls.enabled = !isTouch.current;
+    controls.enabled = true;
     controls.enableDamping = true; controls.dampingFactor = .055;
     controls.target.set(0, 1.7, 0); controls.minDistance = 10; controls.maxDistance = 32;
     controls.minPolarAngle = .55; controls.maxPolarAngle = 1.48;
@@ -150,8 +155,8 @@ function ModelViewer({ modelUrl, textureUrl }) {
   }, [interactive]);
   const reset = () => { const c=controlsRef.current; if (!c) return; c.object.position.set(17,10,20); c.target.set(0,1.7,0); c.update(); };
   return <div className={`model-wrap ${interactive ? "interactive" : ""}`} ref={mount}>
-    <span className={`model-status ${loaded ? "ready" : ""}`}>{loaded ? (isTouch.current ? (interactive ? "Drag or pinch to explore" : "Scroll to continue") : "Drag to explore · Scroll to zoom") : "Loading model…"}</span>
-    {isTouch.current && <button className="model-interact" onClick={() => setInteractive(value => !value)}>{interactive ? "Done" : "Explore 3D"}</button>}
+    <span className={`model-status ${loaded ? "ready" : ""}`}>{loaded ? (isTouch ? (interactive ? "Drag or pinch to explore" : "Scroll to continue") : "Drag to explore · Scroll to zoom") : "Loading model…"}</span>
+    {isTouch && <button className="model-interact" onClick={() => setInteractive(value => !value)}>{interactive ? "Done" : "Explore 3D"}</button>}
     <button className="model-reset" onClick={reset}>Reset view</button>
   </div>;
 }

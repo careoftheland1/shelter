@@ -77,7 +77,7 @@ function PackagesPage() {
     </section>
 
     <section className="package-list" id="packages">
-      {packages.map((item, i) => <article className={`package-row package-${i + 1}`} key={item.name}>
+      {packages.map((item, i) => <article className={`package-row package-${i + 1}`} id={item.name.toLowerCase().replaceAll(" ", "-")} key={item.name}>
         <header className="package-heading"><span>{item.index} / {String(packages.length).padStart(2, "0")}</span>{item.tag && <em>{item.tag}</em>}<h2>{item.name}</h2></header>
         <div className="package-details"><div className="package-price"><span>{item.label}</span>{item.price && <strong>{item.price}</strong>}</div><p className="package-intro">{item.intro}</p><div className="package-includes"><span>Included in this path</span><ul>{item.includes.map(x => <li key={x}>{x}</li>)}</ul></div>{item.note && <p className="package-note">{item.note}</p>}<a href={item.href}>{item.action}<span>↗</span></a></div>
       </article>)}

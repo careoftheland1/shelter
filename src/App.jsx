@@ -11,6 +11,7 @@ import SiteFooter from "./SiteFooter.jsx";
 import PageMeta from "./PageMeta.jsx";
 
 const ShelterPage = lazy(() => import("./ShelterPage.jsx"));
+const SheltersPage = lazy(() => import("./SheltersPage.jsx"));
 const PackagesPage = lazy(() => import("./PackagesPage.jsx"));
 const ToolsPage = lazy(() => import("./ToolsPage.jsx"));
 const OffgridPage = lazy(() => import("./OffgridPage.jsx"));
@@ -140,6 +141,9 @@ function App() {
   }
   if (window.location.pathname.startsWith("/plans")) {
     return <Suspense fallback={<div className="page-loading">Opening the building language…</div>}><OffgridPage /></Suspense>;
+  }
+  if (["/shelters", "/shelters/"].includes(window.location.pathname)) {
+    return <Suspense fallback={<div className="page-loading">Loading shelters…</div>}><SheltersPage /></Suspense>;
   }
   if (window.location.pathname.startsWith("/shelters/")) {
     return <Suspense fallback={<div className="page-loading">Loading shelter…</div>}><ShelterPage /></Suspense>;
