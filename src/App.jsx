@@ -230,9 +230,10 @@ function App() {
         <h2>From a free plan<br/>to a built shelter.</h2>
       </header>
       <ol className="process-rail" aria-label="Four ways to move a shelter forward">
-        {processSteps.map(step => <li className="process-card" key={step.number}>
+        {processSteps.map((step, index) => <li className="process-card" key={step.number}>
           <span className="process-number">{step.number}</span>
           <small>{step.label}</small>
+          <div className={`process-mark process-mark-${index}`} aria-hidden="true"><i/><i/><i/><i/></div>
           <h3>{step.title}</h3>
           <p>{step.copy}</p>
           <a href={step.href}><span>{step.action}</span><b aria-hidden="true">↗</b></a>
