@@ -8,14 +8,11 @@ import lavacreteTextureUrl from "./assets/lavacrete-texture.jpg";
 import csreTextureUrl from "./assets/csre-texture.jpg";
 import courtyardApproachUrl from "./assets/header-alternates/opposing-courtyard-minidv.webp";
 import courtyardApproachSmallUrl from "./assets/header-alternates/opposing-courtyard-minidv-800.webp";
-import longHouseOneUrl from "./assets/shelter-cards/long-house-minidv.webp";
-import longHouseOneSmallUrl from "./assets/shelter-cards/long-house-minidv-800.webp";
-import longHouseTwoUrl from "./assets/shelter-cards/long-house-minidv-v2.webp";
-import longHouseTwoSmallUrl from "./assets/shelter-cards/long-house-minidv-v2-800.webp";
-import longHouseThreeUrl from "./assets/shelter-cards/long-house-minidv-v3.webp";
-import longHouseThreeSmallUrl from "./assets/shelter-cards/long-house-minidv-v3-800.webp";
-import deepOpeningUrl from "./assets/header-alternates/deep-opening.webp";
-import deepOpeningSmallUrl from "./assets/header-alternates/deep-opening-800.webp";
+import longHouseHeroUrl from "./assets/long-house/hero-courtyard.jpeg";
+import longHouseAcrossUrl from "./assets/long-house/across-court.jpeg";
+import longHouseTerraceUrl from "./assets/long-house/roof-terrace.jpeg";
+import longHouseFramedUrl from "./assets/long-house/framed-court.jpeg";
+import longHouseRowUrl from "./assets/long-house/row-of-long-houses.jpeg";
 import fourWallsHeroUrl from "./assets/shelter-updates/four-walls-hero.webp";
 import fourWallsHeroSmallUrl from "./assets/shelter-updates/four-walls-hero-800.webp";
 import fourWallsLightSlotUrl from "./assets/shelter-updates/four-walls-light-slot.webp";
@@ -32,9 +29,11 @@ import courtyardPassageEveningUrl from "./assets/shelter-updates/courtyard-passa
 import courtyardPassageEveningSmallUrl from "./assets/shelter-updates/courtyard-passage-evening-800.webp";
 import SiteFooter from "./SiteFooter.jsx";
 import PageMeta from "./PageMeta.jsx";
+import PatternPage from "./PatternPage.jsx";
+import FourWallsPage from "./FourWallsPage.jsx";
 
 const builds = {
-  "four-walls": { number: "S—01", name: "Four Walls", area: "200 sq ft", rooms: "Studio / 1 bath", footprint: "14′ × 18′", occupancy: "1–2 people", wall: "18–24 in", duration: "4–7 months", cost: "$45–75k", description: "Four walls, one quiet room, made from the ground beneath it. Four Walls is the smallest complete shelter in the collection—a place to begin, retreat, work or stay." },
+  "four-walls": { number: "S—01", name: "Four Walls", area: "Varies by footprint", rooms: "One useful room", footprint: "Six starting footprints", occupancy: "1–2 people", wall: "18–24 in", duration: "4–7 months", cost: "$45–75k", description: "Four walls, one quiet room, made from the ground beneath it. Four Walls is the smallest complete shelter in the collection—a place to begin, retreat, work or stay." },
   "courtyard": { number: "S—02", name: "Courtyard", area: "600 sq ft", rooms: "3 volumes + courtyards", footprint: "Site-adapted cluster", occupancy: "1–3 people", wall: "18–24 in", duration: "7–11 months", cost: "$95–145k", description: "Three Four Walls volumes come together around protected outdoor rooms. Courtyard makes 600 square feet of interior shelter—and a much larger place to live through the useful space held between its walls." },
   "long-house": { number: "S—03", name: "Long House", area: "1,000 sq ft", rooms: "4–6+ volumes", footprint: "Site-adapted linear arrangement", occupancy: "2–4 people", wall: "18–24 in", duration: "10–15 months", cost: "$140–210k", description: "Four Walls volumes repeat along a narrow site, opening and closing as they go. Long House moves between enclosed rooms and the courts, passages and pauses created in the voids between them." },
 };
@@ -71,10 +70,11 @@ const galleries = {
 [courtyardApproachUrl, courtyardApproachSmallUrl, "An approach through opposing walls toward the courtyard", "Approach to the court", 1451],
   ],
   "long-house": [
-[longHouseThreeUrl, longHouseThreeSmallUrl, "A long framed view from an earthen room across a planted court", "Room to courtyard", 1461],
-[longHouseOneUrl, longHouseOneSmallUrl, "Repeated earthen rooms extending along the site", "A sequence of rooms", 1586],
-[longHouseTwoUrl, longHouseTwoSmallUrl, "Long House openings aligned through interior and exterior space", "Long view", 1586],
-[deepOpeningUrl, deepOpeningSmallUrl, "A deep opening cut through a thick earthen wall", "Depth + threshold", 1672],
+[longHouseHeroUrl, null, "Two-story earthen Long House overlooking a planted courtyard", "Long House / courtyard", 1024],
+[longHouseAcrossUrl, null, "View through a deep opening across a planted court", "Across the court", 1024],
+[longHouseTerraceUrl, null, "Upper room opening onto a planted roof terrace", "Room + roof garden", 1024],
+[longHouseFramedUrl, null, "Shaded earthen threshold framing an open-sky court", "Court between rooms", 1024],
+[longHouseRowUrl, null, "A row of low earthen Long House volumes with planted roofs in a neighborhood", "Row of long houses", 1200],
   ],
 };
 
@@ -168,11 +168,13 @@ function ShelterPage() {
   const requestedSlug = location.pathname.split("/").filter(Boolean).pop();
   const legacySlugs = { "the-room": "four-walls", "the-four-walls": "four-walls", "the-courtyard": "courtyard", "the-long-house": "long-house" };
   const slug = legacySlugs[requestedSlug] || requestedSlug;
+  if (slug === "four-walls") return <FourWallsPage/>;
   const build = builds[slug] || builds["four-walls"];
   const metadata = shelterMetadata[slug] || shelterMetadata["four-walls"];
   const gallery = galleries[slug] || galleries["four-walls"];
   const model = models[slug] || models["four-walls"];
   const related = Object.entries(builds).filter(([key]) => key !== slug).slice(0,2);
+  if (slug === "long-house") return <PatternPage slug={slug} gallery={gallery}/>;
   return <main className="shelter-page">
     <PageMeta title={metadata.title} description={metadata.description} path={`/shelters/${slug}/`} image={metadata.image}/>
     <header className="nav detail-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="/#practice">Practice</a><a href="/#shelters">Shelters</a><a href="/#process">Process</a><a href="/#about">About</a></nav><a className="nav-cta" href="#downloads">Get the plans ↘</a></header>

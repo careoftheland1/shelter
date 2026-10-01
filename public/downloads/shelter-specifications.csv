@@ -1,9 +1,11 @@
-Field,Specification
-Interior area,200 sq ft
-Footprint,14 x 18 ft
-Program,Studio / 1 bath
-Wall system,Rammed earth / lavacrete
-Wall thickness,18–24 in
-Foundation,Site-adapted slab
-Roof,Low-slope shed roof
-Plan version,1.0 / August 2026
+Field,Reference
+Plan family,Four Walls
+Starting footprints (ft),11 x 11 / 12 x 16 / 14 x 14 / 10 x 20 / 14 x 20 / 20 x 20
+Dimensions,Starting footprints are not interior floor areas
+Availability,Confirm available drawing sizes with Shelter
+Uses,Shed / studio / sleeping room / workshop / guest room
+Wall system,Rammed earth / lavacrete as appropriate to the project
+Openings,Adaptable to use and orientation
+Local requirements,Confirm site and use requirements before construction
+Court,Clustering pattern - not a plan set
+Long House,Linear pattern - not a plan set

@@ -1,12 +1,12 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import heroUrl from "./assets/shelter-updates/four-walls-hero.webp";
 import heroSmallUrl from "./assets/shelter-updates/four-walls-hero-800.webp";
-import fourWallsUrl from "./assets/shelter-cards/four-walls-angles/01-low-floor.webp";
-import fourWallsSmallUrl from "./assets/shelter-cards/four-walls-angles/01-low-floor-800.webp";
-import courtyardUrl from "./assets/shelter-cards/courtyard-minidv-v3.webp";
-import courtyardSmallUrl from "./assets/shelter-cards/courtyard-minidv-v3-800.webp";
-import longHouseUrl from "./assets/shelter-cards/long-house-minidv-v3.webp";
-import longHouseSmallUrl from "./assets/shelter-cards/long-house-minidv-v3-800.webp";
+import fourWallsUrl from "./assets/shelter-cards/four-walls-angles/four-walls-table.webp";
+import fourWallsSmallUrl from "./assets/shelter-cards/four-walls-angles/four-walls-table-800.webp";
+import courtyardUrl from "./assets/shelter-cards/courtyard-grass-row.webp";
+import courtyardSmallUrl from "./assets/shelter-cards/courtyard-grass-row-800.webp";
+import longHouseUrl from "./assets/shelter-cards/long-house-courtyard.webp";
+import longHouseSmallUrl from "./assets/shelter-cards/long-house-courtyard-800.webp";
 import contactGroveUrl from "./assets/contact-carousel/shelter-grove.webp";
 import contactCourtUrl from "./assets/contact-carousel/shelter-court.webp";
 import contactLavacreteUrl from "./assets/contact-carousel/shelter-lavacrete.webp";
@@ -24,11 +24,6 @@ const PrivacyPage = lazy(() => import("./PrivacyPage.jsx"));
 const ProjectPage = lazy(() => import("./ProjectPage.jsx"));
 const PlanRequestPage = lazy(() => import("./PlanRequestPage.jsx"));
 const OfferingPage = lazy(() => import("./OfferingPage.jsx"));
-
-const services = [
-  { number: "01", kind: "plans", title: "Start small", copy: "Begin with four walls. A small first project can become the beginning of a larger place.", action: "See the shelters", href: "#shelters" },
-  { number: "02", kind: "tool", title: "Develop your own idea", copy: "Use our free browser tools, Space It, Shape It and See It, to generate an arrangement, develop a measured shelter and visualize it on the land.", action: "Explore the tools", href: "/tools/" },
-];
 
 const processSteps = [
   {
@@ -66,9 +61,9 @@ const processSteps = [
 ];
 
 const shelters = [
-  { number: "S—01", name: "Four Walls", area: "200 sq ft", rooms: "Studio / 1 bath", shape: "room", image: fourWallsUrl, imageSmall: fourWallsSmallUrl, imageAlt: "Empty earthen room framed by two bright openings", slug: "four-walls" },
-  { number: "S—02", name: "Courtyard", area: "600 sq ft", rooms: "3 volumes + courtyards", shape: "court", image: courtyardUrl, imageSmall: courtyardSmallUrl, imageAlt: "Three rammed-earth volumes forming a shaded courtyard", slug: "courtyard" },
-  { number: "S—03", name: "Long House", area: "1,000 sq ft", rooms: "4–6+ volumes", shape: "long", image: longHouseUrl, imageSmall: longHouseSmallUrl, imageAlt: "View from a dark earthen room across a planted courtyard into a minimal kitchen", slug: "long-house" },
+  { number: "S—01", name: "Four Walls", area: "200 sq ft", rooms: "Studio / 1 bath", shape: "room", image: fourWallsUrl, imageSmall: fourWallsSmallUrl, imageAlt: "A stone table in a dark earthen room opening onto a small courtyard", slug: "four-walls", width: 1024 },
+  { number: "S—02", name: "Courtyard", area: "600 sq ft", rooms: "3 volumes + courtyards", shape: "court", image: courtyardUrl, imageSmall: courtyardSmallUrl, imageAlt: "Earthen volumes and grasses framing a sandy courtyard", slug: "courtyard", width: 1024 },
+  { number: "S—03", name: "Long House", area: "1,000 sq ft", rooms: "4–6+ volumes", shape: "long", image: longHouseUrl, imageSmall: longHouseSmallUrl, imageAlt: "A narrow grass court leading toward a two-story earthen room", slug: "long-house", width: 1200 },
 ];
 
 const contactSlides = [
@@ -110,17 +105,6 @@ function Plan({ shape }) {
       <path className="plan-court-center" d="M137 126c28 22 51 35 77 41 25 6 50 3 78-13"/>
     </>}
     {shape === "long" && <><rect x="28" y="70" width="364" height="120"/><path d="M128 70v120m98-120v120m78-120v120M28 130h100m98 0h78"/><path className="door" d="M128 150a30 30 0 0 1 30-30M226 150a30 30 0 0 0-30-30"/></>}
-  </svg>;
-}
-
-function EntryVisual({ kind }) {
-  if (kind === "plans") return <svg className="entry-visual" viewBox="0 0 240 88" aria-hidden="true">
-    <path d="M80 80V8h80v26m0 16v30h-30m-20 0H80M86 74V14h68v20m0 16v24h-24m-20 0H86"/>
-    <path d="M110 74v6m20-6v6m24-40h6m-6 4h6"/>
-  </svg>;
-  return <svg className="entry-visual" viewBox="0 0 240 88" aria-hidden="true">
-    <path d="M24 28 83 11l65 17v41L83 82 24 66zM83 11v71"/>
-    <path d="M103 78V47h26v27"/>
   </svg>;
 }
 
@@ -200,16 +184,9 @@ function App() {
 
       <section className="manifesto" id="practice">
         <p className="kicker">START BUILDING TODAY</p>
-        <div>
-          <h2>You can build<br/>your own shelter.</h2>
-          <p>We design small buildings that ordinary people can understand, adapt and build. No experience necessary. The plans and design tools are free. Experienced help is there when the work calls for it.</p>
-        </div>
+        <p className="manifesto-statement">You can build your own shelter. We design small buildings that ordinary people can understand, adapt and build. No experience necessary. The plans and design tools are free. Experienced help is there when the work calls for it.</p>
       </section>
     </div>
-
-    <section className="services">
-      {services.map(item => <article key={item.number}><a href={item.href}><span>{item.number}</span><EntryVisual kind={item.kind}/><h3>{item.title}</h3><p>{item.copy}</p><b>{item.action} ↗</b></a></article>)}
-    </section>
 
     <section className="plans" id="shelters">
       <header><p className="kicker">FREE PLANS TO GET STARTED</p><h2>Plans made<br/>to be built.</h2><p>Four Walls is the seed: a 200 sq ft room that teaches the whole system. Larger shelters grow through repetition, gathering enclosed rooms and useful open space between them.</p></header>
@@ -217,7 +194,7 @@ function App() {
       <div className="plan-grid">
         {shelters.map(s => <a className="plan-card" href={`/shelters/${s.slug}/`} key={s.number}>
           <div className="plan-meta"><span>{s.number}</span><span>{s.area}</span></div>
-          {s.image ? <img className="plan-image" src={s.image} srcSet={`${s.imageSmall} 800w, ${s.image} ${s.slug === "courtyard" ? 1445 : s.slug === "long-house" ? 1461 : 1452}w`} sizes="(max-width: 760px) 100vw, 33vw" alt={s.imageAlt} loading="lazy" decoding="async"/> : <Plan shape={s.shape}/>}
+          {s.image ? <img className="plan-image" src={s.image} srcSet={`${s.imageSmall} 800w, ${s.image} ${s.width}w`} sizes="(max-width: 760px) 100vw, 33vw" alt={s.imageAlt} loading="lazy" decoding="async"/> : <Plan shape={s.shape}/>}
           <div className="plan-name"><h3>{s.name}</h3><p>{s.rooms}</p><b>↗</b></div>
         </a>)}
       </div>

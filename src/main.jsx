@@ -35,7 +35,7 @@ async function start() {
   const { default: Component } = await pages[moduleName]()
   const root = document.getElementById('root')
   const app = <StrictMode><Component {...props}/></StrictMode>
-  if (root.hasChildNodes() && !(window.location.search && ['ProjectPage', 'PlanRequestPage'].includes(moduleName))) hydrateRoot(root, app)
+  if (root.hasChildNodes() && !(window.location.search && ['ProjectPage', 'PlanRequestPage', 'ShelterPage'].includes(moduleName))) hydrateRoot(root, app)
   else createRoot(root).render(app)
 }
 

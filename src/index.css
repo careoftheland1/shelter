@@ -255,3 +255,7 @@ footer{grid-template-columns:2fr 1fr 1fr}footer>a:not(.wordmark){font-size:9px;t
 
 /* Archived landing accent: #9c502e (earthen orange). */
 :root{--archive-orange:#9c502e;--sky-blue:#506878}
+
+.manifesto .manifesto-statement{grid-column:2;max-width:960px;margin:0;font:700 clamp(28px,3.2vw,43px)/1.12 'Public Sans',sans-serif;letter-spacing:-.045em}
+.plans{margin-top:0}
+@media(max-width:760px){.manifesto .manifesto-statement{font-size:clamp(27px,7.5vw,38px)}}
