@@ -12,6 +12,7 @@ const routes = [
   ['/shelters/courtyard/', 'ShelterPage.jsx'],
   ['/shelters/long-house/', 'ShelterPage.jsx'],
   ['/tools/', 'ToolsPage.jsx'],
+  ['/toolbank/', 'ToolbankPage.jsx'],
   ['/packages/', 'PackagesPage.jsx'],
   ['/supported/', 'OfferingPage.jsx', { kind: 'supported' }],
   ['/guided/', 'OfferingPage.jsx', { kind: 'guided' }],

@@ -2,7 +2,6 @@
 
 Free plans, design tools and experienced guidance for small earthen shelters. Public editorial and service pages are available as readable HTML.
 
-- [Building System / Open Set](https://shelter.onthe.land/plans/): Start with one room and grow through a shared building language.
 - [Shelters](https://shelter.onthe.land/shelters/): Four Walls, Courtyard and Long House plan collections.
 - [Packages](https://shelter.onthe.land/packages/): Compare the free plans and ways of working with Shelter.
 - [Supported](https://shelter.onthe.land/supported/): Help with pre-construction decisions.

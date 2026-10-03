@@ -11,6 +11,7 @@ async function start() {
   else if (path.startsWith('/shelters')) moduleName = 'SheltersPage'
   else if (path.startsWith('/plans')) moduleName = 'OffgridPage'
   else if (path.startsWith('/tools')) moduleName = 'ToolsPage'
+  else if (path.startsWith('/toolbank')) moduleName = 'ToolbankPage'
   else if (path.startsWith('/packages')) moduleName = 'PackagesPage'
   else if (path.startsWith('/supported')) { moduleName = 'OfferingPage'; props = { kind: 'supported' } }
   else if (path.startsWith('/guided')) { moduleName = 'OfferingPage'; props = { kind: 'guided' } }
@@ -25,6 +26,7 @@ async function start() {
     SheltersPage: () => import('./SheltersPage.jsx'),
     OffgridPage: () => import('./OffgridPage.jsx'),
     ToolsPage: () => import('./ToolsPage.jsx'),
+    ToolbankPage: () => import('./ToolbankPage.jsx'),
     PackagesPage: () => import('./PackagesPage.jsx'),
     OfferingPage: () => import('./OfferingPage.jsx'),
     OffgridSystemsPage: () => import('./OffgridSystemsPage.jsx'),

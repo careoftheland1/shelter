@@ -3,8 +3,8 @@ import heroUrl from "./assets/shelter-updates/four-walls-hero.webp";
 import heroSmallUrl from "./assets/shelter-updates/four-walls-hero-800.webp";
 import fourWallsUrl from "./assets/shelter-cards/four-walls-angles/four-walls-table.webp";
 import fourWallsSmallUrl from "./assets/shelter-cards/four-walls-angles/four-walls-table-800.webp";
-import courtyardUrl from "./assets/shelter-cards/courtyard-grass-row.webp";
-import courtyardSmallUrl from "./assets/shelter-cards/courtyard-grass-row-800.webp";
+import courtyardUrl from "./assets/shelter-cards/courtyard-court-b.webp";
+import courtyardSmallUrl from "./assets/shelter-cards/courtyard-court-b-800.webp";
 import longHouseUrl from "./assets/shelter-cards/long-house-courtyard.webp";
 import longHouseSmallUrl from "./assets/shelter-cards/long-house-courtyard-800.webp";
 import contactGroveUrl from "./assets/contact-carousel/shelter-grove.webp";
@@ -61,9 +61,9 @@ const processSteps = [
 ];
 
 const shelters = [
-  { number: "S—01", name: "Four Walls", area: "200 sq ft", rooms: "Studio / 1 bath", shape: "room", image: fourWallsUrl, imageSmall: fourWallsSmallUrl, imageAlt: "A stone table in a dark earthen room opening onto a small courtyard", slug: "four-walls", width: 1024 },
-  { number: "S—02", name: "Courtyard", area: "600 sq ft", rooms: "3 volumes + courtyards", shape: "court", image: courtyardUrl, imageSmall: courtyardSmallUrl, imageAlt: "Earthen volumes and grasses framing a sandy courtyard", slug: "courtyard", width: 1024 },
-  { number: "S—03", name: "Long House", area: "1,000 sq ft", rooms: "4–6+ volumes", shape: "long", image: longHouseUrl, imageSmall: longHouseSmallUrl, imageAlt: "A narrow grass court leading toward a two-story earthen room", slug: "long-house", width: 1200 },
+  { number: "SEED", name: "Four Walls", area: "Free plans", action: "Get the plans", shape: "room", image: fourWallsUrl, imageSmall: fourWallsSmallUrl, imageAlt: "A stone table in a dark earthen room opening onto a small courtyard", slug: "four-walls", width: 1024 },
+  { number: "GATHER", name: "Courtyard", area: "Building pattern", action: "Explore the pattern", shape: "court", image: courtyardUrl, imageSmall: courtyardSmallUrl, imageAlt: "Rammed earth rooms surrounding a planted courtyard", slug: "courtyard", width: 1024 },
+  { number: "REPEAT", name: "Long House", area: "Building pattern", action: "Explore the pattern", shape: "long", image: longHouseUrl, imageSmall: longHouseSmallUrl, imageAlt: "A narrow grass court leading toward a two-story earthen room", slug: "long-house", width: 1200 },
 ];
 
 const contactSlides = [
@@ -109,22 +109,27 @@ function Plan({ shape }) {
 }
 
 function BuildingLanguageDiagram() {
-  return <figure className="building-language">
+  return <figure className="building-language language-diagram">
     <svg viewBox="0 0 1040 250" role="img" aria-labelledby="language-title language-desc">
       <title id="language-title">Four Walls seed growing into courtyard and long house arrangements</title>
       <desc id="language-desc">One thick-walled room gathers with independent rooms around a courtyard, or repeats in a line with room-width open courts.</desc>
-      <path className="language-thread" d="M183 125H275M528 125h86"/>
-      <g className="language-seed" transform="translate(34.5 37.5) scale(.7)"><rect x="48" y="58" width="134" height="134"/><circle cx="115" cy="125" r="4"/></g>
-      <g className="language-courtyard" transform="translate(110.6 35) scale(.72)">
-        <rect x="288" y="39" width="88" height="88"/><rect x="411" y="28" width="88" height="88" transform="rotate(7 455 72)"/><rect x="303" y="151" width="88" height="76" transform="rotate(-5 347 189)"/>
-        <path className="language-void" d="M390 119 431 109 450 146 409 185 384 161z"/>
+      <path className="language-thread" d="M235 125h112m250 0h83"/>
+      <path className="language-arrow" d="m342 120 5 5-5 5m333-10 5 5-5 5"/>
+      <g className="language-seed"><rect x="70" y="65" width="120" height="115"/><circle cx="130" cy="123" r="3"/></g>
+      <g className="language-courtyard">
+        <rect x="400" y="55" width="65" height="65"/><rect x="500" y="45" width="65" height="65" transform="rotate(16 532.5 77.5)"/><rect x="410" y="140" width="65" height="60" transform="rotate(-10 442.5 170)"/>
+        <path className="language-void" d="M465 110 505 100 512 133 482 160 465 138z"/>
       </g>
-      <g className="language-long" transform="translate(324.4 50.4) scale(.6)">
-        <rect x="626" y="79" width="74" height="94"/><rect x="774" y="79" width="74" height="94"/><rect x="922" y="79" width="74" height="94"/>
-        <path className="language-void" d="M700 88h74v76h-74zm148 0h74v76h-74z"/>
+      <g className="language-long">
+        <rect x="720" y="85" width="60" height="65"/><rect x="825" y="85" width="60" height="65"/><rect x="930" y="85" width="60" height="65"/>
+        <path className="language-void" d="M780 92h45v51h-45zm105 0h45v51h-45z"/>
       </g>
     </svg>
-    <figcaption><span>01 / Four Walls</span><span>02 / Courtyard</span><span>03 / Long House</span></figcaption>
+    <figcaption>
+      <div><span>01 / Four Walls</span><h3>The seed.</h3><p>An independent room. Simple, scalable.</p></div>
+      <div><span>02 / Court</span><h3>Gather around open space.</h3><p>Combine rooms to create sheltered courtyards, gardens, and light.</p></div>
+      <div><span>03 / Row</span><h3>Repeat along a line.</h3><p>A flexible line of rooms creates shelter, program, and enclosure.</p></div>
+    </figcaption>
   </figure>;
 }
 
@@ -169,7 +174,7 @@ function App() {
     <PageMeta title="Shelter on the Land — Free Plans for Earthen Shelters" description="Free buildable plans, design tools and experienced guidance for small rammed-earth and lavacrete shelters."/>
     <header className="nav">
       <a className="wordmark" href="#top">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a>
-      <nav><a href="#practice">Practice</a><a href="#shelters">Shelters</a><a href="#process">Process</a><a href="#about">About</a></nav>
+      <nav><a href="#practice">Build</a><a href="#shelters">Shelters</a><a href="#process">With</a><a href="#about">Us</a></nav>
       <a className="nav-cta" href="#contact">Start a build ↗</a>
     </header>
 
@@ -177,7 +182,7 @@ function App() {
       <section className="hero" id="top">
         <img src={heroUrl} srcSet={`${heroSmallUrl} 800w, ${heroUrl} 1448w`} sizes="100vw" alt="Rammed-earth shelter volumes in a wooded desert courtyard" fetchPriority="high" decoding="async"/>
         <div className="hero-wash"/>
-        <p className="hero-note">FREE BUILDABLE PLANS AND GUIDES + EXPERIENCED HELP FOR BUILDING WITH RAMMED EARTH AND LAVACRETE</p>
+        <p className="hero-note">FREE BUILDABLE PLANS FOR BUILDING WITH RAMMED EARTH AND LAVACRETE</p>
         <h1>be a builder</h1>
         <a className="down" href="#process">See how it works <span>↓</span></a>
       </section>
@@ -188,17 +193,17 @@ function App() {
       </section>
     </div>
 
-    <section className="plans" id="shelters">
-      <header><p className="kicker">FREE PLANS TO GET STARTED</p><h2>Plans made<br/>to be built.</h2><p>Four Walls is the seed: a 200 sq ft room that teaches the whole system. Larger shelters grow through repetition, gathering enclosed rooms and useful open space between them.</p></header>
+    <section className="plans language-plans" id="shelters">
+      <header><h2>Start with four walls. Gather them. Repeat them.</h2></header>
       <BuildingLanguageDiagram/>
+      <div className="language-summary"><p>Start small. See where it takes you.</p></div>
       <div className="plan-grid">
         {shelters.map(s => <a className="plan-card" href={`/shelters/${s.slug}/`} key={s.number}>
           <div className="plan-meta"><span>{s.number}</span><span>{s.area}</span></div>
           {s.image ? <img className="plan-image" src={s.image} srcSet={`${s.imageSmall} 800w, ${s.image} ${s.width}w`} sizes="(max-width: 760px) 100vw, 33vw" alt={s.imageAlt} loading="lazy" decoding="async"/> : <Plan shape={s.shape}/>}
-          <div className="plan-name"><h3>{s.name}</h3><p>{s.rooms}</p><b>↗</b></div>
+          <div className="plan-name"><h3>{s.name}</h3><p>{s.action}</p><b>↗</b></div>
         </a>)}
       </div>
-      <a className="text-link" href="/plans/">Explore the building language <span>→</span></a>
     </section>
 
     <section className="process" id="process">
