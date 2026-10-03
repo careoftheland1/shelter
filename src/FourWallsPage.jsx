@@ -6,13 +6,9 @@ import fourWallsModelUrl from "./assets/lavacrete-200.glb?url";
 import lavacreteTextureUrl from "./assets/lavacrete-texture.jpg";
 import csreTextureUrl from "./assets/csre-texture.jpg";
 import fourWallsHeroUrl from "./assets/shelter-updates/four-walls-hero.webp";
-import fourWallsHeroSmallUrl from "./assets/shelter-updates/four-walls-hero-800.webp";
-import fourWallsLightSlotUrl from "./assets/shelter-updates/four-walls-light-slot.webp";
-import fourWallsLightSlotSmallUrl from "./assets/shelter-updates/four-walls-light-slot-800.webp";
-import fourWallsDiagonalLightUrl from "./assets/shelter-updates/four-walls-diagonal-light.webp";
-import fourWallsDiagonalLightSmallUrl from "./assets/shelter-updates/four-walls-diagonal-light-800.webp";
-import fourWallsMountainCourtUrl from "./assets/shelter-updates/four-walls-mountain-court.webp";
-import fourWallsMountainCourtSmallUrl from "./assets/shelter-updates/four-walls-mountain-court-800.webp";
+import drylandsUrl from "./assets/climates/drylands.jpeg";
+import tropicsUrl from "./assets/climates/tropics.jpeg";
+import coldCountryUrl from "./assets/climates/cold-country.jpeg";
 import SiteFooter from "./SiteFooter.jsx";
 import PageMeta from "./PageMeta.jsx";
 import { fourWallsSizes, languageMeta, shapeItUrl } from "./buildingLanguage.js";
@@ -23,12 +19,19 @@ const related = [
   ["courtyard", { number: "Pattern / Cluster", name: "Court", description: "Gather complete Four Walls across open land." }],
   ["long-house", { number: "Pattern / Row", name: "Long House", description: "Repeat Four Walls along constrained land." }],
 ];
-const gallery = [
-[fourWallsHeroUrl, fourWallsHeroSmallUrl, "Rammed-earth shelter volumes in a wooded desert courtyard", "Four Walls volume", 1448],
-[fourWallsLightSlotUrl, fourWallsLightSlotSmallUrl, "Low horizontal opening casting warm light into an earthen room", "Low opening + light", 1467],
-[fourWallsDiagonalLightUrl, fourWallsDiagonalLightSmallUrl, "Diagonal sunlight moving across a rammed-earth interior", "Light across the wall", 1319],
-[fourWallsMountainCourtUrl, fourWallsMountainCourtSmallUrl, "Rammed-earth volumes framing desert mountains", "Volume + landscape", 1086],
+const climates = [
+  { id: "drylands", label: "Drylands", image: drylandsUrl },
+  { id: "tropics", label: "Tropics", image: tropicsUrl },
+  { id: "cold-country", label: "North", image: coldCountryUrl },
 ];
+const conditions = [
+  { id: "seismic", label: "Seismic", effect: "Vertical reinforcement", notePosition: "below" },
+  { id: "waters", label: "Waters", effect: "Higher stem walls", notePosition: "above" },
+  { id: "fires", label: "Fires", effect: "Metal framing", notePosition: "below" },
+  { id: "wind", label: "Wind", effect: "Round houses", notePosition: "above" },
+];
+const wallThicknesses = ["12", "18", "24"];
+const wallHeights = ["9", "10", "12"];
 
 function ModelViewer({ modelUrl, textureUrl }) {
   const mount = useRef(null);
@@ -110,53 +113,27 @@ function ModelViewer({ modelUrl, textureUrl }) {
 }
 
 function FourWallsPage() {
-  const [wallMaterial, setWallMaterial] = useState("lavacrete");
-  const moodboardRef = useRef(null);
+  const [wallMaterial, setWallMaterial] = useState("earth");
   const requestedSize = new URLSearchParams(location.search).get("size");
   const [size, setSize] = useState(fourWallsSizes.includes(requestedSize) ? requestedSize : fourWallsSizes[0]);
+  const [climate, setClimate] = useState("");
+  const [selectedConditions, setSelectedConditions] = useState([]);
+  const [wallThickness, setWallThickness] = useState("18");
+  const [wallHeight, setWallHeight] = useState("10");
   const metadata = languageMeta["four-walls"];
-  useEffect(() => {
-    const board = moodboardRef.current;
-    if (!board) return;
-    const figures = [...board.querySelectorAll("figure")];
-    const speeds = [0.06, -0.05, 0.07];
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      if (reduceMotion.matches) return;
-      const viewport = window.innerHeight;
-      const bounds = board.getBoundingClientRect();
-      if (bounds.bottom < 0 || bounds.top > viewport) return;
-      figures.forEach((figure, index) => {
-        const rect = figure.getBoundingClientRect();
-        const distance = viewport / 2 - (rect.top + rect.height / 2);
-        const shift = Math.max(-24, Math.min(24, distance * speeds[index]));
-        figure.style.setProperty("--image-shift", `${shift.toFixed(1)}px`);
-      });
-    };
-    const schedule = () => { if (!frame) frame = window.requestAnimationFrame(update); };
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    schedule();
-    return () => {
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-      window.cancelAnimationFrame(frame);
-    };
-  }, []);
+  const planRequestUrl = `/free-plans/?${new URLSearchParams({ plan: "four-walls", size, wallThickness, wallHeight, ...(climate ? { climate } : {}), source: "shelter" })}`;
   return <main className="shelter-page four-walls-page">
     <PageMeta title={metadata.title} description={metadata.description} path="/shelters/four-walls/" image={metadata.image}/>
     <header className="nav detail-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="/#practice">Practice</a><a href="/#process">Process</a><a href="/#about">About</a></nav><a className="nav-cta" href="#downloads">Get the plans ↘</a></header>
-    <section className="model-hero" id="top"><ModelViewer modelUrl={fourWallsModelUrl} textureUrl={wallMaterial === "earth" ? csreTextureUrl : lavacreteTextureUrl}/><div className="model-material-toggle" role="group" aria-label="Wall material preview"><span>Wall material</span><button className={wallMaterial === "earth" ? "active" : ""} onClick={() => setWallMaterial("earth")}>CSRE</button><button className={wallMaterial === "lavacrete" ? "active" : ""} onClick={() => setWallMaterial("lavacrete")}>Lavacrete</button></div><div className="model-title"><p>{build.number}</p><h1>{build.name}</h1><span>One complete room<br/>A family of small footprints</span></div><a className="model-down" href="#overview">Explore the shelter ↓</a></section>
+    <section className="model-hero" id="top"><ModelViewer modelUrl={fourWallsModelUrl} textureUrl={wallMaterial === "earth" ? csreTextureUrl : lavacreteTextureUrl}/><div className="model-material-toggle" role="group" aria-label="Wall system"><span>Wall system</span><div><button className={wallMaterial === "earth" ? "active" : ""} onClick={() => setWallMaterial("earth")}>CS/RE</button><button className={wallMaterial === "lavacrete" ? "active" : ""} onClick={() => setWallMaterial("lavacrete")}>Lavacrete</button></div></div><div className="model-title"><p>{build.number}</p><h1>{build.name}</h1></div><a className="model-down" href="#overview">Explore the shelter ↓</a></section>
 
-    <section className="shelter-intro" id="overview"><p className="kicker">The seed</p><h2>{build.description}</h2></section>
+    <section className="shelter-intro" id="overview"><p className="kicker">The seed</p><h2>{build.description}</h2><p className="kicker conditions-kicker">In any condition</p><div className="site-conditions" aria-label="Site conditions">{conditions.map(condition => { const selected = selectedConditions.includes(condition.id); return <div className={`condition-option ${condition.notePosition}`} key={condition.id}><button type="button" aria-pressed={selected} onClick={() => setSelectedConditions(values => values.includes(condition.id) ? values.filter(value => value !== condition.id) : [...values, condition.id])}>{condition.label}</button>{selected && <span className="condition-effect">{condition.effect}</span>}</div>; })}</div></section>
 
-    <section className="seed-sizes" id="sizes"><header><p className="kicker">Four Walls / Kit of parts</p><h2>Choose a useful beginning.</h2><p>A shed, studio, sleeping room, workshop or guest room. Straightforward drawings, adaptable openings and a rammed-earth or lavacrete wall system keep the building legible to its builder.</p></header><div><div className="seed-size-options" role="group" aria-label="Starting footprint">{fourWallsSizes.map(value => <button key={value} aria-pressed={size === value} onClick={() => setSize(value)}>{value} ft</button>)}</div><p className="seed-size-note">Footprint dimensions, not interior floor area. Usable space depends on the wall system and thickness.</p><div className="language-actions"><a href={`/free-plans/?plan=four-walls&size=${encodeURIComponent(size)}&source=shelter`}>Request {size} ft drawings →</a><a href={shapeItUrl}>Shape your Four Walls ↗</a></div></div></section>
+    <section className={`climate-selector${climate ? " has-selection" : ""}`} aria-labelledby="climate-title"><header><p className="kicker" id="climate-title">Select a context</p></header><div className="climate-options" role="group" aria-label="Climate selection">{climates.map(option => <button type="button" key={option.id} className={climate && climate !== option.id ? "is-hidden" : ""} aria-pressed={climate === option.id} onClick={() => setClimate(value => value === option.id ? "" : option.id)}><span>{option.label}</span><img src={option.image} alt=""/></button>)}</div></section>
 
-    <section className="building-gallery moodboard" ref={moodboardRef} aria-label="Four Walls image studies">{gallery.slice(1).map(([src, small, alt, caption, width], index) => <figure key={caption}><img src={src} srcSet={`${small} 800w, ${src} ${width}w`} sizes="(max-width: 760px) 90vw, 55vw" alt={alt} loading="lazy" decoding="async"/><figcaption><span>0{index + 1}</span>{caption}</figcaption></figure>)}</section>
+    <section className="seed-sizes" id="sizes"><header><p className="kicker">Four Walls / Kit of parts</p><p>A shed, studio, sleeping room, workshop or guest room. Straightforward drawings, adaptable openings and a rammed-earth or lavacrete wall system keep the building legible to its builder.</p></header><div><div className="seed-size-options" role="group" aria-label="Starting footprint">{fourWallsSizes.map(value => <button key={value} aria-pressed={size === value} onClick={() => setSize(value)}>{value} ft</button>)}</div><p className="seed-size-note">Footprint dimensions, not interior floor area. Usable space depends on the wall thickness.</p><div className="kit-options"><fieldset><legend>Wall thickness</legend><div>{wallThicknesses.map(value => <button type="button" key={value} aria-pressed={wallThickness === value} onClick={() => setWallThickness(value)}>{value} in</button>)}</div></fieldset><fieldset><legend>High wall height</legend><div>{wallHeights.map(value => <button type="button" key={value} aria-pressed={wallHeight === value} onClick={() => setWallHeight(value)}>{value} ft</button>)}</div></fieldset></div><a className="shape-it-handoff" href={shapeItUrl} aria-label="Explore this selected Four Walls room in Shape It">Explore this selection in Shape It <span>↗</span></a></div></section>
 
-    <section className="plan-contents"><header><h2>The plan set</h2></header><div className="sheet-preview"><div className="sheet-plan"><span>A—101</span><svg viewBox="0 0 600 380"><rect x="105" y="50" width="390" height="280"/><path d="M105 225h150m86 105V225h154M255 225v105M341 225h154"/><circle cx="300" cy="190" r="110"/><path d="M60 350h480M80 360v-20m440 20v-20"/></svg><b>Dimensioned floor plan / Scale varies</b></div></div><div className="plan-contents-details"><ul>{["Dimensioned plans","Exterior elevations","Building sections","Foundation details","Wall and opening details","Roof assembly","Door + window schedule","Outline material quantities","Suggested build sequence","Digital reference model"].map((x,i)=><li key={x}><span>{String(i+1).padStart(2,"0")}</span>{x}</li>)}</ul><div className="plan-request-inline" id="downloads"><p className="kicker">Four Walls / Drawing request</p><a className="plan-request-action" href={`/free-plans/?plan=four-walls&size=${encodeURIComponent(size)}&source=shelter`}>Request the {size} ft drawings <span>↗</span></a><div className="plan-request-resources"><a href="/downloads/shelter-plan-preview.svg" download>Sample sheet ↓</a><a href="/downloads/shelter-specifications.csv" download>Plan family overview ↓</a></div></div></div></section>
+    <section className="plan-contents plan-contents-text-only"><header><h2>The plan set</h2></header><div className="plan-contents-details"><ul>{["Dimensioned plans","Exterior elevations","Building sections","Foundation details","Wall and opening details","Roof assembly","Door + window schedule","Outline material quantities","Suggested build sequence","Digital reference model"].map((x,i)=><li key={x}><span>{String(i+1).padStart(2,"0")}</span><b>{x}</b></li>)}</ul><div className="plan-request-inline" id="downloads"><p className="kicker">Four Walls / Drawing request</p><a className="plan-request-action" href={planRequestUrl}>Request the {size} ft drawings <span>↗</span></a><div className="plan-request-resources"><a href="/downloads/shelter-plan-preview.svg" download>Sample sheet ↓</a><a href="/downloads/shelter-specifications.csv" download>Plan family overview ↓</a></div></div></div></section>
 
     <div className="support-transition">
       <section className="before-build"><p className="kicker">Before you build</p><h2>A plan is a foundation,<br/>not a permit.</h2><div><p>Build from the drawings, shape your own version, or bring us in when the site or build asks for more. Local requirements govern what you need for your particular use and site.</p><p>Check local requirements for foundations, structure, services and intended use. Bring in a licensed architect or engineer where required, and confirm the wall system and material mix for the site.</p><a className="tool-nudge" href={shapeItUrl}>Shape your Four Walls <span>↗</span></a></div></section>

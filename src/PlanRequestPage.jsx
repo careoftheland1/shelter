@@ -4,12 +4,21 @@ import { fourWallsSizes } from "./buildingLanguage.js";
 
 const plans = { "four-walls": { title: "Four Walls", number: "SEED / PLANS" } };
 const stages = ["Exploring", "Looking for land", "Have land", "Preparing to build", "Already building"];
+const climates = { drylands: "Drylands", tropics: "Tropics", "cold-country": "North" };
+const wallThicknesses = ["12", "18", "24"];
+const wallHeights = ["9", "10", "12"];
 
 function PlanRequestPage() {
   const requested = new URLSearchParams(location.search).get("plan");
   const plan = "four-walls";
   const requestedSize = new URLSearchParams(location.search).get("size");
   const [size, setSize] = useState(fourWallsSizes.includes(requestedSize) ? requestedSize : "Not sure");
+  const requestedClimate = new URLSearchParams(location.search).get("climate");
+  const climate = climates[requestedClimate] || "";
+  const requestedWallThickness = new URLSearchParams(location.search).get("wallThickness");
+  const wallThickness = wallThicknesses.includes(requestedWallThickness) ? requestedWallThickness : "";
+  const requestedWallHeight = new URLSearchParams(location.search).get("wallHeight");
+  const wallHeight = wallHeights.includes(requestedWallHeight) ? requestedWallHeight : "";
   const [email, setEmail] = useState("");
   const [optIn, setOptIn] = useState(false);
   const [stage, setStage] = useState("");
@@ -23,14 +32,14 @@ function PlanRequestPage() {
     if (!validEmail.test(email.trim())) { setError("Enter a valid email address."); emailInput.current?.focus(); return; }
     setError("");
     if (!endpoint) {
-      const body = [`Hello Shelter,`, `Please send me the free ${plans[plan].title} plan set when available.`, `Preferred footprint: ${size}${size === "Not sure" ? "" : " ft"}`, `Reply to: ${email.trim()}`, `Building guidance and updates: ${optIn ? "Yes, I opt in" : "No"}`].join("\n\n");
+      const body = [`Hello Shelter,`, `Please send me the free ${plans[plan].title} plan set when available.`, `Preferred footprint: ${size}${size === "Not sure" ? "" : " ft"}`, wallThickness && `Wall thickness: ${wallThickness} in`, wallHeight && `Wall height: ${wallHeight} ft`, climate && `Climate: ${climate}`, `Reply to: ${email.trim()}`, `Building guidance and updates: ${optIn ? "Yes, I opt in" : "No"}`].filter(Boolean).join("\n\n");
       window.location.href = `mailto:build@onthe.land?subject=${encodeURIComponent(`${plans[plan].title} plan request`)}&body=${encodeURIComponent(body)}`;
       setState("email-opened");
       return;
     }
     setState("sending");
     try {
-      const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ plan, size, email: email.trim(), marketingOptIn: optIn, source: new URLSearchParams(location.search).get("source") || "plan request page" }) });
+      const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ plan, size, wallThickness: wallThickness || undefined, wallHeight: wallHeight || undefined, climate: climate || undefined, email: email.trim(), marketingOptIn: optIn, source: new URLSearchParams(location.search).get("source") || "plan request page" }) });
       if (!response.ok) throw new Error("Request failed");
       setState("sent");
     } catch { setState("entry"); setError("We could not send the request. Your details are still here; please try again."); }
