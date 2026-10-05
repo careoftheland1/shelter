@@ -1,0 +1,106 @@
+.home-finale {
+  position: relative;
+  isolation: isolate;
+  background: #191917;
+}
+
+.home-finale__scroll-space { height: 160svh; }
+
+.home-finale > .site-footer {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid #4e4f48;
+}
+
+.contact-moodboard {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  background: #191917;
+  color: #f5f1e9;
+}
+
+.contact-moodboard__stage {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 11vh 6vw 7vh;
+  background: #191917;
+  --moodboard-title-opacity: 0;
+}
+
+.contact-moodboard__kicker,
+.contact-moodboard__actions {
+  position: relative;
+  z-index: 10;
+}
+
+.contact-moodboard__kicker { margin: 0; }
+
+.contact-moodboard__images {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.contact-moodboard__tile {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: min(17vw, 220px);
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .18);
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+}
+
+.contact-moodboard__title {
+  position: absolute;
+  z-index: 9;
+  top: 50%;
+  left: 6vw;
+  width: 88vw;
+  margin: 0;
+  transform: translateY(-50%);
+  opacity: var(--moodboard-title-opacity);
+  color: #fff;
+  font: 700 clamp(51.2px, 5.92vw, 88px)/.95 'Roboto', sans-serif;
+  letter-spacing: -.06em;
+  text-align: left;
+  text-transform: lowercase;
+  pointer-events: none;
+}
+
+.contact-moodboard__actions {
+  width: 100%;
+  margin-top: auto;
+}
+
+@media (max-width: 760px) {
+  .contact-moodboard__stage { padding: 10vh 22px 5vh; }
+  .contact-moodboard__tile { width: 18vw; }
+  .contact-moodboard__title {
+    top: 50%;
+    left: 6vw;
+    width: 88vw;
+    font-size: clamp(40px, 10vw, 65.6px);
+    line-height: .92;
+  }
+  .contact-moodboard__actions { grid-template-columns: 1fr; }
+  .contact-moodboard__actions > a { padding: 14px 0; }
+  .contact-moodboard__actions > a + a {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, .45);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-finale__scroll-space { display: none; }
+  .home-finale > .site-footer { min-height: 300px; }
+  .contact-moodboard { position: relative; }
+}

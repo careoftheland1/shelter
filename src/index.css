@@ -120,7 +120,9 @@ footer{grid-template-columns:2fr 1fr 1fr}footer>a:not(.wordmark){font-size:9px;t
 @media(prefers-reduced-motion:reduce){.landing-intro .hero{position:relative}}
 .hero h1{left:4.8vw;right:auto;bottom:18vh;font-size:clamp(46px,7vw,108px);line-height:.9;letter-spacing:-.065em;white-space:nowrap}
 .hero h1:after{content:none}
+.gooey-title{display:block;height:auto;max-width:calc(100vw - 9.6vw);overflow:visible;cursor:default;outline:0;fill:currentColor}.gooey-title text{font:700 132px Roboto,sans-serif;letter-spacing:-.065em}.gooey-title:focus-visible{outline:2px solid currentColor;outline-offset:8px}
 @media(max-width:760px){.hero h1{left:20px;right:auto;bottom:17vh;font-size:12vw}}
+@media(max-width:760px){.gooey-title{max-width:calc(100vw - 40px)}}
 .building-language figcaption{grid-template-columns:1fr 2fr 1.4fr}.building-language figcaption span:nth-child(3){text-align:right}
 .building-language{margin-bottom:2vh}
 #shelters.plans>header>h2{grid-column:2/-1}

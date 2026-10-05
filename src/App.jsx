@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense } from "react";
 import heroUrl from "./assets/shelter-updates/four-walls-hero.webp";
 import heroSmallUrl from "./assets/shelter-updates/four-walls-hero-800.webp";
 import fourWallsUrl from "./assets/shelter-cards/four-walls-angles/four-walls-table.webp";
@@ -7,12 +7,10 @@ import courtyardUrl from "./assets/shelter-cards/courtyard-court-b.webp";
 import courtyardSmallUrl from "./assets/shelter-cards/courtyard-court-b-800.webp";
 import longHouseUrl from "./assets/shelter-cards/long-house-courtyard.webp";
 import longHouseSmallUrl from "./assets/shelter-cards/long-house-courtyard-800.webp";
-import contactGroveUrl from "./assets/contact-carousel/shelter-grove.webp";
-import contactCourtUrl from "./assets/contact-carousel/shelter-court.webp";
-import contactLavacreteUrl from "./assets/contact-carousel/shelter-lavacrete.webp";
-import contactMixedUrl from "./assets/contact-carousel/shelter-lavacrete-csre.webp";
 import SiteFooter from "./SiteFooter.jsx";
 import PageMeta from "./PageMeta.jsx";
+import GooeyTitle from "./GooeyTitle.jsx";
+import ContactMoodboard from "./ContactMoodboard.jsx";
 
 const ShelterPage = lazy(() => import("./ShelterPage.jsx"));
 const SheltersPage = lazy(() => import("./SheltersPage.jsx"));
@@ -65,35 +63,6 @@ const shelters = [
   { number: "GATHER", name: "Courtyard", area: "Building pattern", action: "Explore the pattern", shape: "court", image: courtyardUrl, imageSmall: courtyardSmallUrl, imageAlt: "Rammed earth rooms surrounding a planted courtyard", slug: "courtyard", width: 1024 },
   { number: "REPEAT", name: "Long House", area: "Building pattern", action: "Explore the pattern", shape: "long", image: longHouseUrl, imageSmall: longHouseSmallUrl, imageAlt: "A narrow grass court leading toward a two-story earthen room", slug: "long-house", width: 1200 },
 ];
-
-const contactSlides = [
-  { image: contactGroveUrl, alt: "Rammed-earth shelter among mesquite trees in a sandy desert clearing" },
-  { image: contactCourtUrl, alt: "Two earthen shelters around a shaded desert courtyard" },
-  { image: contactLavacreteUrl, alt: "Three dark lavacrete shelter volumes around a sandy desert court" },
-  { image: contactMixedUrl, alt: "Dark lavacrete and warm CSRE shelter volumes around a desert court" },
-];
-
-function ShelterCarousel() {
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const interval = window.setInterval(() => setActive(index => (index + 1) % contactSlides.length), 11000);
-    return () => window.clearInterval(interval);
-  }, []);
-
-  return <div className="contact-carousel" aria-label="Shelter renders">
-    {contactSlides.map((slide, index) => <img
-      key={slide.image}
-      className={index === active ? "is-active" : ""}
-      src={slide.image}
-      alt={index === active ? slide.alt : ""}
-      aria-hidden={index !== active}
-      loading="lazy"
-      decoding="async"
-    />)}
-  </div>;
-}
 
 function Plan({ shape }) {
   return <svg className={`plan plan-${shape}`} viewBox="0 0 420 260" aria-hidden="true">
@@ -183,7 +152,7 @@ function App() {
         <img src={heroUrl} srcSet={`${heroSmallUrl} 800w, ${heroUrl} 1448w`} sizes="100vw" alt="Rammed-earth shelter volumes in a wooded desert courtyard" fetchPriority="high" decoding="async"/>
         <div className="hero-wash"/>
         <p className="hero-note">FREE BUILDABLE PLANS FOR BUILDING WITH RAMMED EARTH AND LAVACRETE</p>
-        <h1>be a builder</h1>
+        <h1><GooeyTitle/></h1>
         <a className="down" href="#process">See how it works <span>↓</span></a>
       </section>
 
@@ -223,14 +192,11 @@ function App() {
       <p className="process-scroll-hint" aria-hidden="true">Scroll to explore <span>→</span></p>
     </section>
 
-    <section className="contact" id="contact">
-      <ShelterCarousel/>
-      <p className="kicker">YOUR LAND. YOUR HANDS. A PLACE TO BEGIN.</p>
-      <h2>Start<br className="contact-break-mobile"/> with<br className="contact-break-desktop"/> a<br className="contact-break-mobile"/> shelter.</h2>
-      <div className="contact-actions"><a href="#shelters">Select a plan set <span>↗</span></a><a href="/project/?source=home">Tell us about your land <span>↗</span></a></div>
-    </section>
-
-    <SiteFooter/>
+    <div className="home-finale">
+      <ContactMoodboard/>
+      <div className="home-finale__scroll-space" aria-hidden="true"/>
+      <SiteFooter/>
+    </div>
   </main>;
 }
 
