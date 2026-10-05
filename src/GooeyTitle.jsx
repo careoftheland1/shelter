@@ -93,8 +93,8 @@ export default function GooeyTitle() {
       </filter>
     </defs>
     <g ref={groupRef} className="gooey-title__words">
-      <text ref={firstRef} x="7" y="112">be a builder</text>
-      <text ref={secondRef} x="7" y="112" style={{ opacity: 0 }}>shelter now</text>
+      <text ref={firstRef} x="7" y="112">BE A BUILDER</text>
+      <text ref={secondRef} x="7" y="112" style={{ opacity: 0 }}>SHELTER NOW</text>
     </g>
   </svg>;
 }

@@ -68,7 +68,7 @@
   transform: translateY(-50%);
   opacity: var(--moodboard-title-opacity);
   color: #fff;
-  font: 700 clamp(51.2px, 5.92vw, 88px)/.95 'Roboto', sans-serif;
+  font: 700 clamp(51.2px, 5.92vw, 88px)/.95 'Public Sans', sans-serif;
   letter-spacing: -.06em;
   text-align: left;
   text-transform: lowercase;

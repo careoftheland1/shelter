@@ -139,7 +139,7 @@ function App() {
   if (window.location.pathname.startsWith("/shelters/")) {
     return <Suspense fallback={<div className="page-loading">Loading shelter…</div>}><ShelterPage /></Suspense>;
   }
-  return <main>
+  return <main className="home-page">
     <PageMeta title="Shelter on the Land — Free Plans for Earthen Shelters" description="Free buildable plans, design tools and experienced guidance for small rammed-earth and lavacrete shelters."/>
     <header className="nav">
       <a className="wordmark" href="#top">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a>
