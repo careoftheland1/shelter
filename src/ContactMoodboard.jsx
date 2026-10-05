@@ -33,14 +33,43 @@ export default function ContactMoodboard() {
       const width = stage.clientWidth;
       const distance = Math.max(1, scrollSpace.offsetHeight);
       const progress = reducedMotion.matches ? 1 : clamp(-scrollRegion.getBoundingClientRect().top / (distance * 0.8));
-      const gather = smoothstep(0.05, 0.84, progress);
-      const fade = smoothstep(0.28, 0.76, progress);
-      const title = smoothstep(0.64, 0.94, progress);
-      const mobile = width < 700;
-      const stride = width * (mobile ? 0.19 : 0.18);
-      const finalWidth = mobile ? width * 0.45 : Math.min(width * 0.21, 250);
+      const mobile = width <= 760;
+      const title = mobile
+        ? smoothstep(0.77, 0.95, progress)
+        : smoothstep(0.64, 0.94, progress);
 
       stage.style.setProperty("--moodboard-title-opacity", title.toFixed(3));
+
+      if (mobile) {
+        const pairProgress = Math.min(photographs.length - 2, clamp(progress / 0.68) * (photographs.length - 2));
+        const pairIndex = Math.min(photographs.length - 2, Math.floor(pairProgress));
+        const transition = pairProgress - pairIndex;
+        const gather = smoothstep(0.69, 0.87, progress);
+        const fade = smoothstep(0.72, 0.86, progress);
+        const stride = width * 0.45;
+        const finalWidth = width * 0.55;
+
+        tiles.forEach((tile, index) => {
+          // One photo hands its place to the next while the shared photo crosses
+          // the frame; no more than two portraits are visible at once.
+          let opacity = 0;
+          if (index === pairIndex) opacity = 1 - smoothstep(0, 0.5, transition);
+          if (index === pairIndex + 1) opacity = 1;
+          if (index === pairIndex + 2) opacity = smoothstep(0.5, 1, transition);
+
+          const startX = (index - pairProgress - 0.5) * stride;
+          const x = startX * (1 - gather);
+          const scale = 1 + (finalWidth / tile.offsetWidth - 1) * gather;
+          tile.style.transform = `translate(-50%, -50%) translateX(${x.toFixed(1)}px) scale(${scale.toFixed(3)})`;
+          tile.style.opacity = String(index === photographs.length - 1 ? opacity : opacity * (1 - fade));
+        });
+        return;
+      }
+
+      const gather = smoothstep(0.05, 0.84, progress);
+      const fade = smoothstep(0.28, 0.76, progress);
+      const stride = width * 0.18;
+      const finalWidth = Math.min(width * 0.21, 250);
       tiles.forEach((tile, index) => {
         const startX = (index - (photographs.length - 1) / 2) * stride;
         const x = startX * (1 - gather) + index * gather;
@@ -72,7 +101,7 @@ export default function ContactMoodboard() {
   return <section className="contact-moodboard" id="contact" ref={sectionRef}>
     <div className="contact-moodboard__stage" ref={stageRef}>
       <p className="kicker contact-moodboard__kicker">YOUR LAND. YOUR HANDS. A PLACE TO BEGIN.</p>
-      <div className="contact-moodboard__images" role="img" aria-label="Five portrait photographs of earthen shelter details merge into one image">
+      <div className="contact-moodboard__images" role="img" aria-label="Five portrait photographs of earthen shelter details resolve into one exterior image">
         {photographs.map((photo, index) => <img
           key={index}
           ref={(element) => { tileRefs.current[index] = element; }}
