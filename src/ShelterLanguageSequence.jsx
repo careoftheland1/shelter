@@ -245,6 +245,7 @@ export default function ShelterLanguageSequence() {
 
   return <section className="shelter-language-sequence" ref={sectionRef} aria-label="From one room to courtyard and longhouse arrangements">
     <div className="shelter-language-stage">
+      <span className="shelter-language-scroll-cue">( SCROLL TO SEE )</span>
       <a className="shelter-language-skip" href="#shelter-cards" aria-label="Skip the animation and go to shelter plans">( SKIP AHEAD )</a>
       <img className="shelter-language-intro-volume" ref={introVolumeRef} src={volumeUrl} alt="" aria-hidden="true"/>
       <h2 className="shelter-language-intro" ref={introRef}>
@@ -347,12 +348,12 @@ export function LonghouseSequenceAnimation() {
 
   return <div className="longhouse-animation-run" ref={sectionRef} aria-label="Scroll to gather rooms into changing longhouse layouts">
     <div className="longhouse-animation-stage">
+      <span className="pattern-animation-cue">( SCROLL TO SEE )</span>
       <a className="pattern-animation-skip" href="#places" aria-label="Skip the longhouse animation to Places to start">( SKIP AHEAD )</a>
       <svg viewBox="0 0 760 300" role="img" aria-label="Six separate rooms gather into a longhouse with changing interior divisions">
         {volumeSizes.map((_, index) => <rect key={index} ref={(element) => { roomRefs.current[index] = element; }}/>) }
         <path ref={pathRef}/>
       </svg>
-      <p>Scroll to gather the rooms into a line</p>
     </div>
   </div>;
 }
@@ -427,6 +428,7 @@ export function LonghouseNeighborAnimation() {
 
   return <div className="longhouse-neighbors-run" ref={sectionRef}>
     <div className="longhouse-neighbors-stage">
+      <span className="pattern-animation-cue">( SCROLL TO SEE )</span>
       <a className="pattern-animation-skip" href="#long-house-moodboard" aria-label="Skip the neighboring longhouses animation to the moodboard">( SKIP AHEAD )</a>
       <svg viewBox="0 0 760 760" role="img" aria-label="Four neighboring longhouses share side walls while their interior rooms develop differently">
         <path className="longhouse-neighbors-outline" d="M0 0H760V760H0Z M190 0V760 M380 0V760 M570 0V760"/>

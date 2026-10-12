@@ -7,19 +7,19 @@ import "./principle-cards.css";
 const principles = [
   {
     name: "Local",
-    copy: "Build with what is close at hand. Soil, stone, and other regional materials can shape a shelter around the place it belongs.",
+    copy: "Building with regionally available materials can reduce reliance on distant manufacturers and complex supply chains, keeping more of the sourcing, production, and know-how local.",
     image: formsUrl,
     imageAlt: "Construction form and rammed-earth material seen from above",
   },
   {
     name: "Lasting",
-    copy: "When you understand how your shelter is built, you can inspect it, maintain it, and make repairs over time. The building stays legible to the people who live with it.",
+    copy: "When you understand how your shelter is built, you can inspect it, maintain it, and make repairs over time. The building stays legible to the people who live with it. Built well and cared for, it could stand for centuries. Future ruins.",
     image: exteriorUrl,
     imageAlt: "A ladder beside an earthen volume and its dark doorway",
   },
   {
     name: "Comfort",
-    copy: "Earthen walls add thermal mass: they absorb and slowly release heat, helping moderate temperature swings when paired with thoughtful shade, openings, and ventilation.",
+    copy: "Through the use of shade, natural ventilation, vegetation, and climate-appropriate materials, buildings can provide comfort with less dependence on mechanical heating and cooling, reducing utility costs to help keep shelter affordable long after it's built.",
     image: noonUrl,
     imageAlt: "Sunlight falling between thick earthen walls",
   },

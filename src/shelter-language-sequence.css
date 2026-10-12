@@ -18,16 +18,22 @@
   overflow: hidden;
 }
 
-.shelter-language-skip {
+.shelter-language-skip,
+.shelter-language-scroll-cue {
   position: absolute;
   z-index: 3;
-  top: 8vh;
   left: 50%;
   transform: translateX(-50%);
   color: #aaa89f;
   font: 400 9px/1.4 'Source Code Pro', monospace;
   letter-spacing: .08em;
   white-space: nowrap;
+}
+
+.shelter-language-scroll-cue { top: 8vh; }
+
+.shelter-language-skip {
+  bottom: 5vh;
   transition: color .2s;
 }
 
@@ -193,9 +199,8 @@
 
   .shelter-language-stage { min-height: 0; }
 
-  .shelter-language-skip {
-    top: 9vh;
-  }
+  .shelter-language-scroll-cue { top: max(74px, 12svh); }
+  .shelter-language-skip { bottom: max(18px, 4svh); }
 
   #shelters .shelter-language-intro {
     font-size: clamp(43px, 11vw, 64px);

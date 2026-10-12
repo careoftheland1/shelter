@@ -21,12 +21,13 @@
 .pattern-logic>svg{display:block;width:100%;max-width:1000px;height:360px;margin:40px auto}
 .longhouse-animation-run{height:400svh;position:relative;margin:40px auto 55px}
 .longhouse-animation-stage{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
-.pattern-animation-skip{position:absolute;z-index:2;top:8svh;left:50%;transform:translateX(-50%);padding:10px 12px;color:inherit;font:400 9px/1.4 'Source Code Pro',monospace;letter-spacing:.08em;white-space:nowrap}
+.pattern-animation-skip,.pattern-animation-cue{position:absolute;z-index:2;left:50%;transform:translateX(-50%);padding:10px 0;color:inherit;font:400 9px/1.4 'Source Code Pro',monospace;letter-spacing:.08em;white-space:nowrap}
+.pattern-animation-cue{top:8svh}
+.pattern-animation-skip{bottom:5svh}
 .pattern-animation-skip:hover{opacity:.6}
 .pattern-animation-skip:focus-visible{outline:1px solid currentColor;outline-offset:3px}
 .longhouse-animation-stage svg{display:block;width:min(100%,1000px);height:auto;max-height:55svh;overflow:visible}
 .longhouse-animation-stage svg rect,.longhouse-animation-stage svg path{fill:none;stroke:currentColor;stroke-width:1.55;vector-effect:non-scaling-stroke;shape-rendering:geometricPrecision}
-.longhouse-animation-stage p{position:absolute;bottom:8vh;margin:0;color:#aaa89f;font:400 9px/1.4 'Source Code Pro',monospace;letter-spacing:.08em;text-transform:uppercase}
 .pattern-page svg{fill:none;stroke:currentColor;stroke-width:1}
 .pattern-page svg text{fill:currentColor;stroke:none;font:9px 'Source Code Pro',monospace;text-anchor:middle}
 .pattern-page .diagram-room{stroke-width:9;fill:transparent}
@@ -101,8 +102,9 @@
   .pattern-principles{grid-template-columns:1fr 1fr;gap:25px}
   .pattern-logic>svg{height:240px}
   .longhouse-animation-run{height:320svh;margin:15px auto 35px}
+  .pattern-animation-cue{top:max(84px,12svh)}
+  .pattern-animation-skip{bottom:max(18px,4svh)}
   .longhouse-animation-stage svg{width:calc(100vw - 44px);max-height:42svh}
-  .longhouse-animation-stage p{bottom:8vh;text-align:center}
   .pattern-preview{padding:20px}
   .pattern-preview svg{height:220px}
   .pattern-related{flex-direction:column;padding:50px 22px}

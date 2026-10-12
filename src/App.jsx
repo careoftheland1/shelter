@@ -184,7 +184,7 @@ function App() {
           <p className="manifesto-headline manifesto-headline--spaced">
             <span>WE DESIGN SMALL BUILDINGS THAT ORDINARY PEOPLE CAN UNDERSTAND, ADAPT AND BUILD.</span>
             <span className="manifesto-headline__emphasis">( NO EXPERIENCE NECESSARY )</span>
-            <span>THE PLANS AND DESIGN TOOLS ARE FREE. EXPERIENCED HELP IS THERE IF YOU NEED IT.</span>
+            <span><u>THE PLANS AND DESIGN TOOLS ARE FREE.</u> EXPERIENCED HELP IS THERE IF YOU NEED IT.</span>
           </p>
         </section>
         <section className="manifesto-block manifesto-block--final">
@@ -205,7 +205,7 @@ function App() {
 
     <div className="home-journey">
     <section className="shelter-principle">
-      <h2>Radical simplicity, elevated essentials. Make shelter affordable again</h2>
+      <h2>A remembered simplicity, elevated essentials. <u>Start with a free plan.</u> Build small. Grow as you go. <span className="shelter-principle__closing">Shelter.</span></h2>
     </section>
     <section className="process process-lockup" id="process">
       <header className="process-heading">

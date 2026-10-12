@@ -23,13 +23,9 @@
   padding-bottom: 12svh;
 }
 
-.building-styles .context-showcase__card img {
-  aspect-ratio: 1 / 1;
-  visibility: hidden;
-}
-
-.building-styles .context-showcase__card {
-  background: transparent;
+.building-styles .context-showcase__inner {
+  width: min(100%, 1240px);
+  text-align: center;
 }
 
 .context-showcase__inner {
@@ -42,6 +38,21 @@
   font: 500 10px/1.4 'Source Code Pro', monospace;
   letter-spacing: .045em;
   text-align: center;
+  text-transform: uppercase;
+}
+
+.building-styles .context-showcase__inner h2 {
+  max-width: 1080px;
+  margin: 0 auto;
+  color: #f4f0e9;
+  font: 500 clamp(56px, 6vw, 84px)/.9 'Public Sans', sans-serif;
+  letter-spacing: -.065em;
+}
+
+.building-styles__materials {
+  margin: clamp(65px, 10svh, 110px) 0 0;
+  font: 400 clamp(11px, 1vw, 14px)/1.5 'Source Code Pro', monospace;
+  letter-spacing: .07em;
   text-transform: uppercase;
 }
 
@@ -96,15 +107,13 @@
     background: transparent;
     min-height: 100svh;
     padding-top: 120px;
-    padding-bottom: 48px;
+    padding-bottom: 100px;
   }
 
   .context-showcase__inner { max-width: 420px; }
   .context-showcase__grid { grid-template-columns: 1fr; gap: 20px; }
   .context-showcase__inner h2 { margin-bottom: clamp(68px, 10svh, 90px); font-size: 9px; }
   .context-showcase__card figcaption { font-size: clamp(22px, 6vw, 30px); }
-  .building-styles .context-showcase__grid { gap: 8px; }
-  .building-styles .context-showcase__card { height: 56px; }
-  .building-styles .context-showcase__card img { display: none; }
-  .building-styles .context-showcase__card figcaption { font-size: 22px; }
+  .building-styles .context-showcase__inner h2 { font-size: clamp(48px, 11vw, 68px); }
+  .building-styles__materials { margin-top: 70px; font-size: 11px; }
 }
