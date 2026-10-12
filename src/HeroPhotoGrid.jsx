@@ -11,6 +11,9 @@ import websUrl from "./assets/contact-moodboard/WEBS.jpg";
 import lightWellUrl from "./assets/contact-moodboard/PLANT-LIGHT-WELL.jpg";
 import sinksUrl from "./assets/contact-moodboard/SINKS.jpg";
 import thresholdUrl from "./assets/contact-moodboard/THRESHOLD.jpg";
+import wallDirtEarthUrl from "./assets/contact-moodboard/wall-dirt-earth.png";
+import newCurtainUrl from "./assets/contact-moodboard/curtain-new.png";
+import volumeUrl from "./assets/contact-moodboard/volume-cutout.png";
 import shelterFilmUrl from "./assets/shelter-now-film.mp4";
 import shelterFilmPosterUrl from "./assets/shelter-now-poster.jpg";
 import "./hero-photo-grid.css";
@@ -19,10 +22,11 @@ import "./hero-photo-grid.css";
 // the far edge, so the camera can drift or be dragged in either direction.
 const photos = [
   { variants: [formsUrl, bricksUrl, floorsUrl], x: 0.02, y: 0.05, width: 0.35, depth: 0.8 },
-  { variants: [curtainUrl, cornerInteriorUrl], x: 0.47, y: -0.16, width: 0.31, depth: 1.16 },
-  { variants: [wallUrl, websUrl, lightWellUrl], x: 0.69, y: 0.30, width: 0.36, depth: 0.94 },
+  { variants: [curtainUrl, cornerInteriorUrl, newCurtainUrl], x: 0.47, y: -0.16, width: 0.31, depth: 1.16 },
+  { variants: [wallUrl, websUrl, lightWellUrl, wallDirtEarthUrl], x: 0.69, y: 0.30, width: 0.36, depth: 0.94 },
   { variants: [noonUrl, sinksUrl, thresholdUrl], x: 0.18, y: 0.48, width: 0.32, depth: 1.25 },
   { variants: [exteriorUrl], x: 0.53, y: 0.70, width: 0.26, depth: 1.05 },
+  { variants: [volumeUrl], x: 0.86, y: 0.54, width: 0.40, depth: 0.76, fit: "contain", ratio: "390 / 256" },
 ];
 
 const COLS = 4;
@@ -37,7 +41,7 @@ const tiles = Array.from({ length: COLS * ROWS * photos.length }, (_, key) => {
   };
 });
 
-const imageRatio = (slot) => slot === 4 ? "350 / 623" : "3 / 4";
+const imageRatio = (slot) => photos[slot].ratio || (slot === 4 ? "350 / 623" : "3 / 4");
 
 const wrap = (value, period, margin) => ((value + margin) % period + period) % period - margin;
 
@@ -222,7 +226,7 @@ export default function HeroPhotoGrid() {
         alt=""
         decoding="async"
         loading="eager"
-        style={{ aspectRatio: imageRatio(tile.photo), zIndex: 1 + tile.photo }}
+        style={{ aspectRatio: imageRatio(tile.photo), objectFit: photos[tile.photo].fit || "cover", zIndex: 1 + tile.photo }}
       />)}
       <video
         className="hero-photo-grid__film"

@@ -1,17 +1,7 @@
 import SiteFooter from "./SiteFooter.jsx";
 import PageMeta from "./PageMeta.jsx";
 import ContactMoodboard from "./ContactMoodboard.jsx";
-import glassUrl from "./assets/packages-moodboard/glass.png";
-import mountainUrl from "./assets/packages-moodboard/mtn.png";
-import remoteUrl from "./assets/packages-moodboard/remote.png";
-import roofUrl from "./assets/packages-moodboard/roof.jpeg";
-import mixUrl from "./assets/packages-moodboard/mix.png";
-import wallFormsUrl from "./assets/packages-moodboard/walls-form.png";
-
-const packageGallerySets = [
-  [glassUrl, mountainUrl, remoteUrl, roofUrl, mixUrl, wallFormsUrl],
-  [remoteUrl, roofUrl, glassUrl, mountainUrl, wallFormsUrl, mixUrl],
-];
+import { packageGallerySets, packageGalleryLabel } from "./packageMoodboardImages.js";
 
 const packages = [
   {
@@ -119,7 +109,7 @@ function PackagesPage() {
       description="You do not need to choose a path first. Tell us about the place, the shelter and the parts of the work you hope to take on yourself."
       actions={[{ href: "/project/?source=packages", label: "Tell us about your project" }]}
       photos={packageGallerySets}
-      galleryLabel="A repeating field of photographs showing the land, materials, and shelter construction"
+      galleryLabel={packageGalleryLabel}
     />
     <SiteFooter/>
   </main>;

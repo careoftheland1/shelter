@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import volumeUrl from "./assets/contact-moodboard/volume-cutout.png";
 import "./shelter-language-sequence.css";
 
 // The first four courtyard layouts come from the supplied motion study.
@@ -95,12 +96,14 @@ export default function ShelterLanguageSequence() {
   const sectionRef = useRef(null);
   const roomsRef = useRef([]);
   const introRef = useRef(null);
+  const introVolumeRef = useRef(null);
   const figureRef = useRef(null);
   const svgRef = useRef(null);
   const housePathRef = useRef(null);
   const seedLabelsRef = useRef(null);
   const seedCopyRef = useRef(null);
   const courtLabelRef = useRef(null);
+  const courtGrowthLabelRef = useRef(null);
   const courtCopyRef = useRef(null);
   const longhouseLabelRef = useRef(null);
   const longhouseCopyRef = useRef(null);
@@ -127,7 +130,8 @@ export default function ShelterLanguageSequence() {
       const expansion = beat < 9 ? 0 : beat < 10 ? lineGathering : 1;
       const baseWidth = window.innerWidth <= 760 ? window.innerWidth - 36 : Math.min(window.innerWidth * .56, 620);
       const baseHeight = Math.min(baseWidth * 275 / 350, window.innerHeight * (window.innerWidth <= 760 ? .48 : .57));
-      const lineWidth = 4 * 76 * Math.min(baseWidth / 350, baseHeight / 275);
+      const mobileLineScale = window.innerWidth <= 760 ? 0.94 : 1;
+      const lineWidth = 4 * 76 * Math.min(baseWidth / 350, baseHeight / 275) * mobileLineScale;
       section.style.setProperty("--longhouse-half-width", `${lineWidth / 2}px`);
       figureRef.current.style.width = `${mix(baseWidth, lineWidth, expansion)}px`;
       figureRef.current.style.height = `${mix(baseHeight, lineWidth / 4, expansion)}px`;
@@ -188,12 +192,16 @@ export default function ShelterLanguageSequence() {
       });
 
       introRef.current.style.opacity = String(1 - smoothstep(0.55, 1.1, beat));
+      introVolumeRef.current.style.opacity = String(1 - smoothstep(0.55, 1.1, beat));
+      introVolumeRef.current.style.height = `${introRef.current.querySelector("span").getBoundingClientRect().height * 4.8}px`;
       figureRef.current.style.opacity = String(smoothstep(0.7, 1.25, beat));
       const seedOpacity = smoothstep(1.15, 1.5, beat) * (1 - smoothstep(2.1, 2.55, beat));
       seedLabelsRef.current.style.opacity = String(seedOpacity);
       seedCopyRef.current.style.opacity = String(seedOpacity);
       const courtOpacity = smoothstep(2.35, 2.75, beat) * (1 - smoothstep(9.05, 9.5, beat));
-      courtLabelRef.current.style.opacity = String(courtOpacity * (1 - smoothstep(8.2, 8.7, beat)));
+      const courtLabelOpacity = courtOpacity * (1 - smoothstep(8.2, 8.7, beat));
+      courtLabelRef.current.style.opacity = String(courtLabelOpacity);
+      courtGrowthLabelRef.current.style.opacity = String(courtLabelOpacity);
       courtCopyRef.current.style.opacity = String(courtOpacity);
       const longhouseOpacity = smoothstep(9.65, 10.15, beat) * (1 - smoothstep(16.1, 16.6, beat));
       longhouseLabelRef.current.style.opacity = String(longhouseOpacity);
@@ -220,7 +228,13 @@ export default function ShelterLanguageSequence() {
   return <section className="shelter-language-sequence" ref={sectionRef} aria-label="From one room to courtyard and longhouse arrangements">
     <div className="shelter-language-stage">
       <a className="shelter-language-skip" href="#shelter-cards" aria-label="Skip the animation and go to shelter plans">( SKIP AHEAD )</a>
-      <h2 className="shelter-language-intro" ref={introRef}>START WITH FOUR WALLS</h2>
+      <img className="shelter-language-intro-volume" ref={introVolumeRef} src={volumeUrl} alt="" aria-hidden="true"/>
+      <h2 className="shelter-language-intro" ref={introRef}>
+        <span className="shelter-language-intro-word shelter-language-intro-word--start">START</span>
+        <span className="shelter-language-intro-word shelter-language-intro-word--with">WITH</span>
+        <span className="shelter-language-intro-word shelter-language-intro-word--four">FOUR</span>
+        <span className="shelter-language-intro-word shelter-language-intro-word--walls">WALLS</span>
+      </h2>
       <figure className="shelter-language-figure" ref={figureRef}>
         <svg ref={svgRef} viewBox="0 0 350 275" role="img" aria-label="A square room gathers into courtyard layouts, the rooms fall into a longhouse line, then return to one square">
           {volumeSizes.map(([width, height], index) => <rect
@@ -239,6 +253,7 @@ export default function ShelterLanguageSequence() {
         <span>The Seed</span>
       </div>
       <div className="shelter-language-court-label" ref={courtLabelRef}>Gather Them</div>
+      <div className="shelter-language-court-label shelter-language-court-label--right" ref={courtGrowthLabelRef}>Grow as you go</div>
       <div className="shelter-language-copy shelter-language-copy--seed" ref={seedCopyRef}>
         <p>An independent room. Simple, scalable.</p>
       </div>

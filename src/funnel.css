@@ -52,6 +52,10 @@
 @media(prefers-reduced-motion:reduce){.offering-faq-action b{transition:none}}
 @media(prefers-reduced-motion:reduce){.offering-hero{position:relative}}
 
+.offering-guided .offering-next{background:#9B8B73;color:#0D0D0B}
+.offering-guided .offering-next-link{border-color:rgba(13,13,11,.55)}
+.offering-supported .offering-next{background:#7A6B52;color:#f0e9df}
+
 /* Free plans: a single, quiet editorial surface with the drawing as the companion. */
 .plan-request-page{background:#e7e0d2}
 .plan-request-nav{position:fixed;top:0;left:0;right:0;height:auto;min-height:64px;padding:27px 4vw;border:0;background:transparent;color:#242219;font-size:9px;letter-spacing:.08em;text-transform:uppercase;z-index:20}

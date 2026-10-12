@@ -1,5 +1,7 @@
 import PageMeta from "./PageMeta.jsx";
 import SiteFooter from "./SiteFooter.jsx";
+import ContactMoodboard from "./ContactMoodboard.jsx";
+import { packageGallerySets, packageGalleryLabel } from "./packageMoodboardImages.js";
 
 const offerings = {
   supported: {
@@ -52,20 +54,33 @@ function OfferingPage({ kind }) {
   const offer = offerings[kind];
   const briefHref = `/project/?offering=${kind}&source=${kind}`;
   const [firstLine, secondLine] = offer.heading.split("<br/>");
+  const hasMoodboardHero = kind === "guided" || kind === "supported";
+  const hero = hasMoodboardHero
+    ? <ContactMoodboard
+        variant={`${kind}-top`}
+        title={kind === "guided" ? "Build with us beside you" : "Get ready to build."}
+        kicker={`${offer.number} / ${offer.name}`}
+        description={offer.intro}
+        actions={[{ href: briefHref, label: "Tell us about your project" }]}
+        photos={packageGallerySets}
+        galleryLabel={kind === "guided" ? packageGalleryLabel : "A drifting field of the same transparent earthen shelter volume"}
+        headingLevel={1}
+      />
+    : <section className="offering-hero">
+        <div className="offering-hero-top"><span>{offer.number} / {offer.name.toUpperCase()}</span></div>
+        <h1>{firstLine}<br/>{secondLine}</h1>
+        <div className="offering-hero-bottom"><p>{offer.intro}</p><a href={briefHref}>Tell us about your project <span>↗</span></a></div>
+      </section>;
   return <main className={`offering-page offering-${offer.tone}`}>
     <PageMeta title={`${offer.name} — Shelter on the Land`} description={offer.intro} path={`/${kind}/`}/>
     <header className="nav offering-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><a className="nav-cta" href="/packages/">Compare paths ↗</a></header>
-    <section className="offering-hero">
-      <div className="offering-hero-top"><span>{offer.number} / {offer.name.toUpperCase()}</span></div>
-      <h1>{firstLine}<br/>{secondLine}</h1>
-      <div className="offering-hero-bottom"><p>{offer.intro}</p><a href={briefHref}>Tell us about your project <span>↗</span></a></div>
-    </section>
-    <section className="offering-overview"><p className="funnel-eyebrow">{offer.name.toUpperCase()}</p><div><h2>Help where<br/>it matters.</h2><p>{offer.outcome}</p></div><div className="offering-price"><span>Fee — </span><strong>{offer.price}</strong><p>Final scope is confirmed in writing before work begins. Additional work outside the agreed scope is discussed before it is undertaken.</p></div></section>
+    {hero}
+    <section className="offering-overview"><p className="funnel-eyebrow">{offer.name.toUpperCase()}</p><div><h2>{kind === "guided" ? "Guidance throughout the build" : kind === "supported" ? "Support from design through permit" : <>Help where<br/>it matters.</>}</h2></div><div className="offering-price"><span>Fee — </span><strong>{offer.price}</strong><p>{kind === "supported" && <>{offer.outcome} </>}Final scope is confirmed in writing before work begins. Additional work outside the agreed scope is discussed before it is undertaken.</p></div></section>
     <section className="offering-includes"><div><p className="funnel-eyebrow">WHERE WE COME IN</p><h2>{offer.workHeading}</h2></div><ol>{offer.includes.map((item, i) => <li key={item}><span>{String(i+1).padStart(2,"0")}</span><p>{item}</p></li>)}</ol></section>
     <section className="offering-process"><p className="funnel-eyebrow">HOW WE KICK OFF</p><h2>Begin with<br/>the project.</h2><div>{offer.process.map((item, i) => <p key={item}><span>{String(i+1).padStart(2,"0")}</span>{item}</p>)}</div></section>
     <section className="offering-responsibilities"><p className="funnel-eyebrow">THE LOCAL WORK</p><h2>The work<br/>stays local.</h2><p>You and your local team make site and construction decisions, arrange required surveys, testing, engineering and inspections, and work with the local building department. Shelter’s role and any additional work are defined in the written scope.</p></section>
     <details className="offering-faq" id="questions"><summary className="offering-faq-toggle"><span className="funnel-eyebrow">PRACTICAL QUESTIONS</span><h2>Good to know.</h2><span className="offering-faq-action">View questions <b aria-hidden="true">+</b></span></summary><div className="offering-faq-content">{faqs[kind].map(([question, answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></details>
-    <section className="offering-next"><p className="funnel-eyebrow">YOUR LAND / YOUR BUILD</p><h2>Tell us what<br/>you’re making.</h2><p>Share what you know so far. We’ll read the brief and reply with a useful next step.</p><a className="offering-next-link" href={briefHref}>Tell us about your project <span>↗</span></a></section>
+    <section className="offering-next"><p className="funnel-eyebrow">YOUR LAND / YOUR BUILD</p><h2>Tell us what<br/>{kind === "guided" ? "you’re building." : kind === "supported" ? "you’re designing." : "you’re making."}</h2><p>Share what you know so far. We’ll read the brief and reply with a useful next step.</p><a className="offering-next-link" href={briefHref}>Tell us about your project <span>↗</span></a></section>
     <SiteFooter/>
   </main>;
 }

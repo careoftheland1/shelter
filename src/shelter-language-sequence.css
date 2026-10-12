@@ -43,16 +43,33 @@
 #shelters .shelter-language-intro {
   position: absolute;
   z-index: 2;
-  top: 50%;
-  left: 50%;
-  width: calc(100% - 16vw);
-  max-width: 1340px;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   margin: 0;
-  transform: translate(-50%, -50%);
+  transform: none;
   color: #fff;
   font: 500 clamp(56px, 6.4vw, 86px)/.9 'Public Sans', sans-serif;
   letter-spacing: -.065em;
-  text-align: center;
+  pointer-events: none;
+}
+
+.shelter-language-intro-word { position: absolute; }
+.shelter-language-intro-word--start { top: 16vh; left: 6vw; }
+.shelter-language-intro-word--with { top: 16vh; right: 6vw; }
+.shelter-language-intro-word--four { right: 6vw; bottom: 16vh; }
+.shelter-language-intro-word--walls { bottom: 16vh; left: 6vw; }
+
+.shelter-language-intro-volume {
+  position: absolute;
+  z-index: 1;
+  top: 48%;
+  left: 50%;
+  width: auto;
+  max-width: 72vw;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  opacity: 0;
   pointer-events: none;
 }
 
@@ -106,6 +123,11 @@
   letter-spacing: -.025em;
   opacity: 0;
   pointer-events: none;
+}
+
+.shelter-language-court-label--right {
+  display: block;
+  text-align: right;
 }
 
 .shelter-language-longhouse-label {
@@ -176,10 +198,14 @@
   }
 
   #shelters .shelter-language-intro {
-    width: calc(100% - 44px);
-    font-size: clamp(54px, 15vw, 76px);
-    line-height: .92;
+    font-size: clamp(43px, 11vw, 64px);
+    line-height: .9;
   }
+
+  .shelter-language-intro-word--start { top: 19vh; left: 22px; }
+  .shelter-language-intro-word--with { top: 19vh; right: 22px; }
+  .shelter-language-intro-word--four { right: 22px; bottom: 19vh; }
+  .shelter-language-intro-word--walls { bottom: 19vh; left: 22px; }
 
   .shelter-language-figure {
     top: 46%;
