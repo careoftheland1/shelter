@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import PageMeta from "./PageMeta.jsx";
 import SiteFooter from "./SiteFooter.jsx";
 import { languageMeta, longHouseShapeItUrl, spaceItUrl } from "./buildingLanguage.js";
-import "./pattern-page.css";
+import { LonghouseNeighborAnimation, LonghouseSequenceAnimation } from "./ShelterLanguageSequence.jsx";
+import "./pattern-page.css?layout";
 
 const courts = [
   { title: "Two volumes + court", rooms: ["LIVE", "SLEEP"], copy: "Begin with two complete rooms. Orient their openings toward a useful outdoor room." },
@@ -41,13 +42,58 @@ function Arrangement({ rooms, court, index }) {
   </svg>;
 }
 
+function MoodboardLightbox({ images, activeIndex, onChange }) {
+  const swipeRef = useRef(null);
+  const [src, , alt, caption] = images[activeIndex];
+  const show = (direction) => onChange((index) => (index + direction + images.length) % images.length);
+  const close = () => onChange(null);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") onChange(null);
+      if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+        event.preventDefault();
+        onChange((index) => (index + (event.key === "ArrowRight" ? 1 : -1) + images.length) % images.length);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [images.length, onChange]);
+
+  const onPointerDown = (event) => {
+    swipeRef.current = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+  const onPointerUp = (event) => {
+    const start = swipeRef.current;
+    swipeRef.current = null;
+    if (!start || start.id !== event.pointerId) return;
+    const x = event.clientX - start.x;
+    const y = event.clientY - start.y;
+    if (Math.abs(x) > 45 && Math.abs(x) > Math.abs(y) * 1.2) show(x < 0 ? 1 : -1);
+  };
+
+  return <div className="moodboard-lightbox" role="dialog" aria-modal="true" aria-label={`Long House image gallery: ${caption}`} onClick={(event) => { if (event.target === event.currentTarget) close(); }}>
+    <button className="lightbox-close" type="button" onClick={close} aria-label="Close image gallery">×</button>
+    <button className="lightbox-step lightbox-step--previous" type="button" onClick={() => show(-1)} aria-label="Previous image">‹</button>
+    <img src={src} alt={alt} draggable="false" onPointerDown={onPointerDown} onPointerUp={onPointerUp} onPointerCancel={() => { swipeRef.current = null; }}/>
+    <button className="lightbox-step lightbox-step--next" type="button" onClick={() => show(1)} aria-label="Next image">›</button>
+    <p aria-live="polite"><span>0{activeIndex + 1} / 0{images.length}</span>{caption}</p>
+  </div>;
+}
+
 export default function PatternPage({ slug, gallery }) {
   const court = slug === "courtyard";
   const name = court ? "Court" : "Long House";
   const meta = languageMeta[slug];
   const places = court ? courts : rows;
   const [active, setActive] = useState(0);
-  const [activeMoodboardImage, setActiveMoodboardImage] = useState(null);
+  const [activeMoodboardIndex, setActiveMoodboardIndex] = useState(null);
   const moodboardRef = useRef(null);
   const toolUrl = court ? spaceItUrl : longHouseShapeItUrl;
   const action = court ? "Space a court" : "Shape a long house";
@@ -56,7 +102,7 @@ export default function PatternPage({ slug, gallery }) {
     const board = moodboardRef.current;
     if (!board) return;
     const figures = [...board.querySelectorAll("figure")];
-    const speeds = [0.06, -0.05, 0.07, -0.06];
+    const speeds = [0.06, -0.05, 0.07, -0.06, 0.05, -0.04];
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
     const update = () => {
@@ -82,20 +128,17 @@ export default function PatternPage({ slug, gallery }) {
       window.cancelAnimationFrame(frame);
     };
   }, [court]);
-  useEffect(() => {
-    if (!activeMoodboardImage) return;
-    const closeOnEscape = (event) => { if (event.key === "Escape") setActiveMoodboardImage(null); };
-    window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
-  }, [activeMoodboardImage]);
   return <main className={`pattern-page ${court ? "court-pattern" : "long-house-pattern"}`}>
     <PageMeta {...meta} path={`/shelters/${slug}/`}/>
     <header className="offgrid-nav"><a className="wordmark" href="/">shelter&nbsp;&nbsp;&nbsp;on the&nbsp;&nbsp;land</a><nav><a href="#places">Places to start</a><a href="/supported/">Supported</a></nav><a href={toolUrl}>{action} ↗</a></header>
+    <div className="pattern-intro-stack">
     <section className="pattern-hero"><div><p className="kicker">Pattern / {name}</p><h1>{court ? "Gather around the space between." : "When the land is narrow, build along it."}</h1><p>{court ? "Court is a way of clustering complete Four Walls volumes around useful outdoor rooms. Openings, sun, wind, privacy and landscape help decide where each volume belongs." : "Long House arranges Four Walls along a line. Rooms can share walls where building less makes sense, then open to sky where light, air, privacy and separation matter more."}</p><div className="language-actions"><a href={toolUrl}>{action} ↗</a><a href="#places">See places to start ↓</a></div></div><img src={gallery[0][0]} srcSet={court ? `${gallery[0][1]} 800w, ${gallery[0][0]} ${gallery[0][4]}w` : undefined} sizes="(max-width: 760px) 100vw, 65vw" alt={gallery[0][2]} fetchPriority="high"/></section>
-    <section className="pattern-logic"><header><p className="kicker">{court ? "Cluster / The relationships" : "Row / The rhythm"}</p><h2>{court ? "The court is a room with the sky for a roof." : "Room / sky / room / sky / room"}</h2><p>{court ? "Begin with Four Walls. Place an opening. Turn toward light, shelter from wind and make room for another volume. Give the outdoor room its own purpose, proportions and edges." : "The architecture is a rhythm, not a fixed floor plan. Complete rooms, opaque side walls and open-sky courts give a narrow site depth, light and places to pause."}</p></header><Arrangement court={court} rooms={court ? courts[1].rooms : rows[1].rooms} index={1}/>{court ? <div className="pattern-principles">{[["Begin with the opening", "Decide what each room looks toward, and where its threshold meets outdoor life."], ["Orient to the place", "Read sun, wind, privacy, paths and existing landscape before adding another room."], ["Give space a purpose", "A court can be a garden, a gathering place or a quiet retreat. It is positive space, not leftover setback."]].map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div> : <div className="pattern-principles">{principles.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div>}</section>
+    <section className="pattern-logic">{court ? <header><p className="kicker">Cluster / The relationships</p><h2>The court is a room with the sky for a roof.</h2><p>Begin with Four Walls. Place an opening. Turn toward light, shelter from wind and make room for another volume. Give the outdoor room its own purpose, proportions and edges.</p></header> : <header className="pattern-manifesto"><h2>narrow lots, or lots split a few ways, longhouses work in rows that support densification countering displacement</h2></header>}{court ? <Arrangement court rooms={courts[1].rooms} index={1}/> : <LonghouseSequenceAnimation/>}{court ? <div className="pattern-principles">{[["Begin with the opening", "Decide what each room looks toward, and where its threshold meets outdoor life."], ["Orient to the place", "Read sun, wind, privacy, paths and existing landscape before adding another room."], ["Give space a purpose", "A court can be a garden, a gathering place or a quiet retreat. It is positive space, not leftover setback."]].map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div> : <div className="pattern-principles">{principles.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div>}</section>
+    </div>
     <section className="pattern-places" id="places"><header><p className="kicker">Places to start</p>{court && <p>Try different relationships between complete volumes and outdoor rooms.</p>}</header><div className="pattern-explorer"><div className="pattern-options" role="group" aria-label={`${name} starting arrangements`}>{places.map((place, i) => <button key={place.title} aria-pressed={active === i} onClick={() => setActive(i)}><span>0{i+1}</span>{place.title}<b>{active === i ? "−" : "+"}</b></button>)}<a className="pattern-tool-button" href={toolUrl}>{action} <span>↗</span></a></div><div className="pattern-preview" aria-live="polite"><Arrangement court={court} rooms={places[active].rooms} index={active}/><h3>{places[active].title}</h3><p>{places[active].copy || "A starting relationship to explore, with dimensions and uses shaped by your site."}</p><p className="pattern-caption">Concept diagram / No fixed scale</p></div></div></section>
-    {court ? <><section className="pattern-photo"><img src={gallery[1][0]} srcSet={`${gallery[1][1]} 800w, ${gallery[1][0]} ${gallery[1][4]}w`} sizes="100vw" alt={gallery[1][2]} loading="lazy"/><p>{gallery[1][3]}</p></section><section className="support"><p className="kicker">Develop with Supported</p><h2>The pattern can repeat. The project cannot.</h2><p>Once several volumes meet a real site, foundations, drainage, structure, services, code and construction details become specific to that place.</p><a href={`/supported/?plan=${slug}`}>Develop it with Supported →</a></section></> : <div className="long-house-transition"><div className="long-house-moodboard-run"><section className="pattern-moodboard" ref={moodboardRef} aria-label="Long House image studies">{gallery.slice(1).map(([src, , alt, caption], index) => <figure key={caption}><button className="moodboard-open" type="button" onClick={() => setActiveMoodboardImage({ src, alt, caption })} aria-label={`View image: ${caption}`}><img src={src} alt="" loading="lazy" decoding="async"/><span className="moodboard-expand" aria-hidden="true">↗</span></button><figcaption><span>0{index + 1}</span>{caption}</figcaption></figure>)}</section></div><section className="support"><p className="kicker">Develop with Supported</p><h2>Design it yourself.<br/>With help.</h2><p>Turning the pattern into a building means resolving the particular lot, party walls, structure, stairs, services, drainage, code and construction. Explore our support packages if you need a hand.</p><a href={`/supported/?plan=${slug}`}>Develop it with Supported →</a></section></div>}
-    {activeMoodboardImage && <div className="moodboard-lightbox" role="dialog" aria-modal="true" aria-label={activeMoodboardImage.caption} onClick={() => setActiveMoodboardImage(null)}><button className="lightbox-close" type="button" onClick={() => setActiveMoodboardImage(null)} aria-label="Close image">×</button><img src={activeMoodboardImage.src} alt={activeMoodboardImage.alt}/><p>{activeMoodboardImage.caption}</p></div>}
+    {!court && <section className="long-house-neighbors" aria-labelledby="long-house-neighbors-title"><header><h2 id="long-house-neighbors-title">Here’s a thought. Buy a lot with friends or family. Divide the width. Build along the length. Share walls. Make room for eachother.</h2></header><LonghouseNeighborAnimation/></section>}
+    {court ? <><section className="pattern-photo"><img src={gallery[1][0]} srcSet={`${gallery[1][1]} 800w, ${gallery[1][0]} ${gallery[1][4]}w`} sizes="100vw" alt={gallery[1][2]} loading="lazy"/><p>{gallery[1][3]}</p></section><section className="support"><p className="kicker">Develop with Supported</p><h2>The pattern can repeat. The project cannot.</h2><p>Once several volumes meet a real site, foundations, drainage, structure, services, code and construction details become specific to that place.</p><a href={`/supported/?plan=${slug}`}>Develop it with Supported →</a></section></> : <div className="long-house-transition" id="long-house-moodboard"><div className="long-house-moodboard-run"><section className="pattern-moodboard" ref={moodboardRef} aria-label="Long House image studies">{gallery.slice(1).map(([src, , , caption], index) => <figure key={caption}><button className="moodboard-open" type="button" onClick={() => setActiveMoodboardIndex(index)} aria-label={`View image: ${caption}`}><img src={src} alt="" loading="lazy" decoding="async"/><span className="moodboard-expand" aria-hidden="true">↗</span></button><figcaption><span>0{index + 1}</span>{caption}</figcaption></figure>)}</section></div><section className="support"><p className="kicker">Develop with Supported</p><h2>Design it yourself.<br/>With help.</h2><p>Turning the pattern into a building means resolving the particular lot, party walls, structure, stairs, services, drainage, code and construction. Explore our support packages if you need a hand.</p><a href={`/supported/?plan=${slug}`}>Develop it with Supported →</a></section></div>}
+    {activeMoodboardIndex !== null && <MoodboardLightbox images={gallery.slice(1)} activeIndex={activeMoodboardIndex} onChange={setActiveMoodboardIndex}/>}
     <section className="pattern-related"><a href="/shelters/four-walls/">Return to the seed / Four Walls plans →</a><a href={court ? "/shelters/long-house/" : "/shelters/courtyard/"}>Explore {court ? "Long House" : "Court"} →</a></section><SiteFooter/>
   </main>;
 }

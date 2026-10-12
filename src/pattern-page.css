@@ -10,9 +10,23 @@
 .pattern-hero>img{display:block;width:100%;height:calc(85svh - 75px);min-height:540px;object-fit:cover}
 .pattern-logic,.pattern-places{padding:100px 6vw}
 .pattern-logic{background:#252525;color:#eee}
+.long-house-pattern .pattern-intro-stack{position:relative;isolation:isolate}
+.long-house-pattern .pattern-hero{position:sticky;top:0;z-index:0;min-height:100svh}
+.long-house-pattern .pattern-hero>img{height:calc(100svh - 75px);min-height:0}
+.long-house-pattern .pattern-logic{position:relative;z-index:1;padding:24svh 6vw 100px;background:#000;color:#eee}
 .pattern-logic>header,.pattern-places>header{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:5vw}
+.long-house-pattern .pattern-logic>.pattern-manifesto{display:block;max-width:1180px;margin:0 auto 8vh;padding:0 6vw}
+.long-house-pattern .pattern-logic>.pattern-manifesto h2{width:100%;max-width:1340px;margin:0;font:500 clamp(56px,5.6vw,78px)/.9 'Public Sans',sans-serif!important;letter-spacing:-.065em!important;text-align:center;text-transform:uppercase}
 .long-house-pattern .pattern-places>header h2{grid-column:3}
 .pattern-logic>svg{display:block;width:100%;max-width:1000px;height:360px;margin:40px auto}
+.longhouse-animation-run{height:400svh;position:relative;margin:40px auto 55px}
+.longhouse-animation-stage{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.pattern-animation-skip{position:absolute;z-index:2;top:8svh;left:50%;transform:translateX(-50%);padding:10px 12px;color:inherit;font:400 9px/1.4 'Source Code Pro',monospace;letter-spacing:.08em;white-space:nowrap}
+.pattern-animation-skip:hover{opacity:.6}
+.pattern-animation-skip:focus-visible{outline:1px solid currentColor;outline-offset:3px}
+.longhouse-animation-stage svg{display:block;width:min(100%,1000px);height:auto;max-height:55svh;overflow:visible}
+.longhouse-animation-stage svg rect,.longhouse-animation-stage svg path{fill:none;stroke:currentColor;stroke-width:1.55;vector-effect:non-scaling-stroke;shape-rendering:geometricPrecision}
+.longhouse-animation-stage p{position:absolute;bottom:8vh;margin:0;color:#aaa89f;font:400 9px/1.4 'Source Code Pro',monospace;letter-spacing:.08em;text-transform:uppercase}
 .pattern-page svg{fill:none;stroke:currentColor;stroke-width:1}
 .pattern-page svg text{fill:currentColor;stroke:none;font:9px 'Source Code Pro',monospace;text-anchor:middle}
 .pattern-page .diagram-room{stroke-width:9;fill:transparent}
@@ -32,14 +46,24 @@
 .pattern-handoff{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6vw;padding:100px 6vw}
 .pattern-handoff a{display:inline-block;border-bottom:1px solid;margin-top:20px}
 .pattern-related{display:flex;justify-content:space-between;gap:30px;padding:70px 6vw}
+.long-house-neighbors{background:#fff;color:#0d0d0b;padding-top:14svh}
+.long-house-neighbors>header{max-width:1200px;margin:0 auto;padding:0 12vw;text-align:center}
+.long-house-neighbors h2{margin:0;font:500 clamp(42px,4.2vw,59px)/.9 'Public Sans',sans-serif!important;letter-spacing:-.065em!important;text-transform:uppercase}
+.longhouse-neighbors-run{position:relative;height:560svh}
+.longhouse-neighbors-stage{position:sticky;top:0;height:100svh;display:grid;place-items:center}
+.longhouse-neighbors-stage svg{display:block;width:min(72vw,68svh,760px);height:auto;overflow:visible;fill:none;stroke:#0d0d0b;stroke-width:1.55;stroke-linejoin:miter;vector-effect:non-scaling-stroke;shape-rendering:geometricPrecision}
+.longhouse-neighbors-stage svg path{vector-effect:non-scaling-stroke}
+.longhouse-neighbors-stage svg .neighbor-room-label{fill:#0d0d0b;stroke:none;font:400 12px 'Source Code Pro',monospace;text-anchor:middle;dominant-baseline:middle;letter-spacing:.04em;pointer-events:none}
 .long-house-transition{position:relative;background:#fff}
-.long-house-moodboard-run{height:160svh;position:relative}
+.long-house-moodboard-run{height:165svh;position:relative}
 .long-house-pattern .pattern-moodboard{position:sticky;top:0;height:100svh;overflow:hidden;background:#fff;color:#222;padding:0 6vw;display:block}
 .pattern-moodboard figure{position:absolute;margin:0;overflow:hidden;background:#e8e3d9}
 .pattern-moodboard figure:nth-child(1){left:8%;top:13%;width:18%;aspect-ratio:4/3}
 .pattern-moodboard figure:nth-child(2){right:11%;top:24%;width:15%;aspect-ratio:5/4}
 .pattern-moodboard figure:nth-child(3){left:34%;top:44%;width:24%;aspect-ratio:16/10}
-.pattern-moodboard figure:nth-child(4){right:12%;bottom:9%;width:27%;aspect-ratio:4/3}
+.pattern-moodboard figure:nth-child(4){right:12%;bottom:15%;width:27%;aspect-ratio:4/3}
+.pattern-moodboard figure:nth-child(5){left:8%;bottom:16%;width:20%;aspect-ratio:4/3}
+.pattern-moodboard figure:nth-child(6){right:39%;top:9%;width:19%;aspect-ratio:4/3}
 .moodboard-open{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:transparent;cursor:zoom-in;overflow:hidden}
 .moodboard-open:focus-visible{outline:2px solid #a34b1d;outline-offset:3px;z-index:1}
 .pattern-moodboard img{display:block;width:100%;height:100%;object-fit:cover;transform:translate3d(0,var(--image-shift,0px),0) scale(1.08);will-change:transform;transition:filter .25s ease}
@@ -51,10 +75,16 @@
 .pattern-page .support{margin:0;padding-left:6vw;padding-right:6vw;background:#191919;color:#eee}
 .pattern-page .support h2{font:700 clamp(44px,5vw,84px)/.9 "Public Sans",sans-serif!important;letter-spacing:-.04em!important}
 .pattern-page .support>a{min-width:170px;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:15px 17px;border:1px solid rgba(255,255,255,.5);font-size:9px;text-transform:uppercase;letter-spacing:.08em}
-.long-house-transition>.support{position:relative;z-index:2;min-height:100svh;margin-top:-60svh;padding-top:clamp(100px,18vh,190px);box-shadow:0 -18px 40px rgba(0,0,0,.12)}
+.long-house-transition>.support{position:relative;z-index:2;min-height:100svh;margin-top:-30svh;padding-top:clamp(100px,18vh,190px);box-shadow:0 -18px 40px rgba(0,0,0,.12)}
 .moodboard-lightbox{position:fixed;z-index:100;inset:0;background:rgba(16,16,15,.94);display:flex;align-items:center;justify-content:center;padding:7vh 6vw;cursor:zoom-out}
-.moodboard-lightbox img{max-width:92vw;max-height:82svh;object-fit:contain}
+.moodboard-lightbox img{max-width:92vw;max-height:82svh;object-fit:contain;touch-action:pan-y;user-select:none;cursor:grab}
+.moodboard-lightbox img:active{cursor:grabbing}
 .moodboard-lightbox p{position:absolute;bottom:2.5vh;left:6vw;color:#fff;font-size:10px;text-transform:uppercase;letter-spacing:.1em}
+.moodboard-lightbox p span{margin-right:18px;opacity:.65}
+.lightbox-step{position:absolute;z-index:2;top:50%;width:48px;height:56px;transform:translateY(-50%);border:0;background:rgba(16,16,15,.45);color:#fff;font:400 42px/1 'Public Sans',sans-serif;cursor:pointer}
+.lightbox-step--previous{left:2vw}
+.lightbox-step--next{right:2vw}
+.lightbox-step:hover,.lightbox-step:focus-visible{background:rgba(16,16,15,.8)}
 .lightbox-close{position:absolute;top:18px;right:24px;border:0;background:transparent;color:#fff;font-size:36px;line-height:1;cursor:pointer}
 @media(max-width:760px){
   .pattern-hero,.pattern-explorer{grid-template-columns:1fr}
@@ -62,22 +92,40 @@
   .pattern-hero>img{min-height:0;height:65vh}
   .pattern-logic,.pattern-places{padding:70px 22px}
   .pattern-logic>header,.pattern-places>header{grid-template-columns:1fr;gap:15px}
+  .long-house-pattern .pattern-logic>.pattern-manifesto{margin-bottom:35px;padding:0 22px}
+  .long-house-pattern .pattern-logic>.pattern-manifesto h2{font-size:clamp(44px,12vw,68px)}
+  .long-house-pattern .pattern-hero{position:relative;min-height:0}
+  .long-house-pattern .pattern-hero>img{height:65vh}
+  .long-house-pattern .pattern-logic{padding:18svh 22px 70px}
   .long-house-pattern .pattern-places>header h2{grid-column:1}
   .pattern-principles{grid-template-columns:1fr 1fr;gap:25px}
   .pattern-logic>svg{height:240px}
+  .longhouse-animation-run{height:320svh;margin:15px auto 35px}
+  .longhouse-animation-stage svg{width:calc(100vw - 44px);max-height:42svh}
+  .longhouse-animation-stage p{bottom:8vh;text-align:center}
   .pattern-preview{padding:20px}
   .pattern-preview svg{height:220px}
   .pattern-related{flex-direction:column;padding:50px 22px}
-  .long-house-moodboard-run{height:145svh}
+  .long-house-neighbors{padding-top:12svh}
+  .long-house-neighbors>header{padding:0 44px}
+  .long-house-neighbors h2{font-size:clamp(33px,9vw,51px)!important}
+  .longhouse-neighbors-run{height:510svh}
+  .longhouse-neighbors-stage svg{width:calc(100vw - 44px)}
+  .longhouse-neighbors-stage svg .neighbor-room-label{font-size:18px}
+  .long-house-moodboard-run{height:150svh}
   .long-house-pattern .pattern-moodboard{padding:0 22px}
   .pattern-moodboard figure:nth-child(1){left:7%;top:14%;width:34%;aspect-ratio:4/3}
   .pattern-moodboard figure:nth-child(2){right:7%;top:28%;width:32%;aspect-ratio:5/4}
   .pattern-moodboard figure:nth-child(3){left:12%;top:49%;width:37%;aspect-ratio:16/10}
-  .pattern-moodboard figure:nth-child(4){right:7%;bottom:10%;width:35%;aspect-ratio:4/3}
+  .pattern-moodboard figure:nth-child(4){right:7%;bottom:14%;width:35%;aspect-ratio:4/3}
+  .pattern-moodboard figure:nth-child(5){left:7%;bottom:14%;width:35%;aspect-ratio:4/3}
+  .pattern-moodboard figure:nth-child(6){right:11%;top:7%;width:34%;aspect-ratio:4/3}
   .pattern-moodboard figcaption{padding:24px 10px 10px;gap:7px;font-size:7px}
-  .long-house-transition>.support{margin-top:-45svh;padding-top:100px}
+  .long-house-transition>.support{margin-top:-20svh;padding-top:100px}
   .moodboard-lightbox{padding:8vh 4vw}
   .moodboard-lightbox img{max-width:92vw;max-height:78svh}
+  .lightbox-step--previous{left:4px}
+  .lightbox-step--next{right:4px}
   .pattern-page .support{padding-left:22px;padding-right:22px}
   .pattern-tool-button{width:100%;box-sizing:border-box}
   .pattern-page .support>a{width:100%;box-sizing:border-box}

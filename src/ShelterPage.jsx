@@ -13,6 +13,8 @@ import longHouseAcrossUrl from "./assets/long-house/across-court.jpeg";
 import longHouseTerraceUrl from "./assets/long-house/roof-terrace.jpeg";
 import longHouseFramedUrl from "./assets/long-house/framed-court.jpeg";
 import longHouseRowUrl from "./assets/long-house/row-of-long-houses.jpeg";
+import longHouseConstructionUrl from "./assets/long-house/row-in-construction.webp";
+import longHouseCardUrl from "./assets/shelter-cards/long-house-courtyard.webp";
 import fourWallsHeroUrl from "./assets/shelter-updates/four-walls-hero.webp";
 import fourWallsHeroSmallUrl from "./assets/shelter-updates/four-walls-hero-800.webp";
 import fourWallsLightSlotUrl from "./assets/shelter-updates/four-walls-light-slot.webp";
@@ -75,6 +77,8 @@ const galleries = {
 [longHouseTerraceUrl, null, "Upper room opening onto a planted roof terrace", "Room + roof garden", 1024],
 [longHouseFramedUrl, null, "Shaded earthen threshold framing an open-sky court", "Court between rooms", 1024],
 [longHouseRowUrl, null, "A row of low earthen Long House volumes with planted roofs in a neighborhood", "Row of long houses", 1200],
+[longHouseConstructionUrl, null, "Steel beam spanning an earthen courtyard during construction", "Long House / in construction", 1448],
+[longHouseCardUrl, null, "A narrow planted court between earthen Long House volumes", "The planted court", 1200],
   ],
 };
 

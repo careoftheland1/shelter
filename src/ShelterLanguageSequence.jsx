@@ -29,6 +29,24 @@ const longhouseStates = [
   { bounds: [17, 32, 71, 87], partials: { 1: ["bottom", .5, .42, "left"] } },
   { bounds: [12, 37, 58, 83], partials: {} },
 ];
+const neighborRoutes = [
+  [1, 4, 7, 2, 5, 0],
+  [3, 6, 1, 5, 0, 2],
+  [5, 0, 3, 7, 2, 4],
+  [7, 2, 5, 1, 4, 6],
+];
+const neighborRoomLabels = [
+  ["LIVE", "COOK", "REST"],
+  ["LIVE", "WORK", "REST"],
+  ["WORK", "LIVE/COOK", "REST"],
+  ["COOK", "LIVE", "REST"],
+];
+const neighborInsetLabels = [
+  [{ bay: 1, text: "WASH" }, { bay: 3, text: "WASH" }],
+  [],
+  [],
+  [{ bay: 1, text: "KEEP" }],
+];
 const lineBlocks = [
   [209, 47.5, 174.8, 95],
   [528.2, 95, 159.6, 190],
@@ -73,10 +91,10 @@ function partialBetween(from, to, progress) {
   return [anchor, depth, mix(from[2], to[2], ease(progress)), progress < .5 ? from[3] : to[3]];
 }
 
-function longhousePath(from, to, progress) {
+function longhousePath(from, to, progress, includeOutline = true) {
   const bounds = from.bounds.map((value, index) => mix(value, to.bounds[index], ease(progress)));
   const columns = [0, ...bounds, 100];
-  let path = "M0 0H760V190H0Z";
+  let path = includeOutline ? "M0 0H760V190H0Z" : "";
   bounds.forEach((value) => { path += `M${value * 7.6} 0V190`; });
   for (const column of [1, 2, 3]) {
     const partial = partialBetween(from.partials[column], to.partials[column], progress);
@@ -269,4 +287,153 @@ export default function ShelterLanguageSequence() {
       <p className="shelter-language-summary" ref={summaryRef}>Start small. See where it takes you.</p>
     </div>
   </section>;
+}
+
+export function LonghouseSequenceAnimation() {
+  const sectionRef = useRef(null);
+  const roomRefs = useRef([]);
+  const pathRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const scrollRange = Math.max(1, section.offsetHeight - window.innerHeight);
+      const progress = reducedMotion.matches ? 1 : clamp(-section.getBoundingClientRect().top / scrollRange);
+      const gather = smoothstep(.08, .34, progress);
+      const stateStep = clamp((progress - .34) / .66) * (longhouseStates.length - 1);
+      const fromIndex = Math.min(longhouseStates.length - 1, Math.floor(stateStep));
+      const toIndex = Math.min(longhouseStates.length - 1, fromIndex + 1);
+      const fraction = stateStep - fromIndex;
+      const between = reducedMotion.matches ? 1 : smoothstep(.12, .88, fraction);
+
+      roomRefs.current.forEach((rect, index) => {
+        const [x, y, width, height] = lineBlocks[index];
+        const [startX, startY] = configurations.at(-1)[index];
+        const scaledStart = [startX * (760 / 350), startY + 15];
+        const centerX = mix(scaledStart[0], x, gather);
+        const centerY = mix(scaledStart[1], y + 55, gather);
+        const startSize = volumeSizes[index];
+        const roomWidth = mix(startSize[0], width, gather);
+        const roomHeight = mix(startSize[1], height, gather);
+        rect.setAttribute("x", String(-roomWidth / 2));
+        rect.setAttribute("y", String(-roomHeight / 2));
+        rect.setAttribute("width", String(roomWidth));
+        rect.setAttribute("height", String(roomHeight));
+        rect.setAttribute("transform", `translate(${centerX.toFixed(2)} ${centerY.toFixed(2)})`);
+        rect.style.opacity = String(1 - smoothstep(.3, .43, progress));
+      });
+
+      pathRef.current.setAttribute("d", longhousePath(longhouseStates[fromIndex], longhouseStates[toIndex], between));
+      pathRef.current.setAttribute("transform", "translate(0 55)");
+      pathRef.current.style.opacity = String(smoothstep(.3, .43, progress));
+    };
+
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    reducedMotion.addEventListener("change", schedule);
+    schedule();
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      reducedMotion.removeEventListener("change", schedule);
+    };
+  }, []);
+
+  return <div className="longhouse-animation-run" ref={sectionRef} aria-label="Scroll to gather rooms into changing longhouse layouts">
+    <div className="longhouse-animation-stage">
+      <a className="pattern-animation-skip" href="#places" aria-label="Skip the longhouse animation to Places to start">( SKIP AHEAD )</a>
+      <svg viewBox="0 0 760 300" role="img" aria-label="Six separate rooms gather into a longhouse with changing interior divisions">
+        {volumeSizes.map((_, index) => <rect key={index} ref={(element) => { roomRefs.current[index] = element; }}/>) }
+        <path ref={pathRef}/>
+      </svg>
+      <p>Scroll to gather the rooms into a line</p>
+    </div>
+  </div>;
+}
+
+export function LonghouseNeighborAnimation() {
+  const sectionRef = useRef(null);
+  const pathRefs = useRef([]);
+  const roomLabelRefs = useRef([]);
+  const insetLabelRefs = useRef([]);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const scrollRange = Math.max(1, section.offsetHeight - window.innerHeight);
+      const progress = reducedMotion.matches ? 1 : clamp(-section.getBoundingClientRect().top / scrollRange);
+      pathRefs.current.forEach((path, index) => {
+        const route = neighborRoutes[index];
+        const shift = index * .025;
+        const reveal = smoothstep(.02 + shift, .11 + shift, progress);
+        const step = clamp((progress - .09 - shift) / (.82 - shift)) * (route.length - 1);
+        const fromIndex = Math.min(route.length - 1, Math.floor(step));
+        const toIndex = Math.min(route.length - 1, fromIndex + 1);
+        const between = reducedMotion.matches ? 1 : smoothstep(.08, .92, step - fromIndex);
+        const from = longhouseStates[route[fromIndex]];
+        const to = longhouseStates[route[toIndex]];
+        const middleRow = index === 1 || index === 2;
+        path.setAttribute("d", longhousePath(middleRow ? { ...from, partials: {} } : from, middleRow ? { ...to, partials: {} } : to, between, false));
+        path.style.opacity = String(reveal);
+
+        const bounds = from.bounds.map((value, boundary) => mix(value, to.bounds[boundary], ease(between)));
+        const columns = [0, ...bounds, 100];
+        [0, 2, 4].forEach((bay, labelIndex) => {
+          const label = roomLabelRefs.current[index * 3 + labelIndex];
+          label.setAttribute("x", String(index * 190 + 95));
+          label.setAttribute("y", String((columns[bay] + columns[bay + 1]) * 3.8));
+          label.style.opacity = String(reveal);
+        });
+
+        neighborInsetLabels[index].forEach(({ bay }, labelIndex) => {
+          const label = insetLabelRefs.current[index * 2 + labelIndex];
+          const partial = partialBetween(from.partials[bay], to.partials[bay], between);
+          if (!partial) { label.style.opacity = "0"; return; }
+          const [anchor, depth, ratio, side] = partial;
+          const start = columns[bay] * 7.6;
+          const end = columns[bay + 1] * 7.6;
+          const split = mix(start, end, ratio);
+          const roomX = side === "left" ? (start + split) / 2 : (split + end) / 2;
+          const roomY = anchor === "top" ? depth * 95 : 190 - depth * 95;
+          label.setAttribute("x", String((index + 1) * 190 - roomY));
+          label.setAttribute("y", String(roomX));
+          label.style.opacity = String(reveal * smoothstep(.1, .35, depth));
+        });
+      });
+    };
+
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    reducedMotion.addEventListener("change", schedule);
+    schedule();
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      reducedMotion.removeEventListener("change", schedule);
+    };
+  }, []);
+
+  return <div className="longhouse-neighbors-run" ref={sectionRef}>
+    <div className="longhouse-neighbors-stage">
+      <a className="pattern-animation-skip" href="#long-house-moodboard" aria-label="Skip the neighboring longhouses animation to the moodboard">( SKIP AHEAD )</a>
+      <svg viewBox="0 0 760 760" role="img" aria-label="Four neighboring longhouses share side walls while their interior rooms develop differently">
+        <path className="longhouse-neighbors-outline" d="M0 0H760V760H0Z M190 0V760 M380 0V760 M570 0V760"/>
+        {[0, 1, 2, 3].map((index) => <path key={index} ref={(element) => { pathRefs.current[index] = element; }} transform={`translate(${(index + 1) * 190} 0) rotate(90)`}/>)}
+        {neighborRoomLabels.flatMap((labels, index) => labels.map((label, labelIndex) => <text className="neighbor-room-label" key={`${index}-${label}`} ref={(element) => { roomLabelRefs.current[index * 3 + labelIndex] = element; }}>{label}</text>))}
+        {neighborInsetLabels.flatMap((labels, index) => labels.map(({ text }, labelIndex) => <text className="neighbor-room-label neighbor-room-label--inset" key={`${index}-${labelIndex}`} ref={(element) => { insetLabelRefs.current[index * 2 + labelIndex] = element; }}>{text}</text>))}
+      </svg>
+    </div>
+  </div>;
 }

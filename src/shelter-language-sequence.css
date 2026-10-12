@@ -21,7 +21,7 @@
 .shelter-language-skip {
   position: absolute;
   z-index: 3;
-  top: 15vh;
+  top: 8vh;
   left: 50%;
   transform: translateX(-50%);
   color: #aaa89f;
@@ -57,8 +57,8 @@
 .shelter-language-intro-word { position: absolute; }
 .shelter-language-intro-word--start { top: 16vh; left: 6vw; }
 .shelter-language-intro-word--with { top: 16vh; right: 6vw; }
-.shelter-language-intro-word--four { right: 6vw; bottom: 16vh; }
-.shelter-language-intro-word--walls { bottom: 16vh; left: 6vw; }
+.shelter-language-intro-word--four { bottom: 16vh; left: 6vw; }
+.shelter-language-intro-word--walls { right: 6vw; bottom: 16vh; }
 
 .shelter-language-intro-volume {
   position: absolute;
@@ -194,7 +194,7 @@
   .shelter-language-stage { min-height: 0; }
 
   .shelter-language-skip {
-    top: 19vh;
+    top: 9vh;
   }
 
   #shelters .shelter-language-intro {
@@ -204,8 +204,8 @@
 
   .shelter-language-intro-word--start { top: 19vh; left: 22px; }
   .shelter-language-intro-word--with { top: 19vh; right: 22px; }
-  .shelter-language-intro-word--four { right: 22px; bottom: 19vh; }
-  .shelter-language-intro-word--walls { bottom: 19vh; left: 22px; }
+  .shelter-language-intro-word--four { bottom: 19vh; left: 22px; }
+  .shelter-language-intro-word--walls { right: 22px; bottom: 19vh; }
 
   .shelter-language-figure {
     top: 46%;
