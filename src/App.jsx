@@ -3,7 +3,7 @@ import HeroPhotoGrid from "./HeroPhotoGrid.jsx";
 import PrincipleCards from "./PrincipleCards.jsx";
 import ContextShowcase from "./ContextShowcase.jsx";
 import BuildingStyles from "./BuildingStyles.jsx";
-import ParticleCubeAssembly from "./ParticleCubeAssembly.jsx";
+import ManifestoScrollFilm from "./ManifestoScrollFilm.jsx";
 import "./manifesto-sequence.css";
 import fourWallsUrl from "./assets/shelter-cards/four-walls-angles/four-walls-table.webp";
 import fourWallsSmallUrl from "./assets/shelter-cards/four-walls-angles/four-walls-table-800.webp";
@@ -15,6 +15,7 @@ import SiteFooter from "./SiteFooter.jsx";
 import PageMeta from "./PageMeta.jsx";
 import GooeyTitle from "./GooeyTitle.jsx";
 import ContactMoodboard from "./ContactMoodboard.jsx";
+import ShelterLanguageSequence from "./ShelterLanguageSequence.jsx";
 import "./process-lockup.css";
 
 const ShelterPage = lazy(() => import("./ShelterPage.jsx"));
@@ -80,31 +81,6 @@ function Plan({ shape }) {
     </>}
     {shape === "long" && <><rect x="28" y="70" width="364" height="120"/><path d="M128 70v120m98-120v120m78-120v120M28 130h100m98 0h78"/><path className="door" d="M128 150a30 30 0 0 1 30-30M226 150a30 30 0 0 0-30-30"/></>}
   </svg>;
-}
-
-function BuildingLanguageDiagram() {
-  return <figure className="building-language language-diagram">
-    <svg viewBox="0 0 1040 250" role="img" aria-labelledby="language-title language-desc">
-      <title id="language-title">Four Walls seed growing into courtyard and long house arrangements</title>
-      <desc id="language-desc">One thick-walled room gathers with independent rooms around a courtyard, or repeats in a line with room-width open courts.</desc>
-      <path className="language-thread" d="M235 125h112m250 0h83"/>
-      <path className="language-arrow" d="m342 120 5 5-5 5m333-10 5 5-5 5"/>
-      <g className="language-seed"><rect x="70" y="65" width="120" height="115"/><circle cx="130" cy="123" r="3"/></g>
-      <g className="language-courtyard">
-        <rect x="400" y="55" width="65" height="65"/><rect x="500" y="45" width="65" height="65" transform="rotate(16 532.5 77.5)"/><rect x="410" y="140" width="65" height="60" transform="rotate(-10 442.5 170)"/>
-        <path className="language-void" d="M465 110 505 100 512 133 482 160 465 138z"/>
-      </g>
-      <g className="language-long">
-        <rect x="720" y="85" width="60" height="65"/><rect x="825" y="85" width="60" height="65"/><rect x="930" y="85" width="60" height="65"/>
-        <path className="language-void" d="M780 92h45v51h-45zm105 0h45v51h-45z"/>
-      </g>
-    </svg>
-    <figcaption>
-      <div><span>01 / Four Walls</span><h3>The seed.</h3><p>An independent room. Simple, scalable.</p></div>
-      <div><span>02 / Court</span><h3>Gather around open space.</h3><p>Combine rooms to create sheltered courtyards, gardens, and light.</p></div>
-      <div><span>03 / Row</span><h3>Repeat along a line.</h3><p>A flexible line of rooms creates shelter, program, and enclosure.</p></div>
-    </figcaption>
-  </figure>;
 }
 
 function ShelterCardCarousel({ items }) {
@@ -200,19 +176,19 @@ function App() {
       </section>
 
       <div className="manifesto-sequence" id="practice">
-        <ParticleCubeAssembly />
+        <ManifestoScrollFilm />
         <section className="manifesto-block">
           <p className="manifesto-headline">HOUSING HAS BECOME EXPENSIVE AND COMPLICATED. BUILDING A PLACE OF YOUR OWN OFFERS ANOTHER WAY FORWARD.</p>
         </section>
         <section className="manifesto-block">
           <p className="manifesto-headline manifesto-headline--spaced">
             <span>WE DESIGN SMALL BUILDINGS THAT ORDINARY PEOPLE CAN UNDERSTAND, ADAPT AND BUILD.</span>
-            <span className="manifesto-headline__emphasis">NO EXPERIENCE NECESSARY.</span>
+            <span className="manifesto-headline__emphasis">( NO EXPERIENCE NECESSARY )</span>
             <span>THE PLANS AND DESIGN TOOLS ARE FREE. EXPERIENCED HELP IS THERE IF YOU NEED IT.</span>
           </p>
         </section>
         <section className="manifesto-block manifesto-block--final">
-          <h2>A BETTER PLACE TO LIVE STARTS WITH A SIMPLER WAY TO BUILD.</h2>
+          <h2>AN AFFORDABLE PLACE TO LIVE STARTS WITH A SIMPLER WAY TO BUILD.</h2>
         </section>
         <BuildingStyles/>
       </div>
@@ -222,13 +198,15 @@ function App() {
     <ContextShowcase/>
 
     <section className="plans language-plans" id="shelters">
-      <header><h2>Start with four walls. Gather them. Repeat them.</h2></header>
-      <BuildingLanguageDiagram/>
-      <div className="language-summary"><p>Start small. See where it takes you.</p></div>
+      <ShelterLanguageSequence/>
+      <div id="shelter-cards" className="plan-carousel-anchor" tabIndex="-1"/>
       <ShelterCardCarousel items={shelters}/>
     </section>
 
     <div className="home-journey">
+    <section className="shelter-principle">
+      <h2>Radical simplicity, elevated essentials. Make shelter affordable again</h2>
+    </section>
     <section className="process process-lockup" id="process">
       <header className="process-heading">
         <p className="process-intro">From a free plan to a built shelter.</p>

@@ -21,12 +21,25 @@ const gallerySets = [
   [lightUrl, cedarFloorsUrl, okraUrl, texturesUrl, stovesUrl, duskUrl, tableUrl],
 ];
 
-export default function ContactMoodboard() {
-  return <section className="contact-moodboard" id="contact">
+const homeActions = [
+  { href: "/#shelter-cards", label: "Select a plan set" },
+  { href: "/project/?source=home", label: "Tell us about your land" },
+];
+
+export default function ContactMoodboard({
+  variant = "home",
+  title = "start with a shelter",
+  kicker,
+  description,
+  actions = homeActions,
+  photos = gallerySets,
+  galleryLabel = "A repeating field of photographs showing earthen shelter details",
+}) {
+  return <section className={`contact-moodboard contact-moodboard--${variant}`} id="contact">
     <div className="contact-moodboard__stage">
-      <div className="contact-moodboard__images" role="img" aria-label="A repeating field of photographs showing earthen shelter details">
+      <div className="contact-moodboard__images" role="img" aria-label={galleryLabel}>
         {[0, 1, 0].map((set, setIndex) => <div className="contact-moodboard__set" key={setIndex}>
-          {gallerySets[set].map((photo, index) => <img
+          {photos[set].map((photo, index) => <img
             key={`${setIndex}-${index}`}
             className="contact-moodboard__tile"
             src={photo}
@@ -36,10 +49,11 @@ export default function ContactMoodboard() {
           />)}
         </div>)}
       </div>
-      <h2 className="contact-moodboard__title">start with a shelter</h2>
+      {kicker && <p className="kicker contact-moodboard__kicker">{kicker}</p>}
+      <h2 className="contact-moodboard__title">{title}</h2>
+      {description && <p className="contact-moodboard__description">{description}</p>}
       <div className="contact-actions contact-moodboard__actions">
-        <a href="#shelters">Select a plan set <span>↗</span></a>
-        <a href="/project/?source=home">Tell us about your land <span>↗</span></a>
+        {actions.map(({ href, label }) => <a href={href} key={href}>{label} <span>↗</span></a>)}
       </div>
     </div>
   </section>;

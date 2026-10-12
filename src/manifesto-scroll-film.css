@@ -1,0 +1,19 @@
+.manifesto-scroll-film {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  height: 100svh;
+  margin-bottom: -100svh;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.manifesto-scroll-film video {
+  display: block;
+  width: min(50vw, 66.667svh);
+  height: auto;
+  max-height: 50svh;
+  object-fit: contain;
+}

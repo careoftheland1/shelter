@@ -1,0 +1,69 @@
+.particle-experiments {
+  background: #000;
+  color: #f5f3ee;
+}
+
+.particle-experiments__header {
+  min-height: 80svh;
+  padding: 16vh 6vw 12vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.particle-experiments__header h2 {
+  margin: 4vh 0;
+  font: 500 clamp(52px, 8vw, 120px)/.9 'Public Sans', sans-serif;
+  letter-spacing: -.07em;
+}
+
+.particle-experiments__header > p:not(.kicker) {
+  max-width: 420px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.particle-experiments__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 7vh;
+}
+
+.particle-experiments__options button {
+  padding: 12px 14px;
+  border: 1px solid #898984;
+  border-radius: 0;
+  background: transparent;
+  color: #f5f3ee;
+  cursor: pointer;
+  font: 400 10px/1.4 'Source Code Pro', monospace;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.particle-experiments__options button:hover,
+.particle-experiments__options button:focus-visible,
+.particle-experiments__options button[aria-pressed="true"] {
+  border-color: #f5f3ee;
+  background: #f5f3ee;
+  color: #000;
+}
+
+.particle-experiment-run {
+  position: relative;
+  height: 220svh;
+}
+
+.particle-experiment-run .particle-cube { margin-bottom: 0; }
+
+@media (max-width: 760px) {
+  .particle-experiments__header {
+    min-height: 70svh;
+    padding: 100px 22px 70px;
+  }
+
+  .particle-experiments__header h2 { font-size: clamp(48px, 14vw, 70px); }
+}

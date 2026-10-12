@@ -1,9 +1,21 @@
 .principle-scroll {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   height: 300svh;
   background: #000;
   color: #f4f0e9;
+}
+
+.principle-scroll::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: -28svh;
+  right: 0;
+  left: 0;
+  height: 28svh;
+  background: #000;
+  pointer-events: none;
 }
 
 .principle-scroll__viewport {

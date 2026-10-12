@@ -1,5 +1,24 @@
 .home-journey { background: #000; }
 
+.shelter-principle {
+  min-height: 86svh;
+  padding: 18svh 8vw 20svh;
+  display: grid;
+  place-items: center;
+  background: #000;
+  color: #fff;
+}
+
+.shelter-principle h2 {
+  width: 100%;
+  max-width: 1340px;
+  margin: 0;
+  font: 500 clamp(56px, 5.6vw, 78px)/.9 'Public Sans', sans-serif;
+  letter-spacing: -.065em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .process-lockup.process {
   min-height: 100svh;
   padding: clamp(42px, 8vh, 88px) 0;
@@ -108,6 +127,13 @@
 }
 
 @media (max-width: 600px) {
+  .shelter-principle {
+    min-height: 82svh;
+    padding: 17svh 22px 19svh;
+  }
+
+  .shelter-principle h2 { font-size: clamp(44px, 12vw, 68px); }
+
   .process-lockup.process {
     min-height: 100svh;
     padding: 42px 0;

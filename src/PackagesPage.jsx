@@ -1,5 +1,17 @@
 import SiteFooter from "./SiteFooter.jsx";
 import PageMeta from "./PageMeta.jsx";
+import ContactMoodboard from "./ContactMoodboard.jsx";
+import glassUrl from "./assets/packages-moodboard/glass.png";
+import mountainUrl from "./assets/packages-moodboard/mtn.png";
+import remoteUrl from "./assets/packages-moodboard/remote.png";
+import roofUrl from "./assets/packages-moodboard/roof.jpeg";
+import mixUrl from "./assets/packages-moodboard/mix.png";
+import wallFormsUrl from "./assets/packages-moodboard/walls-form.png";
+
+const packageGallerySets = [
+  [glassUrl, mountainUrl, remoteUrl, roofUrl, mixUrl, wallFormsUrl],
+  [remoteUrl, roofUrl, glassUrl, mountainUrl, wallFormsUrl, mixUrl],
+];
 
 const packages = [
   {
@@ -38,6 +50,33 @@ const packages = [
   }
 ];
 
+const wideMarks = [
+  { x: 70, y: 90, width: 150, height: 150 },
+  { x: 330, y: 210, width: 118, height: 118, transform: "rotate(6 389 269)" },
+  { x: 560, y: 60, width: 170, height: 170, transform: "rotate(-4 645 145)" },
+  { x: 800, y: 280, width: 140, height: 140, transform: "rotate(8 870 350)" },
+  { x: 960, y: 70, width: 160, height: 160 },
+  { x: 990, y: 400, width: 128, height: 112, transform: "rotate(-6 1054 456)" },
+];
+
+const tallMarks = [
+  { x: 60, y: 70, width: 160, height: 160 },
+  { x: 330, y: 30, width: 130, height: 130, transform: "rotate(6 395 95)" },
+  { x: 470, y: 230, width: 150, height: 150, transform: "rotate(-5 545 305)" },
+  { x: 80, y: 380, width: 120, height: 120, transform: "rotate(8 140 440)" },
+  { x: 360, y: 500, width: 170, height: 170 },
+  { x: 120, y: 740, width: 140, height: 122, transform: "rotate(-6 190 801)" },
+];
+
+function PackageMarkField({ className, viewBox, marks }) {
+  return <svg className={className} viewBox={viewBox} preserveAspectRatio="xMidYMid slice">
+    {marks.map((mark, index) => <g key={index}>
+      <rect {...mark}/>
+      <rect {...mark} className="mark-trace" pathLength="100" style={{ animationDelay: `${-index * 2.15}s` }}/>
+    </g>)}
+  </svg>;
+}
+
 function PackagesPage() {
   return <main className="packages-page">
     <PageMeta title="Plans + Ways of Working — Shelter on the Land" description="Start with the open Shelter building system, then bring us in for focused advice, pre-construction support, guidance through the build or a project designed from the land outward." path="/packages/"/>
@@ -49,22 +88,8 @@ function PackagesPage() {
 
     <section className="packages-hero">
       <div className="packages-hero-marks" aria-hidden="true">
-        <svg className="marks-wide" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice">
-          <rect x="70" y="90" width="150" height="150"/>
-          <rect x="330" y="210" width="118" height="118" transform="rotate(6 389 269)"/>
-          <rect x="560" y="60" width="170" height="170" transform="rotate(-4 645 145)"/>
-          <rect x="800" y="280" width="140" height="140" transform="rotate(8 870 350)"/>
-          <rect x="960" y="70" width="160" height="160"/>
-          <rect x="990" y="400" width="128" height="112" transform="rotate(-6 1054 456)"/>
-        </svg>
-        <svg className="marks-tall" viewBox="0 0 700 1300" preserveAspectRatio="xMidYMid slice">
-          <rect x="60" y="70" width="160" height="160"/>
-          <rect x="330" y="30" width="130" height="130" transform="rotate(6 395 95)"/>
-          <rect x="470" y="230" width="150" height="150" transform="rotate(-5 545 305)"/>
-          <rect x="80" y="380" width="120" height="120" transform="rotate(8 140 440)"/>
-          <rect x="360" y="500" width="170" height="170"/>
-          <rect x="120" y="740" width="140" height="122" transform="rotate(-6 190 801)"/>
-        </svg>
+        <PackageMarkField className="marks-wide" viewBox="0 0 1200 700" marks={wideMarks}/>
+        <PackageMarkField className="marks-tall" viewBox="0 0 700 1300" marks={tallMarks}/>
       </div>
       <p className="kicker">Ways of working</p>
       <h1>Build it yourself.<br/>Not alone.</h1>
@@ -87,7 +112,15 @@ function PackagesPage() {
       </section>
     </section>
 
-    <section className="packages-contact"><p className="kicker">Tell us what you are building</p><h2>Begin with<br/>the land.</h2><p>You do not need to choose a path first. Tell us about the place, the shelter and the parts of the work you hope to take on yourself.</p><a href="/project/?source=packages">Tell us about your project <span>↗</span></a></section>
+    <ContactMoodboard
+      variant="packages"
+      title="begin with the land"
+      kicker="Tell us what you are building"
+      description="You do not need to choose a path first. Tell us about the place, the shelter and the parts of the work you hope to take on yourself."
+      actions={[{ href: "/project/?source=packages", label: "Tell us about your project" }]}
+      photos={packageGallerySets}
+      galleryLabel="A repeating field of photographs showing the land, materials, and shelter construction"
+    />
     <SiteFooter/>
   </main>;
 }

@@ -2,30 +2,42 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import "./particle-cube-assembly.css";
 
-const PARTICLE_COUNT = 5200;
 const FACE_BRIGHTNESS = [0.5, 0.72, 0.42, 0.82, 0.3, 0.96];
-const VOLUMES = [
+const FOUR_VOLUMES = [
   { x: -1.55, y: -0.48, z: -0.85, width: 1.72, height: 1.44, depth: 1.55 },
   { x: 0.34, y: -0.55, z: -0.95, width: 1.62, height: 1.3, depth: 1.55 },
   { x: -0.66, y: -0.58, z: 0.82, width: 1.42, height: 1.24, depth: 1.28 },
   { x: 1.2, y: -0.49, z: 0.63, width: 1.66, height: 1.42, depth: 1.5 },
 ];
+const SIX_VOLUMES = [
+  { x: -3.7, y: -0.35, z: -2.4, width: 2.2, height: 1.5, depth: 2.0 },
+  { x: -0.2, y: 0.3, z: -3.5, width: 1.65, height: 2.8, depth: 2.1 },
+  { x: 3.5, y: -0.15, z: -2.2, width: 2.35, height: 1.9, depth: 1.9 },
+  { x: 3.6, y: 0.1, z: 2.0, width: 1.8, height: 2.4, depth: 2.5 },
+  { x: 0.4, y: -0.475, z: 3.5, width: 2.5, height: 1.25, depth: 1.8 },
+  { x: -3.5, y: -0.025, z: 2.3, width: 1.9, height: 2.15, depth: 2.0 },
+];
+const volumeCorners = volumes => volumes.flatMap(({ x, y, z, width, height, depth }) =>
+  [-1, 1].flatMap((sideX) => [-1, 1].flatMap((sideY) => [-1, 1].map((sideZ) =>
+    new THREE.Vector3(x + sideX * width / 2, y + sideY * height / 2, z + sideZ * depth / 2)
+  )))
+);
 
 const randomBetween = (min, max) => min + Math.random() * (max - min);
 
-function buildPositions() {
-  const scattered = new Float32Array(PARTICLE_COUNT * 3);
-  const target = new Float32Array(PARTICLE_COUNT * 3);
-  const colors = new Float32Array(PARTICLE_COUNT * 3);
+function buildPositions(volumes, particleCount) {
+  const scattered = new Float32Array(particleCount * 3);
+  const target = new Float32Array(particleCount * 3);
+  const colors = new Float32Array(particleCount * 3);
 
-  for (let i = 0; i < PARTICLE_COUNT; i += 1) {
+  for (let i = 0; i < particleCount; i += 1) {
     const offset = i * 3;
     scattered[offset] = randomBetween(-7.2, 7.2);
     scattered[offset + 1] = randomBetween(-4.8, 4.8);
     scattered[offset + 2] = randomBetween(-4, 4);
 
-    const volumeIndex = Math.min(VOLUMES.length - 1, Math.floor(i * VOLUMES.length / PARTICLE_COUNT));
-    const volume = VOLUMES[volumeIndex];
+    const volumeIndex = Math.min(volumes.length - 1, Math.floor(i * volumes.length / particleCount));
+    const volume = volumes[volumeIndex];
     const halfWidth = volume.width / 2;
     const halfHeight = volume.height / 2;
     const halfDepth = volume.depth / 2;
@@ -56,7 +68,7 @@ function buildPositions() {
   return { scattered, target, colors };
 }
 
-export default function ParticleCubeAssembly() {
+export default function ParticleCubeAssembly({ variant = "six" }) {
   const sectionRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -66,7 +78,10 @@ export default function ParticleCubeAssembly() {
     if (!section || !canvas) return undefined;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const { scattered, target, colors } = buildPositions();
+    const isFour = variant === "four";
+    const volumes = isFour ? FOUR_VOLUMES : SIX_VOLUMES;
+    const corners = volumeCorners(volumes);
+    const { scattered, target, colors } = buildPositions(volumes, isFour ? 5200 : 13000);
     let renderer;
     let frame = 0;
     let progress = reducedMotion.matches ? 1 : 0;
@@ -86,8 +101,8 @@ export default function ParticleCubeAssembly() {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-    camera.position.set(1.25, 0.86, 8.2);
-    camera.lookAt(0, 0, 0);
+    const cameraDirection = new THREE.Vector3(0.13, 0.82, 1).normalize();
+    const cameraTarget = new THREE.Vector3(0, 0.15, 0);
 
     const positions = new Float32Array(scattered);
     const geometry = new THREE.BufferGeometry();
@@ -97,7 +112,7 @@ export default function ParticleCubeAssembly() {
     geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
     const material = new THREE.PointsMaterial({
-      size: 0.032,
+      size: isFour ? 0.032 : 0.05,
       vertexColors: true,
       transparent: true,
       opacity: 0.86,
@@ -112,11 +127,34 @@ export default function ParticleCubeAssembly() {
       const height = Math.max(1, canvas.clientHeight);
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
-      const fitDistance = 5.6 / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect);
-      const distance = Math.max(8.2, fitDistance);
-      camera.position.set(distance * 0.15, distance * 0.105, distance);
-      camera.lookAt(0, 0, 0);
       camera.updateProjectionMatrix();
+      if (isFour) {
+        const fitDistance = 5.6 / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect);
+        const distance = Math.max(8.2, fitDistance);
+        camera.position.set(distance * 0.15, distance * 0.105, distance);
+        camera.lookAt(0, 0, 0);
+        camera.updateMatrixWorld();
+        scheduleRender();
+        return;
+      }
+      // Frame every volume while allowing the six buildings to fill the stage.
+      const fit = (distance) => {
+        camera.position.copy(cameraTarget).addScaledVector(cameraDirection, distance);
+        camera.lookAt(cameraTarget);
+        camera.updateMatrixWorld();
+        return corners.every((corner) => {
+          const projected = corner.clone().project(camera);
+          return Math.abs(projected.x) <= 0.92 && Math.abs(projected.y) <= 0.84;
+        });
+      };
+      let near = 5;
+      let far = 60;
+      for (let i = 0; i < 18; i += 1) {
+        const middle = (near + far) / 2;
+        if (fit(middle)) far = middle;
+        else near = middle;
+      }
+      fit(far);
       scheduleRender();
     };
 
@@ -153,7 +191,7 @@ export default function ParticleCubeAssembly() {
     };
 
     const updateProgress = () => {
-      const sequence = section.closest(".manifesto-sequence") || section;
+      const sequence = section.closest(".particle-experiment-run") || section;
       const bounds = sequence.getBoundingClientRect();
       visible = bounds.bottom > 0 && bounds.top < window.innerHeight;
       if (reducedMotion.matches) {
@@ -183,9 +221,9 @@ export default function ParticleCubeAssembly() {
       material.dispose();
       renderer.dispose();
     };
-  }, []);
+  }, [variant]);
 
-  return <section className="particle-cube" ref={sectionRef} aria-label="Particles assembling into four cuboid shelter volumes">
+  return <section className="particle-cube" ref={sectionRef} aria-label={variant === "four" ? "Particles assembling into four shelter volumes" : "Particles assembling into six shelter volumes around an open courtyard"}>
     <div className="particle-cube__stage">
       <canvas className="particle-cube__canvas" ref={canvasRef} aria-hidden="true" />
     </div>

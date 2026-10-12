@@ -37,12 +37,6 @@
   margin-top: 1.12em;
 }
 
-.manifesto-headline__emphasis {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: .14em;
-}
-
 .manifesto-block--final h2 {
   width: 100%;
   max-width: 1340px;
