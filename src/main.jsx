@@ -19,6 +19,7 @@ async function start() {
   else if (path.startsWith('/privacy')) moduleName = 'PrivacyPage'
   else if (path.startsWith('/project')) moduleName = 'ProjectPage'
   else if (path.startsWith('/free-plans')) moduleName = 'PlanRequestPage'
+  else if (path.startsWith('/elements')) moduleName = 'ElementsPage'
 
   const pages = {
     App: () => import('./App.jsx'),
@@ -33,6 +34,7 @@ async function start() {
     PrivacyPage: () => import('./PrivacyPage.jsx'),
     ProjectPage: () => import('./ProjectPage.jsx'),
     PlanRequestPage: () => import('./PlanRequestPage.jsx'),
+    ElementsPage: () => import('./ElementsPage.jsx'),
   }
   const { default: Component } = await pages[moduleName]()
   const root = document.getElementById('root')

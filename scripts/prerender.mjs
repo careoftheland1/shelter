@@ -20,6 +20,7 @@ const routes = [
   ['/privacy/', 'PrivacyPage.jsx'],
   ['/project/', 'ProjectPage.jsx'],
   ['/free-plans/', 'PlanRequestPage.jsx'],
+  ['/elements/', 'ElementsPage.jsx'],
 ]
 
 const dist = resolve('dist')

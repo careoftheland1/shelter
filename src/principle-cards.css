@@ -1,0 +1,157 @@
+.principle-scroll {
+  position: relative;
+  z-index: 2;
+  height: 300svh;
+  background: #000;
+  color: #f4f0e9;
+}
+
+.principle-scroll__viewport {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  background: #000;
+}
+
+.principle-scroll__track {
+  display: flex;
+  width: 300vw;
+  height: 100%;
+  will-change: transform;
+}
+
+.principle-card {
+  flex: 0 0 100vw;
+  width: 100vw;
+  height: 100%;
+  padding: 12vh 7vw 10vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
+  align-items: center;
+  gap: 7vw;
+  overflow: hidden;
+}
+
+.principle-card__art {
+  width: auto;
+  max-width: min(40vw, 520px);
+  max-height: 68svh;
+  margin: 0;
+  justify-self: center;
+  overflow: hidden;
+  background: #211e19;
+}
+
+.principle-card__art img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 68svh;
+  object-fit: contain;
+}
+
+.principle-card__copy {
+  width: 100%;
+  max-width: 540px;
+  justify-self: center;
+}
+
+.principle-card__copy h2 {
+  margin: 0 0 28px;
+  color: #f5f1e9;
+  font: 700 clamp(54px, 6.2vw, 88px)/.92 'Public Sans', sans-serif !important;
+  letter-spacing: -.06em;
+}
+
+.principle-card__description {
+  max-width: 430px;
+  margin: 0;
+  color: rgba(245, 241, 233, .84);
+  font: 400 clamp(14px, 1.15vw, 16px)/1.6 'Public Sans', sans-serif;
+}
+
+.principle-scroll__progress {
+  position: absolute;
+  left: 50%;
+  bottom: 6.5vh;
+  z-index: 2;
+  display: flex;
+  gap: 7px;
+  transform: translateX(-50%);
+}
+
+.principle-scroll__progress i {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: rgba(245, 241, 233, .28);
+  transition: background .25s ease;
+}
+
+.principle-scroll__progress i.is-active {
+  background: rgba(245, 241, 233, .9);
+}
+
+.principle-scroll__hint {
+  position: absolute;
+  right: 7vw;
+  bottom: 7vh;
+  color: rgba(245, 241, 233, .7);
+  font-size: 9px;
+  line-height: 1;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.principle-scroll__hint b { margin-left: 10px; font-size: 13px; font-weight: 400; }
+
+@media (max-width: 920px) {
+  .principle-card {
+    padding-right: 5vw;
+    padding-left: 5vw;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, .92fr);
+    gap: 4vw;
+  }
+
+  .principle-card__copy h2 { font-size: clamp(48px, 7vw, 68px) !important; }
+}
+
+@media (max-width: 760px) {
+  .principle-card {
+    padding: 92px 24px 82px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    align-content: center;
+    gap: 2vh;
+  }
+
+  .principle-card__art {
+    width: auto;
+    max-width: min(78vw, 390px);
+    max-height: 39svh;
+    align-self: end;
+  }
+
+  .principle-card__art img { max-height: 39svh; object-position: center; }
+
+  .principle-card__copy {
+    align-self: start;
+    max-width: 520px;
+  }
+
+  .principle-card__copy h2 { margin-bottom: 15px; font-size: clamp(42px, 12vw, 58px) !important; }
+  .principle-card__description { font-size: 13px; line-height: 1.5; }
+  .principle-scroll__progress { bottom: 28px; gap: 5px; }
+  .principle-scroll__progress i { width: 16px; }
+  .principle-scroll__hint { right: 24px; bottom: 28px; font-size: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .principle-scroll { height: auto; }
+  .principle-scroll__viewport { position: relative; height: auto; overflow: visible; }
+  .principle-scroll__track { width: 100%; height: auto; display: block; transform: none !important; }
+  .principle-card { min-height: 90svh; height: auto; }
+  .principle-scroll__progress, .principle-scroll__hint { display: none; }
+}

@@ -1,6 +1,10 @@
-import { lazy, Suspense } from "react";
-import heroUrl from "./assets/shelter-updates/four-walls-hero.webp";
-import heroSmallUrl from "./assets/shelter-updates/four-walls-hero-800.webp";
+import { lazy, Suspense, useRef, useState } from "react";
+import HeroPhotoGrid from "./HeroPhotoGrid.jsx";
+import PrincipleCards from "./PrincipleCards.jsx";
+import ContextShowcase from "./ContextShowcase.jsx";
+import BuildingStyles from "./BuildingStyles.jsx";
+import ParticleCubeAssembly from "./ParticleCubeAssembly.jsx";
+import "./manifesto-sequence.css";
 import fourWallsUrl from "./assets/shelter-cards/four-walls-angles/four-walls-table.webp";
 import fourWallsSmallUrl from "./assets/shelter-cards/four-walls-angles/four-walls-table-800.webp";
 import courtyardUrl from "./assets/shelter-cards/courtyard-court-b.webp";
@@ -11,6 +15,7 @@ import SiteFooter from "./SiteFooter.jsx";
 import PageMeta from "./PageMeta.jsx";
 import GooeyTitle from "./GooeyTitle.jsx";
 import ContactMoodboard from "./ContactMoodboard.jsx";
+import "./process-lockup.css";
 
 const ShelterPage = lazy(() => import("./ShelterPage.jsx"));
 const SheltersPage = lazy(() => import("./SheltersPage.jsx"));
@@ -102,6 +107,44 @@ function BuildingLanguageDiagram() {
   </figure>;
 }
 
+function ShelterCardCarousel({ items }) {
+  const trackRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const goToCard = (index) => {
+    const track = trackRef.current;
+    const card = track?.querySelectorAll(".plan-card")[index];
+    if (!track || !card) return;
+    track.scrollTo({ left: card.offsetLeft - track.offsetLeft - 22, behavior: "smooth" });
+    setActiveIndex(index);
+  };
+
+  const updateActiveCard = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    const targetLeft = track.getBoundingClientRect().left + 22;
+    const cards = [...track.querySelectorAll(".plan-card")];
+    const closestIndex = cards.reduce((closest, card, index) => {
+      const distance = Math.abs(card.getBoundingClientRect().left - targetLeft);
+      return distance < closest.distance ? { index, distance } : closest;
+    }, { index: 0, distance: Infinity }).index;
+    setActiveIndex((current) => current === closestIndex ? current : closestIndex);
+  };
+
+  return <>
+    <div className="plan-grid plan-carousel" ref={trackRef} role="region" aria-label="Shelter plans and patterns. Swipe to explore." onScroll={updateActiveCard}>
+      {items.map((s) => <a className="plan-card" href={`/shelters/${s.slug}/`} key={s.number}>
+        <div className="plan-meta"><span>{s.number}</span><span>{s.area}</span></div>
+        {s.image ? <img className="plan-image" src={s.image} srcSet={`${s.imageSmall} 800w, ${s.image} ${s.width}w`} sizes="(max-width: 760px) 82vw, 33vw" alt={s.imageAlt} loading="lazy" decoding="async"/> : <Plan shape={s.shape}/>}
+        <div className="plan-name"><h3>{s.name}</h3><span className="plan-action">{s.action} <b aria-hidden="true">↗</b></span></div>
+      </a>)}
+    </div>
+    <nav className="plan-carousel-nav" aria-label="Choose a shelter card">
+      {items.map((s, index) => <button type="button" key={s.number} aria-label={`Show ${s.name}`} aria-current={activeIndex === index ? "step" : undefined} onClick={() => goToCard(index)} />)}
+    </nav>
+  </>;
+}
+
 function App() {
   if (window.location.pathname.startsWith("/project")) {
     return <Suspense fallback={<div className="page-loading">Opening project brief…</div>}><ProjectPage /></Suspense>;
@@ -149,53 +192,62 @@ function App() {
 
     <div className="landing-intro">
       <section className="hero" id="top">
-        <img src={heroUrl} srcSet={`${heroSmallUrl} 800w, ${heroUrl} 1448w`} sizes="100vw" alt="Rammed-earth shelter volumes in a wooded desert courtyard" fetchPriority="high" decoding="async"/>
+        <HeroPhotoGrid/>
         <div className="hero-wash"/>
-        <p className="hero-note">FREE BUILDABLE PLANS FOR BUILDING WITH RAMMED EARTH AND LAVACRETE</p>
+        <p className="hero-note">FREE BUILDABLE PLANS FOR BUILDING WITH THE EARTH</p>
         <h1><GooeyTitle/></h1>
         <a className="down" href="#process">See how it works <span>↓</span></a>
       </section>
 
-      <section className="manifesto" id="practice">
-        <p className="kicker">START BUILDING TODAY</p>
-        <p className="manifesto-statement">You can build your own shelter. We design small buildings that ordinary people can understand, adapt and build. No experience necessary. The plans and design tools are free. Experienced help is there when the work calls for it.</p>
-      </section>
+      <div className="manifesto-sequence" id="practice">
+        <ParticleCubeAssembly />
+        <section className="manifesto-block">
+          <p className="manifesto-headline">HOUSING HAS BECOME EXPENSIVE AND COMPLICATED. BUILDING A PLACE OF YOUR OWN OFFERS ANOTHER WAY FORWARD.</p>
+        </section>
+        <section className="manifesto-block">
+          <p className="manifesto-headline manifesto-headline--spaced">
+            <span>WE DESIGN SMALL BUILDINGS THAT ORDINARY PEOPLE CAN UNDERSTAND, ADAPT AND BUILD.</span>
+            <span className="manifesto-headline__emphasis">NO EXPERIENCE NECESSARY.</span>
+            <span>THE PLANS AND DESIGN TOOLS ARE FREE. EXPERIENCED HELP IS THERE IF YOU NEED IT.</span>
+          </p>
+        </section>
+        <section className="manifesto-block manifesto-block--final">
+          <h2>A BETTER PLACE TO LIVE STARTS WITH A SIMPLER WAY TO BUILD.</h2>
+        </section>
+        <BuildingStyles/>
+      </div>
     </div>
+
+    <PrincipleCards/>
+    <ContextShowcase/>
 
     <section className="plans language-plans" id="shelters">
       <header><h2>Start with four walls. Gather them. Repeat them.</h2></header>
       <BuildingLanguageDiagram/>
       <div className="language-summary"><p>Start small. See where it takes you.</p></div>
-      <div className="plan-grid">
-        {shelters.map(s => <a className="plan-card" href={`/shelters/${s.slug}/`} key={s.number}>
-          <div className="plan-meta"><span>{s.number}</span><span>{s.area}</span></div>
-          {s.image ? <img className="plan-image" src={s.image} srcSet={`${s.imageSmall} 800w, ${s.image} ${s.width}w`} sizes="(max-width: 760px) 100vw, 33vw" alt={s.imageAlt} loading="lazy" decoding="async"/> : <Plan shape={s.shape}/>}
-          <div className="plan-name"><h3>{s.name}</h3><p>{s.action}</p><b>↗</b></div>
-        </a>)}
-      </div>
+      <ShelterCardCarousel items={shelters}/>
     </section>
 
-    <section className="process" id="process">
+    <div className="home-journey">
+    <section className="process process-lockup" id="process">
       <header className="process-heading">
-        <p className="kicker">How it works</p>
-        <h2>From a free plan<br/>to a built shelter.</h2>
+        <p className="process-intro">From a free plan to a built shelter.</p>
       </header>
       <ol className="process-rail" aria-label="Four ways to move a shelter forward">
         {processSteps.map(step => <li className="process-card" key={step.number}>
-          <span className="process-number">{step.number}</span>
-          <small>{step.label}</small>
+          <small>STEP {step.number}</small>
           <h3>{step.title}</h3>
           <p>{step.copy}</p>
-          <a href={step.href}><span>{step.action}</span><b aria-hidden="true">↗</b></a>
+          <a href={step.href}><span>{step.action}</span><svg className="process-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-7-7 7 7-7 7"/></svg></a>
         </li>)}
       </ol>
-      <p className="process-scroll-hint" aria-hidden="true">Scroll to explore <span>→</span></p>
     </section>
 
     <div className="home-finale">
       <ContactMoodboard/>
       <div className="home-finale__scroll-space" aria-hidden="true"/>
       <SiteFooter/>
+    </div>
     </div>
   </main>;
 }

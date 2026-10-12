@@ -1,0 +1,110 @@
+.context-showcase {
+  position: relative;
+  z-index: 2;
+  min-height: 72svh;
+  display: grid;
+  place-items: center;
+  padding: 76px 6vw;
+  background: #000;
+  color: #f4f0e9;
+}
+
+.context-showcase:not(.building-styles) {
+  min-height: 100svh;
+  padding-top: 9svh;
+  padding-bottom: 34svh;
+}
+
+.building-styles {
+  isolation: isolate;
+  background: transparent;
+  min-height: 100svh;
+  padding-top: clamp(150px, 20svh, 240px);
+  padding-bottom: 12svh;
+}
+
+.building-styles .context-showcase__card img {
+  aspect-ratio: 1 / 1;
+  visibility: hidden;
+}
+
+.building-styles .context-showcase__card {
+  background: transparent;
+}
+
+.context-showcase__inner {
+  width: min(100%, 1080px);
+}
+
+.context-showcase__inner h2 {
+  margin: 0 0 clamp(90px, 13svh, 130px);
+  color: #ef392f;
+  font: 500 10px/1.4 'Source Code Pro', monospace;
+  letter-spacing: .045em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.context-showcase__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.context-showcase__card {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #b5afa2;
+}
+
+.context-showcase__card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.context-showcase__card figcaption {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  color: #fff;
+  font: 700 clamp(18px, 2.3vw, 30px)/1 'Public Sans', sans-serif;
+  letter-spacing: .02em;
+  text-align: center;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .55);
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .context-showcase {
+    min-height: 0;
+    padding: 84px 22px;
+  }
+
+  .context-showcase:not(.building-styles) {
+    min-height: 100svh;
+    padding-top: 84px;
+    padding-bottom: max(160px, 20svh);
+  }
+
+  .building-styles {
+    background: transparent;
+    min-height: 100svh;
+    padding-top: 120px;
+    padding-bottom: 48px;
+  }
+
+  .context-showcase__inner { max-width: 420px; }
+  .context-showcase__grid { grid-template-columns: 1fr; gap: 20px; }
+  .context-showcase__inner h2 { margin-bottom: clamp(68px, 10svh, 90px); font-size: 9px; }
+  .context-showcase__card figcaption { font-size: clamp(22px, 6vw, 30px); }
+  .building-styles .context-showcase__grid { gap: 8px; }
+  .building-styles .context-showcase__card { height: 56px; }
+  .building-styles .context-showcase__card img { display: none; }
+  .building-styles .context-showcase__card figcaption { font-size: 22px; }
+}

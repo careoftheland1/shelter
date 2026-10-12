@@ -1,0 +1,126 @@
+.home-journey { background: #000; }
+
+.process-lockup.process {
+  min-height: 100svh;
+  padding: clamp(42px, 8vh, 88px) 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: visible;
+  background: #000;
+  color: #f5f3ef;
+}
+
+.process-lockup .process-heading {
+  display: block;
+  margin: 0 auto 38px;
+  padding: 0 22px;
+  text-align: center;
+}
+
+.process-lockup .process-intro {
+  margin: 0;
+  color: #ef392f;
+  font: 500 10px/1.4 'Source Code Pro', monospace;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+
+.process-lockup .process-rail {
+  display: grid;
+  width: min(704px, calc(100% - 44px));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-flow: row;
+  grid-auto-columns: auto;
+  column-gap: clamp(48px, 8vw, 112px);
+  row-gap: 42px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: visible;
+  overscroll-behavior: auto;
+  scroll-snap-type: none;
+  list-style: none;
+}
+
+.process-lockup .process-card {
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.process-lockup .process-card:hover,
+.process-lockup .process-card:focus-within {
+  border-color: transparent;
+  background: transparent;
+  color: inherit;
+}
+
+.process-lockup .process-card small {
+  display: block;
+  color: inherit;
+  font: 400 9px/1.4 'Source Code Pro', monospace;
+  letter-spacing: .04em;
+}
+
+.process-lockup .process-card h3 {
+  max-width: none;
+  margin: 10px 0 11px;
+  padding: 0 0 9px;
+  border: 0;
+  border-bottom: 1px solid rgba(245, 243, 239, .82);
+  color: inherit;
+  font: 400 clamp(25px, 2.45vw, 32px)/1.08 Georgia, 'Times New Roman', serif;
+  letter-spacing: -.045em;
+}
+
+.process-lockup .process-card p {
+  max-width: 310px;
+  margin: 0;
+  color: inherit;
+  font: 400 12px/1.45 'Public Sans', Arial, sans-serif;
+}
+
+.process-lockup.process .process-card > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 13px;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  font: 500 9px/1.4 'Public Sans', Arial, sans-serif;
+  text-decoration: none;
+}
+
+.process-lockup .process-card > a .process-arrow {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 600px) {
+  .process-lockup.process {
+    min-height: 100svh;
+    padding: 42px 0;
+  }
+  .process-lockup .process-heading { margin-bottom: 30px; }
+  .process-lockup .process-intro { font-size: 9px; }
+  .process-lockup .process-rail {
+    width: min(390px, calc(100% - 44px));
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 30px;
+  }
+  .process-lockup .process-card h3 {
+    font-size: clamp(27px, 7vw, 32px);
+  }
+  .process-lockup .process-card p { font-size: 12px; }
+}

@@ -12,6 +12,7 @@ const routePages = [
   { path: 'guided', title: 'Guided — Shelter on the Land', description: 'Work with Shelter from pre-construction decisions through an agreed construction period.' },
   { path: 'project', title: 'Tell us about your build — Shelter on the Land', description: 'Share your land, plans and questions with Shelter in a short project brief.' },
   { path: 'free-plans', title: 'Request free plans — Shelter on the Land', description: 'Request the free Four Walls drawings and choose a preferred starting footprint.', image: '/social/four-walls.jpg' },
+  { path: 'elements', title: 'Water, Earth & Time — Shelter on the Land', description: 'An animated study of water, earth, and time in earthen building.' },
   { path: 'offgrid', title: 'Off-Grid Systems for Small Shelters — Shelter on the Land', description: 'Free plans and guides for understandable water, heat, cooking, cooling and sanitation systems that work without the grid or pipe.' },
   { path: 'privacy', title: 'Privacy — Shelter on the Land', description: 'How Shelter on the Land handles website analytics, email correspondence and information shared through linked services.' },
   { path: 'shelters/four-walls', title: 'Four Walls — Small Shelter Plans', description: 'Four Walls is the buildable seed, with six starting footprints: 11 × 11, 12 × 16, 14 × 14, 10 × 20, 14 × 20, and 20 × 20 feet.', image: '/social/four-walls.jpg' },
