@@ -138,8 +138,9 @@ footer{grid-template-columns:2fr 1fr 1fr}footer>a:not(.wordmark){font-size:9px;t
 .hero h1{left:4.8vw;right:auto;bottom:18vh;font-size:clamp(46px,7vw,108px);line-height:.9;letter-spacing:-.065em;white-space:nowrap}
 .hero h1:after{content:none}
 .gooey-title{display:block;height:auto;max-width:calc(100vw - 9.6vw);overflow:visible;cursor:default;outline:0;fill:currentColor}.gooey-title text{font:700 132px 'Public Sans',sans-serif;letter-spacing:-.065em;text-transform:none}.gooey-title:focus-visible{outline:2px solid currentColor;outline-offset:8px}
+.gooey-title__mobile{display:none}
 @media(max-width:760px){.hero h1{left:20px;right:auto;bottom:17vh;font-size:12vw}}
-@media(max-width:760px){.gooey-title{max-width:calc(100vw - 40px)}}
+@media(max-width:760px){.hero h1{right:20px;white-space:normal}.gooey-title{display:none}.gooey-title__mobile{display:block;max-width:100%;font:700 clamp(34px,9.2vw,46px)/.92 'Public Sans',sans-serif;letter-spacing:-.075em;overflow-wrap:normal}}
 .building-language figcaption{grid-template-columns:1fr 2fr 1.4fr}.building-language figcaption span:nth-child(3){text-align:right}
 .building-language{margin-bottom:2vh}
 #shelters.plans>header>h2{grid-column:2/-1}
